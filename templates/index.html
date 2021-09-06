@@ -18,14 +18,14 @@
 
   <!-- Vendor CSS Files -->
   <link href="../static/vendor/aos/aos.css" rel="stylesheet">
-  <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="../static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="/static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="/static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="../static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="{{url_for('static', filename='css/style.css')}}">
+  <link href="../static/css/style.css">
 
   <!-- =======================================================
   * Template Name: AdFluencer - v4.3.0
@@ -52,7 +52,7 @@
       <div class="container d-flex align-items-center justify-content-between">
 
         <div class="logo">
-          <h1 class="text-light"><a href="index.html"><span>AdFluencer</span></a></h1>
+          <h1 class="text-light"><a href="{{url_for('home')}}"><span>AdFluencer</span></a></h1>
           <!-- Uncomment below if you prefer to use an image logo -->
           <!-- <a href="index.html"><img src="../static/img/logo.png" alt="" class="img-fluid"></a>-->
         </div>
@@ -65,7 +65,7 @@
             <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
             <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li>
             <li><a class="nav-link scrollto" href="#team">Team</a></li>
-            <li><a href="login.html">Login/Sign-up</a></li>
+            <li><a href="{{url_for('login')}}">Login/Sign-up</a></li>
             <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
               <ul>
                 <li><a href="#">Drop Down 1</a></li>
@@ -911,15 +911,15 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="../static/vendor/aos/aos.js"></script>
-  <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../static/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="../static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="../static/vendor/php-email-form/validate.js"></script>
-  <script src="../static/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="{{url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{url_for('static', filename='vendor/aos/aos.js')}}"></script>
+  <script src="{{url_for('static', filename='vendor/glightbox/js/glightbox.min.js')}}"></script>
+  <script src="{{url_for('static', filename='vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
+  <script src="{{url_for('static', filename='vendor/php-email-form/validate.js')}}"></script>
+  <script src="{{url_for('static', filename='vendor/swiper/swiper-bundle.min.js')}}"></script>
 
   <!-- Template Main JS File -->
-  <script src="../static/js/main.js"></script>
+  <script src="{{url_for('static', filename='js/main.js')}}"></script>
 
 </body>
 

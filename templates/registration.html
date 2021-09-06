@@ -10,8 +10,8 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="../assets/img/Logo_1.png" rel="icon">
-    <link href="../assets/img/Logo_1.png" rel="apple-touch-icon">
+    <link href="../static/img/Logo_1.png" rel="icon">
+    <link href="../static/img/Logo_1.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link
@@ -19,15 +19,15 @@
         rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="../static/vendor/aos/aos.css" rel="stylesheet">
+    <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="../static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="../static/css/style.css" rel="stylesheet">
 
     <!-- =======================================================
   * Template Name: AdFluencer - v4.3.0
@@ -45,14 +45,14 @@
             <div class="container d-flex align-items-center justify-content-between">
 
                 <div class="logo">
-                    <h1 class="text-light"><a href="index.html"><span>AdFluencer</span></a></h1>
+                    <h1 class="text-light"><a href="{{url_for('home')}}"><span>AdFluencer</span></a></h1>
                     <!-- Uncomment below if you prefer to use an image logo -->
-                    <!-- <a href="index.html"><img src="../assets/img/logo.png" alt="" class="img-fluid"></a>-->
+                    <!-- <a href="index.html"><img src="../static/img/logo.png" alt="" class="img-fluid"></a>-->
                 </div>
 
                 <nav id="navbar" class="navbar">
                     <ul>
-                        <li><a class="nav-link scrollto " href="index.html">Home</a></li>
+                        <li><a class="nav-link scrollto " href="{{url_for('home')}}">Home</a></li>
                         <!-- <li><a class="nav-link scrollto" href="#about">About</a></li>
                         <li><a class="nav-link scrollto" href="#services">Services</a></li>
                         <li><a class="nav-link scrollto active" href="#portfolio">Portfolio</a></li>
@@ -198,15 +198,12 @@
             <form name="registration" id="register" method="POST" >
                 <label>Select your type of account</label>
                 <br><br>
-                <!-- &nbsp;&nbsp; -->
-                <input type="radio" name="regis_type" id="advt" onclick="document.location.href='advertiser-registration.html'">
-                <!-- &nbsp; -->
-                <span id="advt">Advertiser</span>
+                <input type="radio" name="regis_type" id="advt1" onclick='document.location.href="{{url_for('adv_regis')}}"'>
+                <span id="advt1">Advertiser</span>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" name="regis_type" id="influ" onclick="document.location.href='influencer-registration.html'">
-                <!-- &nbsp; -->
+                <input type="radio" name="regis_type" id="influ" onclick='document.location.href="{{url_for('inf_regis')}}"'>
                 <span id="influ">Influencer</span>
-                <!-- &nbsp; -->
+                
                 <br>
                 <!-- <div class="btn">
                     <div class="inner"></div>
@@ -215,7 +212,7 @@
                 <!-- <input type="submit" name="submit" value="Register" id="submit">
                 <br><br> -->
                 <br>
-                <label for="">Already have an account?</label><a href="login.html" id="name">Login</a>
+                <label for="">Already have an account?</label><a href="{{url_for('login')}}" id="name">Login</a>
 
             </form>
         </div>
