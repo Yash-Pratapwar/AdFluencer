@@ -25,14 +25,12 @@ class user_advt(db.Model, UserMixin):
 class user_infl(db.Model, UserMixin):
     __tablename__ = 'user_infl'
     id = db.Column(db.Integer, primary_key=True)
-    company_name = db.Column(db.String(150), unique=True)
-    acc_handler_name = db.Column(db.String(150))
-    acc_handler_desig = db.Column(db.String(150))
-    comp_website = db.Column(db.String(150))
+    fname = db.Column(db.String(150), unique=True)
+    lname = db.Column(db.String(150))
+    smh = db.Column(db.String(150))
+    # ph_no = db.Column(db.String(150))
     ph_no = db.Column(db.Integer)
-    comp_email = db.Column(db.String(150))
-    ah_email = db.Column(db.String(150))
-    ah_email = db.Column(db.String(150))
+    inf_email = db.Column(db.String(150))
     pswd1 = db.Column(db.String(150))
     pswd2 = db.Column(db.String(150))
     gender = db.Column(db.String(150))
@@ -83,6 +81,20 @@ def adv_regis():
 @app.route('/inf_regis', methods=['GET', 'POST'])
 def inf_regis():
     if request.method == 'POST':
+        fname = request.form.get("fname")
+        lname = request.form.get("lname")
+        smh = request.form.get("smh")
+        # comp_website = request.form.get("comp_website")
+        ph_no = request.form.get("ph_no")
+        inf_email = request.form.get("inf_email")
+        # ah_email = request.form.get("ah_email")
+        pswd1 = request.form.get("pswd1")
+        pswd2 = request.form.get("pswd2")
+        gender = request.form["gender"]
+        inf_regis = user_infl(fname=fname,lname=lname,smh=smh,
+        ph_no=ph_no, inf_email=inf_email, pswd1=pswd1,pswd2=pswd2,gender=gender )
+        db.session.add(inf_regis)
+        db.session.commit()
         return redirect(url_for('home'))
     else:
         return render_template('influencer-registration.html')

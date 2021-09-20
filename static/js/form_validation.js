@@ -1,14 +1,14 @@
 function validateform() {
-    var c_name = document.registration.company_name.value;
-    var ah_name = document.registration.acc_handler_name.value;
-    var ah_desig = document.registration.acc_handler_desig.value;
-    var num = document.registration.rollno.value;
-    var pw1 = document.registration.pswd1.value;
-    var pw2 = document.registration.pswd2.value;
-    var dept = document.registration.r_dept.value;
-    var age = document.registration.age.value;
-    var email = document.registration.email.value;
-    var getSelectedValue = document.querySelector('input[name="gender"]:checked');
+    let c_name = document.forms["registration"]["name"].value;
+    let ah_name = document.registration.acc_handler_name.value;
+    let ah_desig = document.registration.acc_handler_desig.value;
+    let num = document.registration.rollno.value;
+    let pw1 = document.registration.pswd1.value;
+    let pw2 = document.registration.pswd2.value;
+    let dept = document.registration.r_dept.value;
+    let age = document.registration.age.value;
+    let email = document.registration.email.value;
+    let getSelectedValue = document.querySelector('input[name="gender"]:checked');
 
 
     if (c_name == null || c_name == "") {
