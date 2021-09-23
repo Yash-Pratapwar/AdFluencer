@@ -1,6 +1,6 @@
 function validateform() {
-    let c_name = document.forms["registration"]["name"].value;
-    let ah_name = document.registration.acc_handler_name.value;
+    var company_name = document.forms["registration"]["company_name"];
+    let ah_name = document.registration.acc_handler_name;
     let ah_desig = document.registration.acc_handler_desig.value;
     let num = document.registration.rollno.value;
     let pw1 = document.registration.pswd1.value;
@@ -11,7 +11,7 @@ function validateform() {
     let getSelectedValue = document.querySelector('input[name="gender"]:checked');
 
 
-    if (c_name == null || c_name == "") {
+    if (company_name.value == null || company_name.value == "") {
         alert("Company name can't be blank");
         // ufname.focus();
         return false;

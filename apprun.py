@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, url_for, redirect
+from flask import Flask, request, render_template, url_for, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask_login import UserMixin
@@ -61,15 +61,35 @@ def register():
 def adv_regis():
     if request.method == 'POST':
         company_name = request.form.get("company_name")
+        if len(company_name) == "":
+            flash("Company Name cannot be empty", category= "error")
         acc_handler_name = request.form.get("acc_handler_name")
+        if len(acc_handler_name) == "":
+            flash("Account Handler Name cannot be empty", category= "error")
         acc_handler_desig = request.form.get("acc_handler_desig")
+        if len(acc_handler_desig) == "":
+            flash("Account Handler's Designation cannot be empty", category= "error")
         comp_website = request.form.get("comp_website")
+        if len(comp_website) == "":
+            flash("Company Website cannot be empty", category= "error")
         ph_no = request.form.get("ph_no")
+        if len(ph_no) == "":
+            flash("Phone Number cannot be empty", category= "error")
         comp_email = request.form.get("comp_email")
+        if len(comp_email) == "":
+            flash("Company's Email Address cannot be empty", category= "error")
         ah_email = request.form.get("ah_email")
+        if len(ah_email) == "":
+            flash("Account Handler's Email cannot be empty", category= "error")
         pswd1 = request.form.get("pswd1")
+        if len(pswd1) == "":
+            flash("Password cannot be empty", category= "error")
         pswd2 = request.form.get("pswd2")
+        if len(pswd2) == "":
+            flash("Password cannot be empty", category= "error")
         gender = request.form["gender"]
+        if len(gender) == "":
+            flash("Please Select a Gender", category= "error")
         adv_regis = user_advt(company_name=company_name,acc_handler_name=acc_handler_name,acc_handler_desig=acc_handler_desig,
         comp_website=comp_website, ph_no=ph_no, comp_email=comp_email, ah_email=ah_email,pswd1=pswd1,pswd2=pswd2,gender=gender )
         db.session.add(adv_regis)
