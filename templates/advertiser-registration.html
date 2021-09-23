@@ -87,7 +87,13 @@
             </div>
         </header><!-- End Header -->
     </div>
-
+    {% with messages = get_flashed_messages() %}
+        {% if messages%}
+            {% for msg in messages%}
+                <p>{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
     <br>
     <div class="main">
         <div class="register">
@@ -104,27 +110,27 @@
 
                 <label>Company name: </label>
                 <br>
-                <input type="text" name="company_name" id="name" placeholder="Enter the name of company*" required>
+                <input type="text" name="company_name" id="name" placeholder="Enter the name of company*" >
                 <br><br>
 
                 <label>Account handler's name: </label>
                 <br>
-                <input type="text" name="acc_handler_name" id="name" placeholder="Enter the name of account handler*" required>
+                <input type="text" name="acc_handler_name" id="name" placeholder="Enter the name of account handler*" >
                 <br><br>
 
                 <label>Account handler's designation: </label>
                 <br>
-                <input type="text" name="acc_handler_desig" id="name" placeholder="Designation of account handler*" required>
+                <input type="text" name="acc_handler_desig" id="name" placeholder="Designation of account handler*" >
                 <br><br>
 
                 <label>Company website: </label>
                 <br>
-                <input type="url" name="comp_website" id="name" placeholder="Enter company website url*" required>
+                <input type="url" name="comp_website" id="name" placeholder="Enter company website url*" >
                 <br><br>
 
                 <label>Phone number: </label>
                 <br>
-                <input type="tel" name="ph_no" id="name" placeholder="Enter company's contact no.*" required>
+                <input type="tel" name="ph_no" id="name" placeholder="Enter company's contact no.*" >
                 <br><br>
 
                 <label>Company's email: </label>
@@ -132,19 +138,19 @@
                 <input type="email" name="comp_email" id="name" placeholder="Enter company's email ID*" required>
                 <br><br>
 
-                <label>Account hnadler's email: </label>
+                <label>Account handler's email: </label>
                 <br>
-                <input type="email" name="ah_email" id="name" placeholder="Enter acc handler's email ID*" required>
+                <input type="email" name="ah_email" id="name" placeholder="Enter acc handler's email ID*" >
                 <br><br>
 
                 <label>Password: </label>
                 <br>
-                <input type="password" name="pswd1" id="name" placeholder="Enter Password*" required>
+                <input type="password" name="pswd1" id="name" placeholder="Enter Password*" >
                 <br><br>
 
                 <label>Re-enter password: </label>
                 <br>
-                <input type="password" name="pswd2" id="name" placeholder="Enter Password Again*" required>
+                <input type="password" name="pswd2" id="name" placeholder="Enter Password Again*" >
                 <br><br>
                 
                 <!-- <label>Your Age: </label>
@@ -154,22 +160,22 @@
                 <!-- <label>Email: </label>
             <br>
             <input type="email" name="email" id="name"
-            placeholder="Enter your email*" required>
+            placeholder="Enter your email*" >
             <br><br> -->
                 <label>Account handler's gender: </label>
                 <br>
                 <!-- &nbsp;&nbsp; -->
-                <input type="radio" name="gender" id="gender" value="male" required>
+                <input type="radio" name="gender" id="gender" value="male" >
                 <!-- &nbsp; -->
                 <span id="male">Male</span>
                 &nbsp;
                 &nbsp;
-                <input type="radio" name="gender" id="gender" value="female" required>
+                <input type="radio" name="gender" id="gender" value="female" >
                 <!-- &nbsp; -->
                 <span id="female">Female</span>
                 &nbsp;
                 &nbsp;
-                <input type="radio" name="gender" id="gender" value="others" required>
+                <input type="radio" name="gender" id="gender" value="others" >
                 <!-- &nbsp; -->
                 <span id="others">others</span>
                 <br>

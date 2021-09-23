@@ -1,12 +1,18 @@
-from flask import Flask, request, render_template, url_for, redirect
+from flask import Flask, request, render_template, url_for, redirect, flash
+from flask.helpers import flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
+# from flask_bcrypt import Bcrypt
+
 # from flask_user import roles_required
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///adfluencer.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = 'adfluencer@secret'
 db = SQLAlchemy(app)
+# bcrypt = Bcrypt(app)
 
 class user_advt(db.Model, UserMixin):
     __tablename__ = 'user_advt'
@@ -18,8 +24,8 @@ class user_advt(db.Model, UserMixin):
     ph_no = db.Column(db.Integer)
     comp_email = db.Column(db.String(150))
     ah_email = db.Column(db.String(150))
-    pswd1 = db.Column(db.String(150))
-    pswd2 = db.Column(db.String(150))
+    password = db.Column(db.String(150))
+    # pswd2 = db.Column(db.String(150))
     gender = db.Column(db.String(150))
     date_created = db.Column(db.DateTime, default = datetime.utcnow)
 class user_infl(db.Model, UserMixin):
@@ -31,8 +37,8 @@ class user_infl(db.Model, UserMixin):
     # ph_no = db.Column(db.String(150))
     ph_no = db.Column(db.Integer)
     inf_email = db.Column(db.String(150))
-    pswd1 = db.Column(db.String(150))
-    pswd2 = db.Column(db.String(150))
+    password = db.Column(db.String(150))
+    # pswd2 = db.Column(db.String(150))
     gender = db.Column(db.String(150))
     date_created = db.Column(db.DateTime, default = datetime.utcnow)
 
@@ -40,11 +46,23 @@ class user_infl(db.Model, UserMixin):
 def home():
     return render_template('index.html')
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('pswd')
+        
+        user = user_advt.query.filter_by(comp_email=email).first()
+        if user:
+            
+            if check_password_hash(user.password, password):
+                flash('Logged in successfully!', category='success')
+                return render_template('advt_dashboard.html')
+            else:
+                flash('Incorrect password, try again.', category='error')
+        else:
+            flash('Email does not exist', category='error')
     return render_template('login.html')
-
-
 
 # @app.route('/advt/dashboard')    # @route() must always be the outer-most decorator
 # @login_required
@@ -70,13 +88,21 @@ def adv_regis():
         pswd1 = request.form.get("pswd1")
         pswd2 = request.form.get("pswd2")
         gender = request.form["gender"]
-        adv_regis = user_advt(company_name=company_name,acc_handler_name=acc_handler_name,acc_handler_desig=acc_handler_desig,
-        comp_website=comp_website, ph_no=ph_no, comp_email=comp_email, ah_email=ah_email,pswd1=pswd1,pswd2=pswd2,gender=gender )
-        db.session.add(adv_regis)
-        db.session.commit()
-        return redirect(url_for('home'))
-    else:
-        return render_template('advertiser-registration.html')
+
+        user = user_advt.query.filter_by(comp_email=comp_email).first()
+        if user:
+            flash('Email already exists.', category='error')
+            return render_template('advertiser-registration.html')
+
+        else:
+            hashed_password = generate_password_hash(pswd1)    
+            adv_regis_user = user_advt(company_name=company_name,acc_handler_name=acc_handler_name,acc_handler_desig=acc_handler_desig,
+            comp_website=comp_website, ph_no=ph_no, comp_email=comp_email, ah_email=ah_email,password=hashed_password,gender=gender )
+            db.session.add(adv_regis_user)
+            db.session.commit()
+            return redirect(url_for('home', database = user_advt.query.order_by(user_advt.total_score.desc()).all()))
+    
+    return render_template('advertiser-registration.html')
 
 @app.route('/inf_regis', methods=['GET', 'POST'])
 def inf_regis():
@@ -91,9 +117,9 @@ def inf_regis():
         pswd1 = request.form.get("pswd1")
         pswd2 = request.form.get("pswd2")
         gender = request.form["gender"]
-        inf_regis = user_infl(fname=fname,lname=lname,smh=smh,
-        ph_no=ph_no, inf_email=inf_email, pswd1=pswd1,pswd2=pswd2,gender=gender )
-        db.session.add(inf_regis)
+        inf_regis_user = user_infl(fname=fname,lname=lname,smh=smh,
+        ph_no=ph_no, inf_email=inf_email, pswd1=generate_password_hash(pswd1, method='sha256'), gender=gender )
+        db.session.add(inf_regis_user)
         db.session.commit()
         return redirect(url_for('home'))
     else:
