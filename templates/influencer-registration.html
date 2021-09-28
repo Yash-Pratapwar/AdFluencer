@@ -84,7 +84,18 @@
             </div>
         </header><!-- End Header -->
     </div>
-
+    
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    {{message}}
+                </div>  
+                {% endfor %}
+            {% endif %}    
+        {% endwith %}
+        
     <style>
         body {
             background-image: linear-gradient(to right,gray, rgb(230, 230, 230) );
@@ -207,47 +218,47 @@
 
                 <label>First Name: </label>
                 <br>
-                <input type="text" name="fname" id="name" placeholder="Enter Your First Name*" required>
+                <input type="text" name="fname" id="name" placeholder="Enter Your First Name*" >
                 <br><br>
                 
                 <label>Last Name: </label>
                 <br>
-                <input type="text" name="lname" id="name" placeholder="Enter Your Last Name"  required>
+                <input type="text" name="lname" id="name" placeholder="Enter Your Last Name"  >
                 <br><br>
                 
                 <label>Social media handle: </label>
                 <br>
-                <input type="url" name="smh" id="name" placeholder="Enter social media handle*" required>
+                <input type="url" name="smh" id="name" placeholder="Enter social media handle (URL in format https://sample.com)*" >
                 <br><br>
                 
                 <label>Phone number: </label>
                 <br>
-                <input type="tel" name="ph_no" id="name" placeholder="Enter Your phone number*"  required>
+                <input type="tel" name="ph_no" id="name" placeholder="Enter Your phone number*"  >
                 <br><br>
                 
                 <label>Email: </label>
                 <br>
-                <input type="email" name="inf_email" id="name" placeholder="Enter Your Email ID*" required>
+                <input type="email" name="inf_email" id="name" placeholder="Enter Your Email ID*" >
                 <br><br>
                 
                 <label>Password: </label>
                 <br>
-                <input type="password" name="pswd1" id="name" placeholder="Enter Password*" required>
+                <input type="password" name="pswd1" id="name" placeholder="Enter Password*" >
                 <br><br>
                 
                 <label>Re-enter password: </label>
                 <br>
-                <input type="password" name="pswd2" id="name" placeholder="Enter Password Again*" required>
+                <input type="password" name="pswd2" id="name" placeholder="Enter Password Again*" >
                 <br><br>
                 
                 <label>Your Age: </label>
                 <br>
-                <input type="number" name="age" id="name" placeholder="How old are you?" required>
+                <input type="number" name="age" id="name" placeholder="How old are you?" >
                 <br><br>
                 <!-- <label>Email: </label>
             <br>
             <input type="email" name="email" id="name"
-            placeholder="Enter your email*" required>
+            placeholder="Enter your email*" >
             <br><br> -->
                 <label>Gender: </label>
                 <br>

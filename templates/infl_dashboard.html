@@ -42,6 +42,12 @@
 
         <!-- ======= Hero Section ======= -->
         <section id="hero">
+            {% for msg in get_flashed_messages() %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{msg}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
             <div class="hero-container" data-aos="fade-up">
                 <h1>Welcome <br><span>AdFluencer</span></h1>
                 <!-- <h2>We are a team of college students </h2> -->
@@ -67,7 +73,7 @@
                         <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
                         <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li>
                         <li><a class="nav-link scrollto" href="#team">Team</a></li>
-                        <li><a href="{{url_for('login')}}">Login/Sign-up</a></li>
+                        <li><a href="{{url_for('logout')}}">Logout</a></li>
                         <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
               <ul>
                 <li><a href="#">Drop Down 1</a></li>
