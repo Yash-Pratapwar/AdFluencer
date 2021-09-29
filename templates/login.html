@@ -84,11 +84,24 @@
             </div>
         </header><!-- End Header -->
     </div>
-
+    <!-- {% with messages = get_flashed_messages() %}
+        {% if messages%}
+            {% for msg in messages%}
+                <p>{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %} -->
+    {% for msg in get_flashed_messages() %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{msg}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
     <style>
         body {
             background-image: linear-gradient(to right, rgb(230, 230, 230), gray);
         }
+
         div.main {
             width: 400px;
             margin: 10px auto 0px auto;
@@ -210,9 +223,9 @@
         <div class="login">
             <h2>Login</h2>
             <form id="login" method="POST">
-                <label>Username: </label>
+                <label>E-mail: </label>
                 <br>
-                <input type="text" name="fname" id="name" placeholder="Enter Your Username">
+                <input type="text" name="email" id="name" placeholder="Enter your email">
                 <br><br>
                 <label>Password: </label>
                 <br>
@@ -229,25 +242,3 @@
         <br><br><br><br><br>
     </div>
     <!--end main-->
-
-    
-    .btn-grad {background-image: linear-gradient(to right, #24C6DC 0%, #514A9D  51%, #24C6DC  100%)}
-    .btn-grad {
-       margin: 10px;
-       padding: 15px 45px;
-       text-align: center;
-       text-transform: uppercase;
-       transition: 0.5s;
-       background-size: 200% auto;
-       color: white;            
-       box-shadow: 0 0 20px #eee;
-       border-radius: 10px;
-       display: block;
-     }
-
-     .btn-grad:hover {
-       background-position: right center; /* change the direction of the change here */
-       color: #fff;
-       text-decoration: none;
-     }
-    
