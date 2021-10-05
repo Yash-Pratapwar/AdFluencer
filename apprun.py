@@ -49,9 +49,6 @@ class user_infl(db.Model, UserMixin):
     date_created = db.Column(db.DateTime, default = datetime.utcnow)
 
 
-
-
-
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -97,14 +94,17 @@ def logout():
 @app.route('/advt/dashboard')    # @route() must always be the outer-most decorator
 @login_required
 def advt_dashboard():
-    # render the admin dashboard
     return render_template('advt_dashboard.html')
 
 @app.route('/infl/dashboard')    # @route() must always be the outer-most decorator
 @login_required
 def infl_dashboard():
-    # render the admin dashboard
     return render_template('infl_dashboard.html')
+
+@app.route('/infl/portfolio_details')    # @route() must always be the outer-most decorator
+@login_required
+def portfolio_details():
+    return render_template('portfolio_details.html')
 
 @app.route('/register')
 def register():
@@ -155,8 +155,8 @@ def adv_regis():
                 ah_email=ah_email,password=hashed_password,gender=gender )
                 db.session.add(adv_regis_user)
                 db.session.commit()
-                flash('Account created!', category='success')
-                return redirect(url_for('home'))
+                flash('Account created! Please login', category='success')
+                return redirect(url_for('login'))
     return render_template('advertiser-registration.html')
 
 @app.route('/inf_regis', methods=['GET', 'POST'])
@@ -204,8 +204,8 @@ def inf_regis():
                 ph_no=ph_no, inf_email=inf_email, password=hashed_password,age=age, gender=gender )
                 db.session.add(inf_regis_user)
                 db.session.commit()
-                flash('Account created!', category='success')
-                return redirect(url_for('home'))
+                flash('Account created! Please login', category='success')
+                return redirect(url_for('login'))
     return render_template('influencer-registration.html')
 
 if __name__ == "__main__":
