@@ -1,3 +1,4 @@
+console.log('test')
 function validateform() {
     var company_name = document.forms["registration"]["company_name"];
     let ah_name = document.registration.acc_handler_name;
@@ -9,7 +10,7 @@ function validateform() {
     let age = document.registration.age.value;
     let email = document.registration.email.value;
     let getSelectedValue = document.querySelector('input[name="gender"]:checked');
-
+    
 
     if (company_name.value == null || company_name.value == "") {
         alert("Company name can't be blank");
