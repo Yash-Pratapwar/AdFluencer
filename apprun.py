@@ -101,6 +101,10 @@ def advt_dashboard():
 def infl_dashboard():
     return render_template('infl_dashboard.html')
 
+
+
+
+
 @app.route('/infl/portfolio_details')    # @route() must always be the outer-most decorator
 @login_required
 def portfolio_details():
@@ -207,6 +211,12 @@ def inf_regis():
                 flash('Account created! Please login', category='success')
                 return redirect(url_for('login'))
     return render_template('influencer-registration.html')
+
+@app.route('/myprofile')
+@login_required
+def myprofile():
+    return render_template('infl_profile')    
+
 
 if __name__ == "__main__":
     app.run(debug=True)
