@@ -101,10 +101,6 @@ def advt_dashboard():
 def infl_dashboard():
     return render_template('infl_dashboard.html')
 
-
-
-
-
 @app.route('/infl/portfolio_details')    # @route() must always be the outer-most decorator
 @login_required
 def portfolio_details():

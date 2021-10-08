@@ -45,20 +45,20 @@
             <div class="container d-flex align-items-center justify-content-between">
 
                 <div class="logo">
-                    <h1 class="text-light"><a href="index.html"><span>AdFluencer</span></a></h1>
+                    <h1 class="text-light"><a href="{{url_for('infl_dashboard')}}"><span>AdFluencer</span></a></h1>
                     <!-- Uncomment below if you prefer to use an image logo -->
                     <!-- <a href="index.html"><img src="../static/img/logo.png" alt="" class="img-fluid"></a>-->
                 </div>
 
                 <nav id="navbar" class="navbar">
                     <ul>
-                        <li><a class="nav-link scrollto " href="index.html">Home</a></li>
+                        <li><a class="nav-link scrollto " href="{{url_for('infl_dashboard')}}">Home</a></li>
                         <!-- <li><a class="nav-link scrollto" href="#about">About</a></li> -->
                         <!-- <li><a class="nav-link scrollto" href="#services">Services</a></li>
             <li><a class="nav-link scrollto active" href="#portfolio">Portfolio</a></li>
             <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li>
             <li><a class="nav-link scrollto" href="#team">Team</a></li> -->
-                        <li><a href="login.html">Login/Sign-Up</a></li>
+                        <!-- <li><a href="login.html">Login/Sign-Up</a></li> -->
                         <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
               <ul>
                 <li><a href="#">Drop Down 1</a></li>
@@ -93,7 +93,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <h2>Product Details </h2>
                         <ol>
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="{{url_for('infl_dashboard')}}">Home</a></li>
                             <li>Product Details</li>
                         </ol>
                     </div>
