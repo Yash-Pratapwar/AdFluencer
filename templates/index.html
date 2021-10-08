@@ -27,6 +27,13 @@
   <!-- Template Main CSS File -->
   <link href="{{url_for('static',filename='css/style.css')}}" rel="stylesheet" >
 
+  <!-- Including jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js">
+  </script>
+
+  <!-- Including Bootstrap JS -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
+  </script>
 </head>
 
 <body>
@@ -43,6 +50,15 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
       {% endfor %}
+      
+      <script type="text/javascript">
+        setTimeout(function () {
+
+            // Closing the alert
+            $('.alert').alert('close');
+        }, 3000);
+    </script>
+    
       <div class="hero-container" data-aos="fade-up">
         <h1>Promote To Propogate <br><span>With</span><br><span>Adfluencer</span></h1>
         <!-- <h2>We are a team of college students </h2> -->

@@ -106,6 +106,11 @@ def infl_dashboard():
 def portfolio_details():
     return render_template('infl_portfolio.html')
 
+@app.route('/infl/my_profile')    # @route() must always be the outer-most decorator
+@login_required
+def my_profile():
+    return render_template('infl_profile.html')
+
 @app.route('/register')
 def register():
     return render_template('registration.html')
