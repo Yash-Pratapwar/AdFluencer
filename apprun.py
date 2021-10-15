@@ -1,8 +1,9 @@
-from flask import Flask, request, render_template, url_for, redirect, flash
+from flask import Flask, request, render_template, url_for, redirect, flash, session
 from flask.helpers import flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask_login import UserMixin, login_manager, login_user, login_required, logout_user, current_user
+from sqlalchemy.orm import session
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager
 # from flask_bcrypt import Bcrypt
@@ -82,7 +83,7 @@ def login():
 
 @login_manager.user_loader
 def load_user(id):
-    return user_advt.query.get(int(id)) or user_infl.query.get(int(id))
+        return user_infl.query.get(int(id)) or user_advt.query.get(int(id))
 
 @app.route('/logout')
 @login_required
@@ -96,10 +97,16 @@ def logout():
 def advt_dashboard():
     return render_template('advt_dashboard.html')
 
+@app.route('/advt/advertise')
+@login_required
+def advt_advertise():
+    return render_template('advt_advertisements.html')
+
 @app.route('/infl/dashboard')    # @route() must always be the outer-most decorator
 @login_required
 def infl_dashboard():
-    return render_template('infl_dashboard.html')
+    name = current_user.fname
+    return render_template('infl_dashboard.html', name=name)
 
 @app.route('/infl/portfolio_details')    # @route() must always be the outer-most decorator
 @login_required
@@ -128,6 +135,7 @@ def adv_regis():
         pswd1 = request.form.get("pswd1")
         pswd2 = request.form.get("pswd2")
         gender = request.form["gender"]
+        acc_type = 'advt'
         if (company_name == "" or company_name == None) :
             flash("Company Name cannot be empty", category= "error")
         elif (acc_handler_name) == "":
@@ -157,7 +165,7 @@ def adv_regis():
                 hashed_password = generate_password_hash(pswd1, method='sha256')    
                 adv_regis_user = user_advt(company_name=company_name,acc_handler_name=acc_handler_name,
                 acc_handler_desig=acc_handler_desig,comp_website=comp_website, ph_no=ph_no, comp_email=comp_email, 
-                ah_email=ah_email,password=hashed_password,gender=gender )
+                ah_email=ah_email,password=hashed_password,gender=gender,acc_type=acc_type )
                 db.session.add(adv_regis_user)
                 db.session.commit()
                 flash('Account created! Please login', category='success')
@@ -178,6 +186,7 @@ def inf_regis():
         pswd1 = request.form.get("pswd1")
         pswd2 = request.form.get("pswd2")
         gender = request.form["gender"]
+        acc_type = 'infl'
         if (fname == "" or fname == None) :
             flash("First Name cannot be empty", category= "error")
         elif (lname) == "":
@@ -206,7 +215,7 @@ def inf_regis():
             else:
                 hashed_password = generate_password_hash(pswd1, method='sha256')    
                 inf_regis_user = user_infl(fname=fname,lname=lname,smh=smh, 
-                ph_no=ph_no, inf_email=inf_email, password=hashed_password,age=age, gender=gender )
+                ph_no=ph_no, inf_email=inf_email, password=hashed_password,age=age, gender=gender,acc_type=acc_type )
                 db.session.add(inf_regis_user)
                 db.session.commit()
                 flash('Account created! Please login', category='success')

@@ -1038,7 +1038,7 @@ section {
 }
 
 .team .member .social {
-  position: absolute;
+  position:absolute;
   left: 50;
   bottom: -30px;
   right: 50;
