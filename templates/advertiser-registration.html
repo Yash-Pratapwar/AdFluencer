@@ -32,12 +32,9 @@
     <!-- JS file -->
     <script src="../static/js/form_validation.js"></script>
 
-    <!-- =======================================================
-  * Template Name: AdFluencer - v4.3.0
-  * Template URL: https://bootstrapmade.com/AdFluencer-responsive-bootstrap-website-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-======================================================== -->
+    <!-- Including validation -->
+    <script type="text/javascript" src="{{url_for('static', filename='js/advt_validation.js' )}}"></script>
+
 </head>
 
 <body>
@@ -56,29 +53,6 @@
                 <nav id="navbar" class="navbar">
                     <ul>
                         <li><a class="nav-link scrollto " href="{{url_for('home')}}">Home</a></li>
-                        <!-- <li><a class="nav-link scrollto" href="#about">About</a></li>
-                        <li><a class="nav-link scrollto" href="#services">Services</a></li>
-                        <li><a class="nav-link scrollto active" href="#portfolio">Portfolio</a></li>
-                        <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li>
-                        <li><a class="nav-link scrollto" href="#team">Team</a></li>
-                        <li><a href="blog.html">Blog</a></li> -->
-                        <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-                <li><a href="#">Drop Down 1</a></li>
-                <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                    <li><a href="#">Deep Drop Down 1</a></li>
-                    <li><a href="#">Deep Drop Down 2</a></li>
-                    <li><a href="#">Deep Drop Down 3</a></li>
-                    <li><a href="#">Deep Drop Down 4</a></li>
-                    <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-                </li>
-                <li><a href="#">Drop Down 2</a></li>
-                <li><a href="#">Drop Down 3</a></li>
-                <li><a href="#">Drop Down 4</a></li>
-            </ul>
-            </li> -->
                         <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
@@ -98,20 +72,14 @@
         {% endif %}    
     {% endwith %}
     </div>
+
+    <body onload="firstfocus();"></body>
     <br>
     <div class="main">
         <div class="register">
             <h2>Register Here</h2>
-            <form name="registration" id="register" method="POST" >
-                <!-- <label>Account type: </label>
-                <br>
-                <select name="acc_type" id="select">
-                    <option value="">Choose account type</option>
-                    <option value="influ">Influencer</option>
-                    <option value="advt">Advertiser</option>
-                </select>
-                <br><br> -->
-
+            <form name="registration" id="register" method="POST" onsubmit="return validate()" >
+                
                 <label>Company name: </label>
                 <br>
                 <input type="text" name="company_name" id="name" placeholder="Enter the name of company*" >
@@ -157,15 +125,6 @@
                 <input type="password" name="pswd2" id="name" placeholder="Enter Password Again*" >
                 <br><br>
                 
-                <!-- <label>Your Age: </label>
-                <br>
-                <input type="number" name="age" id="name" placeholder="How old are you?">
-                <br><br> -->
-                <!-- <label>Email: </label>
-            <br>
-            <input type="email" name="email" id="name"
-            placeholder="Enter your email*" >
-            <br><br> -->
                 <label>Account handler's gender: </label>
                 <br>
                 <!-- &nbsp;&nbsp; -->
@@ -187,8 +146,6 @@
                     <div class="inner"></div>
                     <button type="submit">Register</button>
                 </div>
-                <!-- <input type="submit" name="submit" value="Register" id="submit">
-            <br><br> -->
                 <label for="">Already have an account?</label><a href="{{url_for('login')}}" id="name">Login</a>
 
             </form>
@@ -244,20 +201,6 @@
             padding: 7px;
             box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0, 0.3);
         }
-
-        /*input#submit {
-            width: 200px;
-            padding: 7px;
-            font-size: 16px;
-            font-family: 'Courier New', Courier, monospace;
-            font-weight: 600;
-            border: none;
-            border-radius: 3px;
-            color: #fff;
-            cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0, 0.3);
-        }*/
 
         form .btn {
             margin: 30px 0;

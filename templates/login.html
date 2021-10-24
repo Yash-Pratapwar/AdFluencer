@@ -33,7 +33,7 @@
 
 <body>
     <div class="wrap">
-
+        
         <!-- ======= Header ======= -->
         <header id="header" class="d-flex align-items-center">
             <div class="container d-flex align-items-center justify-content-between">
@@ -55,12 +55,14 @@
             </div>
         </header><!-- End Header -->
     </div>
+
     {% for msg in get_flashed_messages() %}
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
         {{msg}}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     {% endfor %}
+    
     <style>
         body {
             background-image: linear-gradient(to right, rgb(230, 230, 230), gray);
