@@ -1025,7 +1025,7 @@ section {
 
 .team .member .member-info-content h4 {
   font-weight: 700;
-  margin-bottom: 2px;
+  margin-bottom: 0px;
   font-size: 18px;
   color: #fff;
 }
@@ -1038,11 +1038,11 @@ section {
 }
 
 .team .member .social {
-  position: absolute;
-  left: 0;
-  bottom: -38px;
-  right: 0;
-  height: 48px;
+  position:absolute;
+  left: 50;
+  bottom: -30px;
+  right: 50;
+  height: 40px;
   transition: bottom ease-in-out 0.4s;
   text-align: center;
 }
