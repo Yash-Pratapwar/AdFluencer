@@ -4,7 +4,7 @@ function firstfocus() {
     return true;
 }
 function validate(){
-    var letters = /^[a-zA-Z]+$/;
+    var letters = /^[a-zA-Z]{20}?[ ]?[a-zA-Z]{20}+$/;
     var res = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
     var phoneno = /^\d{10}$/;
     var mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;

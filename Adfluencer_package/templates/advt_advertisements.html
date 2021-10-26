@@ -45,14 +45,14 @@
             <div class="container d-flex align-items-center justify-content-between">
 
                 <div class="logo">
-                    <h1 class="text-light"><a href="{{url_for('advt_dashboard')}}"><span>AdFluencer</span></a></h1>
+                    <h1 class="text-light"><a href="{{url_for('views.advt_dashboard')}}"><span>AdFluencer</span></a></h1>
                     <!-- Uncomment below if you prefer to use an image logo -->
                     <!-- <a href="index.html"><img src="../static/img/logo.png" alt="" class="img-fluid"></a>-->
                 </div>
 
                 <nav id="navbar" class="navbar">
                     <ul>
-                        <li><a class="nav-link scrollto " href="{{url_for('advt_dashboard')}}">Home</a></li>
+                        <li><a class="nav-link scrollto " href="{{url_for('views.advt_dashboard')}}">Home</a></li>
                         <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
@@ -66,31 +66,31 @@
       <br>
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label">Email address</label>
-      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+      <input type="email" class="form-control" name="email" id="exampleFormControlInput1" placeholder="name@example.com">
     </div>
     <div class="mb-3">
       <label for="exampleFormControlTextarea1" class="form-label">Product Description</label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      <textarea class="form-control" name="desc" id="exampleFormControlTextarea1" rows="3"></textarea>
     </div>
     <div class="col-12">
       <label for="inputAddress" class="form-label">Brand</label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="">
+      <input type="text" class="form-control" name="brand" id="inputAddress" placeholder="">
     </div>
     <div class="col-12">
       <label for="inputAddress" class="form-label">Deadline</label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="">
+      <input type="text" class="form-control" name="deadline" id="inputAddress" placeholder="">
     </div>
     <div class="col-12">
       <label for="inputAddress" class="form-label">Product selling points</label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="">
+      <input type="text" class="form-control" name="prod_sp" id="inputAddress" placeholder="">
     </div>
     <div class="col-12">
       <label for="inputAddress" class="form-label">Age group targeted</label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="">
+      <input type="text" class="form-control" name="age_grp" id="inputAddress" placeholder="">
     </div>
     <div class="mb-3">
       <label for="formFileMultiple" class="form-label">Upload product images</label>
-      <input class="form-control" type="file" id="formFileMultiple" multiple>
+      <input class="form-control" type="file" name="prod_imgs" id="formFileMultiple" multiple>
     </div>
     <div class="col-12">
       <button type="submit" class="btn btn-primary">Save and Upload</button>

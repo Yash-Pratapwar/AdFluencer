@@ -71,7 +71,7 @@
             <div class="container d-flex align-items-center justify-content-between">
                 <div class="logo">
                     <h1 class="text-light">
-                        <a href="{{url_for('home')}}"><span>AdFluencer</span></a>
+                        <a href="{{url_for('views.home')}}"><span>AdFluencer</span></a>
                     </h1>
                     <!-- Uncomment below if you prefer to use an image logo -->
                     <!-- <a href="index.html"><img src="../static/img/logo.png" alt="" class="img-fluid"></a>-->
@@ -85,10 +85,10 @@
                         <!-- <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li> -->
                         <!-- <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li> -->
                         <li>
-                            <a class="nav-link scrollto" href="{{url_for('advt_advertise')}}">Advertise</a>
+                            <a class="nav-link scrollto" href="{{url_for('views.advt_advertise')}}">Advertise</a>
                         </li>
                         <li><a class="nav-link scrollto" href="#team">Influencers</a></li>
-                        <li><a href="{{url_for('logout')}}">Logout</a></li>
+                        <li><a href="{{url_for('views.logout')}}">Logout</a></li>
                         <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
