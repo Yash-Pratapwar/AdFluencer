@@ -29,6 +29,9 @@
     <!-- Template Main CSS File -->
     <link href="../static/css/style.css" rel="stylesheet">
 
+    <script type="text/javascript" src="{{url_for('static', filename='js/login.js' )}}"></script>
+
+
 </head>
 
 <body>
@@ -62,7 +65,32 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     {% endfor %}
-    
+    <body onload="firstfocus();"></body>
+    <br>
+    <div class="main">
+        <div class="login">
+            <h2>Login</h2>
+            <form id="login" method="POST" name="login">
+                <label>E-mail: </label>
+                <br>
+                <input type="text" name="email" id="name" placeholder="Enter your email">
+                <br><br>
+                <label>Password: </label>
+                <br>
+                <input type="password" name="pswd" id="name" placeholder="Enter Password">
+                <br><br>
+                <div class="btn">
+                    <div class="inner"></div>
+                    <button type="submit">Login</button>
+                </div>
+                <label for="">Don't have an account?</label><a href="{{url_for('views.register')}}" id="name">Sign up</a>
+            </form>
+        </div>
+        <!--end login -->
+        <br><br><br><br><br>
+    </div>
+    <!--end main-->
+
     <style>
         body {
             background-image: linear-gradient(to right, rgb(230, 230, 230), gray);
@@ -156,28 +184,5 @@
             text-shadow: 1px 1px 5px rgba(0, 0, 0, 0, 0.3);
         }
     </style>
-
-    <br>
-    <div class="main">
-        <div class="login">
-            <h2>Login</h2>
-            <form id="login" method="POST">
-                <label>E-mail: </label>
-                <br>
-                <input type="text" name="email" id="name" placeholder="Enter your email">
-                <br><br>
-                <label>Password: </label>
-                <br>
-                <input type="password" name="pswd" id="name" placeholder="Enter Password">
-                <br><br>
-                <div class="btn">
-                    <div class="inner"></div>
-                    <button type="submit">Login</button>
-                </div>
-                <label for="">Don't have an account?</label><a href="{{url_for('views.register')}}" id="name">Sign up</a>
-            </form>
-        </div>
-        <!--end login -->
-        <br><br><br><br><br>
-    </div>
-    <!--end main-->
+</body>
+</html>
