@@ -50,9 +50,7 @@
 
                 <div class="logo">
                     <h1 class="text-light"><a href="{{url_for('views.advt_dashboard')}}"><span>AdFluencer</span></a>
-                    </h1>
-                    <!-- Uncomment below if you prefer to use an image logo -->
-                    <!-- <a href="index.html"><img src="../static/img/logo.png" alt="" class="img-fluid"></a>-->
+                    </h1>                    
                 </div>
 
                 <nav id="navbar" class="navbar">
@@ -74,14 +72,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     {% endfor %}
-
-    <!-- <script type="text/javascript">
-                setTimeout(function () {
-                    // Closing the alert
-                    $(".alert").alert("close");
-                }, 3000);
-            </script> -->
-
+    
     <body onload="firstfocus()"></body>
     <form name='advertisements' enctype=multipart/form-data method="POST" onsubmit="return validate()" >
         <br>
@@ -109,8 +100,7 @@
         </div>
         <div class="col-12">
             <label for="exampleFormControlTextarea1" class="form-label">Product selling points</label>
-            <textarea class="form-control" name="prdt_sp" id="exampleFormControlTextarea1" rows="3"></textarea>
-            <!-- <input type="text" class="form-control" name="prdt_sp" id="inputAddress" placeholder=""> -->
+            <textarea class="form-control" name="prdt_sp" id="exampleFormControlTextarea1" rows="3"></textarea>            
         </div>
         <div class="col-12">
             <label for="inputAddress" class="form-label">Age group targeted</label>
