@@ -1,16 +1,16 @@
-// After form loads focus will go to Company name field.
+// After form loads focus will go to comp_name field.
 function firstfocus() {
-    var company_namef = document.registration.company_name.focus();
+    var comp_namef = document.registration.comp_name.focus();
     return true;
 }
 function validate(){
-    var letters = /^[a-zA-Z]+$/;
+    var letters = /^[a-zA-Z]{20}?[ ]?[a-zA-Z]{20}+$/;
     var res = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
     var phoneno = /^\d{10}$/;
     var mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     var psw =  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-    var company_name = document.registration.company_name.value;
-    var company_namef = document.registration.company_name;
+    var comp_name = document.registration.comp_name.value;
+    var comp_namef = document.registration.comp_name;
     var acc_handler_name = document.registration.acc_handler_name.value;
     var acc_handler_namef = document.registration.acc_handler_name;
     var acc_handler_desig = document.registration.acc_handler_desig.value;
@@ -31,14 +31,14 @@ function validate(){
 
 
 
-    if (company_name == "" || company_name == null) {
-        alert("Company name should not be empty");
-        company_namef.focus();
+    if (comp_name == "" || comp_name == null) {
+        alert("comp name should not be empty");
+        comp_namef.focus();
         return false;
     }
-    else if (!company_name.match(letters)) {
-        alert("Company name should contain only letters");
-        company_namef.focus();
+    else if (!comp_name.match(letters)) {
+        alert("comp name should contain only letters");
+        comp_namef.focus();
         return false;
     }
     
@@ -67,7 +67,7 @@ function validate(){
     }
     
     else if (comp_website == "" || comp_website == null) {
-        alert("Please enter your company's website URL");
+        alert("Please enter your comp's website URL");
         comp_websitef.focus();
         return false;
     }
@@ -79,7 +79,7 @@ function validate(){
     }
     
     else if (ph_no == "" || ph_no == null) {
-        alert("Please enter your company's phone number");
+        alert("Please enter your comp's phone number");
         ph_nof.focus();
         return false;
     }
@@ -91,7 +91,7 @@ function validate(){
     }
     
     else if (comp_email == "" || comp_email == null) {
-        alert("Please enter your company's E-mail ID");
+        alert("Please enter your comp's E-mail ID");
         comp_emailf.focus();
         return false;
     }

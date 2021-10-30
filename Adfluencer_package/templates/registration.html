@@ -28,13 +28,6 @@
 
     <!-- Template Main CSS File -->
     <link href="../static/css/style.css" rel="stylesheet">
-
-    <!-- =======================================================
-  * Template Name: AdFluencer - v4.3.0
-  * Template URL: https://bootstrapmade.com/AdFluencer-responsive-bootstrap-website-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-======================================================== -->
 </head>
 
 <body>
@@ -45,37 +38,12 @@
             <div class="container d-flex align-items-center justify-content-between">
 
                 <div class="logo">
-                    <h1 class="text-light"><a href="{{url_for('home')}}"><span>AdFluencer</span></a></h1>
-                    <!-- Uncomment below if you prefer to use an image logo -->
-                    <!-- <a href="index.html"><img src="../static/img/logo.png" alt="" class="img-fluid"></a>-->
+                    <h1 class="text-light"><a href="{{url_for('views.home')}}"><span>AdFluencer</span></a></h1>                    
                 </div>
 
                 <nav id="navbar" class="navbar">
                     <ul>
-                        <li><a class="nav-link scrollto " href="{{url_for('home')}}">Home</a></li>
-                        <!-- <li><a class="nav-link scrollto" href="#about">About</a></li>
-                        <li><a class="nav-link scrollto" href="#services">Services</a></li>
-                        <li><a class="nav-link scrollto active" href="#portfolio">Portfolio</a></li>
-                        <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li>
-                        <li><a class="nav-link scrollto" href="#team">Team</a></li>
-                        <li><a href="blog.html">Blog</a></li> -->
-                        <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-                <li><a href="#">Drop Down 1</a></li>
-                <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                    <li><a href="#">Deep Drop Down 1</a></li>
-                    <li><a href="#">Deep Drop Down 2</a></li>
-                    <li><a href="#">Deep Drop Down 3</a></li>
-                    <li><a href="#">Deep Drop Down 4</a></li>
-                    <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-                </li>
-                <li><a href="#">Drop Down 2</a></li>
-                <li><a href="#">Drop Down 3</a></li>
-                <li><a href="#">Drop Down 4</a></li>
-            </ul>
-            </li> -->
+                        <li><a class="nav-link scrollto " href="{{url_for('views.home')}}">Home</a></li>                        
                         <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
@@ -132,20 +100,6 @@
             box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0, 0.3);
         }
 
-        /*input#submit {
-            width: 200px;
-            padding: 7px;
-            font-size: 16px;
-            font-family: 'Courier New', Courier, monospace;
-            font-weight: 600;
-            border: none;
-            border-radius: 3px;
-            color: #fff;
-            cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0, 0.3);
-        }*/
-
         form .btn {
             margin: 30px 0;
             height: 45px;
@@ -161,9 +115,7 @@
             width: 300%;
             position: absolute;
             left: -100%;
-            z-index: -1;
-            /*background-color: bisque;*/
-            /*background: -webkit-linear-gradient(right, rgb(83, 192, 219), blue, rgb(83, 192, 219), blue);*/
+            z-index: -1;        
             transition: all 0.4s;
         }
         
@@ -198,21 +150,13 @@
             <form name="registration" id="register" method="POST" >
                 <label>Select your type of account</label>
                 <br><br>
-                <input type="radio" name="regis_type" id="advt1" onclick='document.location.href="{{url_for('adv_regis')}}"'>
+                <input type="radio" name="regis_type" id="advt1" onclick='document.location.href="{{url_for('views.adv_regis')}}"'>
                 <span id="advt1">Advertiser</span>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" name="regis_type" id="influ" onclick='document.location.href="{{url_for('inf_regis')}}"'>
-                <span id="influ">Influencer</span>
-                
-                <br>
-                <!-- <div class="btn">
-                    <div class="inner"></div>
-                    <button type="submit">Register</button>
-                </div> -->
-                <!-- <input type="submit" name="submit" value="Register" id="submit">
-                <br><br> -->
-                <br>
-                <label for="">Already have an account?</label><a href="{{url_for('login')}}" id="name">Login</a>
+                <input type="radio" name="regis_type" id="influ" onclick='document.location.href="{{url_for('views.inf_regis')}}"'>
+                <span id="influ">Influencer</span>                
+                <br><br>
+                <label for="">Already have an account?</label><a href="{{url_for('views.login')}}" id="name">Login</a>
 
             </form>
         </div>
@@ -220,5 +164,7 @@
         <br><br><br><br><br>
     </div>
     <!--end main-->
+</body>
+</html>
 
     

@@ -57,8 +57,7 @@
                 }, 3000);
             </script>
             <div class="hero-container" data-aos="fade-up">
-                <h1>Welcome <br><span>{{name}}</span></h1>
-                <!-- <h2>We are a team of college students </h2> -->
+                <h1>Welcome <br><span>{{name}}</span></h1>                
                 <a href="#clients" class="btn-get-started scrollto">Get Started</a>
             </div>
         </section><!-- End Hero -->
@@ -68,38 +67,16 @@
             <div class="container d-flex align-items-center justify-content-between">
 
                 <div class="logo">
-                    <h1 class="text-light"><a href="{{url_for('infl_dashboard')}}"><span>AdFluencer</span></a></h1>
-                    <!-- Uncomment below if you prefer to use an image logo -->
-                    <!-- <a href="index.html"><img src="../static/img/logo.png" alt="" class="img-fluid"></a>-->
+                    <h1 class="text-light"><a href="{{url_for('views.infl_dashboard')}}"><span>AdFluencer</span></a></h1>                    
                 </div>
 
                 <nav id="navbar" class="navbar">
                     <ul>
-                        <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                        <!-- <li><a class="nav-link scrollto" href="#about">About</a></li> -->
-                        <li><a class="nav-link scrollto" href="{{url_for('my_profile')}}">My Profile</a></li>
-                        <!-- <li><a class="nav-link scrollto" href="#services">Services</a></li> -->
-                        <li><a class="nav-link scrollto " href="#portfolio">Advertisements</a></li>
-                        <!-- <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li> -->
-                        <!-- <li><a class="nav-link scrollto" href="#team">Team</a></li> -->
-                        <li><a href="{{url_for('logout')}}">Logout</a></li>
-                        <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-                <ul>
-                <li><a href="#">Drop Down 1</a></li>
-                <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                    <li><a href="#">Deep Drop Down 1</a></li>
-                    <li><a href="#">Deep Drop Down 2</a></li>
-                    <li><a href="#">Deep Drop Down 3</a></li>
-                    <li><a href="#">Deep Drop Down 4</a></li>
-                    <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-                </li>
-                <li><a href="#">Drop Down 2</a></li>
-                <li><a href="#">Drop Down 3</a></li>
-                <li><a href="#">Drop Down 4</a></li>
-            </ul>
-            </li> -->
+                        <li><a class="nav-link scrollto active" href="#hero">Home</a></li>                        
+                        <li><a class="nav-link scrollto" href="{{url_for('views.my_profile')}}">My Profile</a></li>                        
+                        <li><a class="nav-link scrollto " href="#portfolio">Advertisements</a></li>                        
+                        <li><a class="nav-link scrollto " href="#faq">FAQ</a></li>                        
+                        <li><a href="{{url_for('views.logout')}}">Logout</a></li>            
                         <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
@@ -157,220 +134,34 @@
                     <div class="section-title" data-aos="fade-down">
                         <span>Advertisements</span>
                         <h2>Advertisements</h2>
-                        <p>Apply For the Advertising Product after checking the product Discription !!</p>
+                        {% if advts|length ==0 %}
+                            <p>No advertisements to display</p>
+                        {% else %}
+                            <p>Apply to promote the product after checking the product Description !!</p>
+                        {% endif %}
                     </div>
-
-                    <div class="row" data-aos="fade-up" data-aos-delay="150">
-                        <div class="col-lg-12 d-flex justify-content-center">
-                            <ul id="portfolio-flters">
-                                <li data-filter="*" class="filter-active">All</li>
-                                <li data-filter=".filter-product">Products</li>
-                                <li data-filter=".filter-app">App</li>
-                                <li data-filter=".filter-shop">Shops</li>
-                            </ul>
-                        </div>
-                    </div>
-
+                    
+                    {% for adv in advts|batch(3)  %}
                     <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="300">
-                        <div class="col-lg-4 col-md-6 portfolio-item filter-product">
+                        {% for advt in adv %}
+                        <div class="col-lg-4 col-md-6 portfolio-item ">                            
                             <div class="portfolio-wrap">
-                                <img src="../static/img/portfolio/maearth.png" class="img-fluid" alt="">
+                                <img src="{{ url_for('static', filename = 'uploads/'+advt.name) }}" class="img-fluid" alt="{{ advt.name }}">
                                 <div class="portfolio-info">
-                                    <h4>App 1</h4>
-                                    <p>App</p>
+                                    <h4>{{ advt.brand }}</h4>
+                                    <p>{{ advt.comp_name }}</p>
                                 </div>
                                 <div class="portfolio-links">
-                                    <a href="../static/img/portfolio/wow- Hairoil.jpg" data-gallery="portfolioGallery"
-                                        class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                                    <a href="{{url_for('portfolio_details')}}" title="More Details"><i
+                                    <a href="{{ url_for('static', filename = 'uploads/'+advt.name) }}" data-gallery="portfolioGallery"
+                                        class="portfolio-lightbox" title="{{advt.brand}}"><i class="bx bx-plus"></i></a>
+                                    <a href="{{url_for('views.portfolio_details', advt_id= advt.id)}}" title="More Details"><i
                                             class="bx bx-link"></i></a>
                                 </div>
-                            </div>
+                            </div>                            
                         </div>
-
-                        <div class="col-lg-4 col-md-6 portfolio-item filter-product">
-                            <div class="portfolio-wrap">
-                                <img src="../static/img/portfolio/wow- Hairoil.jpg" class="img-fluid" alt="">
-                                <div class="portfolio-info">
-                                    <h4>Product</h4>
-                                    <p>Web</p>
-                                </div>
-                                <div class="portfolio-links">
-                                    <a href="../static/img/portfolio/pv.png" data-gallery="portfolioGallery"
-                                        class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
-                                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="300">
-                            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                                <div class="portfolio-wrap">
-                                    <img src="../static/img/portfolio/zomato1.png" class="img-fluid" alt="">
-                                    <div class="portfolio-info">
-                                        <h4>App</h4>
-                                        <p>App</p>
-                                    </div>
-                                    <div class="portfolio-links">
-                                        <a href="../static/img/portfolio/wow- Hairoil.jpg"
-                                            data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i
-                                                class="bx bx-plus"></i></a>
-                                        <a href="portfolio-details.html" title="More Details"><i
-                                                class="bx bx-link"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-6 portfolio-item filter-shop">
-                                <div class="portfolio-wrap">
-                                    <img src="../static/img/portfolio/pote.png" class="img-fluid" alt="">
-                                    <div class="portfolio-info">
-                                        <h4>Shop Product</h4>
-                                        <p>Dadar</p>
-                                    </div>
-                                    <div class="portfolio-links">
-                                        <a href="../static/img/portfolio/angel.png" data-gallery="portfolioGallery"
-                                            class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
-                                        <a href="portfolio-details.html" title="More Details"><i
-                                                class="bx bx-link"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                                <div class="portfolio-wrap">
-                                    <img src="../static/img/portfolio/coindcx.png" class="img-fluid" alt="">
-                                    <div class="portfolio-info">
-                                        <h4>App</h4>
-                                        <p>App</p>
-                                    </div>
-                                    <div class="portfolio-links">
-                                        <a href="../static/img/portfolio/me1.png" data-gallery="portfolioGallery"
-                                            class="portfolio-lightbox" title="App 2"><i class="bx bx-plus"></i></a>
-                                        <a href="portfolio-details.html" title="More Details"><i
-                                                class="bx bx-link"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-6 portfolio-item filter-product">
-                                <div class="portfolio-wrap">
-                                    <img src="../static/img/portfolio/me2.png" class="img-fluid" alt="">
-                                    <div class="portfolio-info">
-                                        <h4>Product</h4>
-                                        <p>Mamaearth</p>
-                                    </div>
-                                    <div class="portfolio-links">
-                                        <a href="../static/img/portfolio/me1.png" data-gallery="portfolioGallery"
-                                            class="portfolio-lightbox" title="Card 2"><i class="bx bx-plus"></i></a>
-                                        <a href="portfolio-details.html" title="More Details"><i
-                                                class="bx bx-link"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                                <div class="portfolio-wrap">
-                                    <img src="../static/img/portfolio/angel.png" class="img-fluid" alt="">
-                                    <div class="portfolio-info">
-                                        <h4>App</h4>
-                                        <p>Stock Broker</p>
-                                    </div>
-                                    <div class="portfolio-links">
-                                        <a href="../static/img/portfolio/portfolio-4.jpg"
-                                            data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 2"><i
-                                                class="bx bx-plus"></i></a>
-                                        <a href="portfolio-details.html" title="More Details"><i
-                                                class="bx bx-link"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                                <div class="portfolio-wrap">
-                                    <img src="../static/img/portfolio/zee.png" class="img-fluid" alt="">
-                                    <div class="portfolio-info">
-                                        <h4>App</h4>
-                                        <p>OTT</p>
-                                    </div>
-                                    <div class="portfolio-links">
-                                        <a href="../static/img/portfolio/portfolio-5.jpg"
-                                            data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 2"><i
-                                                class="bx bx-plus"></i></a>
-                                        <a href="portfolio-details.html" title="More Details"><i
-                                                class="bx bx-link"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-6 portfolio-item filter-shop">
-                                <div class="portfolio-wrap">
-                                    <img src="../static/img/portfolio/kalyan1.png" class="img-fluid" alt="">
-                                    <div class="portfolio-info">
-                                        <h4>Shop</h4>
-                                        <p>Jewellery</p>
-                                    </div>
-                                    <div class="portfolio-links">
-                                        <a href="../static/img/portfolio/portfolio-6.jpg"
-                                            data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 3"><i
-                                                class="bx bx-plus"></i></a>
-                                        <a href="portfolio-details.html" title="More Details"><i
-                                                class="bx bx-link"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                                <div class="portfolio-wrap">
-                                    <img src="../static/img/portfolio/toi.png" class="img-fluid" alt="">
-                                    <div class="portfolio-info">
-                                        <h4>App</h4>
-                                        <p>News</p>
-                                    </div>
-                                    <div class="portfolio-links">
-                                        <a href="../static/img/portfolio/portfolio-7.jpg"
-                                            data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 1"><i
-                                                class="bx bx-plus"></i></a>
-                                        <a href="portfolio-details.html" title="More Details"><i
-                                                class="bx bx-link"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                                <div class="portfolio-wrap">
-                                    <img src="../static/img/portfolio/swiggy.png" class="img-fluid" alt="">
-                                    <div class="portfolio-info">
-                                        <h4>App</h4>
-                                        <p>Food Delivery</p>
-                                    </div>
-                                    <div class="portfolio-links">
-                                        <a href="../static/img/portfolio/portfolio-8.jpg"
-                                            data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 3"><i
-                                                class="bx bx-plus"></i></a>
-                                        <a href="portfolio-details.html" title="More Details"><i
-                                                class="bx bx-link"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-6 portfolio-item filter-shop">
-                                <div class="portfolio-wrap">
-                                    <img src="../static/img/portfolio/the j.png" class="img-fluid" alt="">
-                                    <div class="portfolio-info">
-                                        <h4>Shop</h4>
-                                        <p>eatery</p>
-                                    </div>
-                                    <div class="portfolio-links">
-                                        <a href="../static/img/portfolio/mamaearth.webp" data-gallery="portfolioGallery"
-                                            class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
-                                        <a href="portfolio-details.html" title="More Details"><i
-                                                class="bx bx-link"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
+                        {% endfor %}
                     </div>
+                    {% endfor %}                    
             </section><!-- End Portfolio Section -->
 
             <!-- ======= Testimonials Section ======= -->
@@ -584,36 +375,7 @@
                                 <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
                             </div>
                         </div>
-                    </div>
-
-                    <form action="forms/contact.php" method="post" role="form" class="php-email-form mt-4"
-                        data-aos="fade-up" data-aos-delay="400">
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"
-                                    required>
-                            </div>
-                            <div class="col-md-6 form-group mt-3 mt-md-0">
-                                <input type="email" class="form-control" name="email" id="email"
-                                    placeholder="Your Email" required>
-                            </div>
-                        </div>
-                        <div class="form-group mt-3">
-                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"
-                                required>
-                        </div>
-                        <div class="form-group mt-3">
-                            <textarea class="form-control" name="message" rows="5" placeholder="Message"
-                                required></textarea>
-                        </div>
-                        <div class="my-3">
-                            <div class="loading">Loading</div>
-                            <div class="error-message"></div>
-                            <div class="sent-message">Your message has been sent. Thank you!</div>
-                        </div>
-                        <div class="text-center"><button type="submit">Send Message</button></div>
-                    </form>
-
+                    </div>                    
                 </div>
             </section><!-- End Contact Us Section -->
 
@@ -621,21 +383,7 @@
 
         <!-- ======= Footer ======= -->
         <footer id="footer">
-
-            <div class="footer-newsletter">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-6">
-                            <h4>Join Our Newsletter</h4>
-                            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-                            <form action="" method="post">
-                                <input type="email" name="email"><input type="submit" value="Subscribe">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            
             <div class="footer-top">
                 <div class="container">
                     <div class="row">
@@ -662,15 +410,7 @@
                             </ul>
                         </div>
 
-                        <div class="col-lg-3 col-md-6 footer-links">
-                            <h4>Our Services</h4>
-                            <ul>
-                                <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-                                <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-                                <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-                                <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-                                <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-                            </ul>
+                        <div class="col-lg-3 col-md-6 footer-links">                            
                         </div>
 
                         <div class="col-lg-3 col-md-6 footer-links">
@@ -714,5 +454,4 @@
     <script src="{{url_for('static', filename='js/main.js')}}"></script>
 
 </body>
-
 </html>

@@ -39,14 +39,12 @@
             <div class="container d-flex align-items-center justify-content-between">
 
                 <div class="logo">
-                    <h1 class="text-light"><a href="{{url_for('infl_dashboard')}}"><span>AdFluencer</span></a></h1>
-                    <!-- Uncomment below if you prefer to use an image logo -->
-                    <!-- <a href="index.html"><img src="../static/img/logo.png" alt="" class="img-fluid"></a>-->
+                    <h1 class="text-light"><a href="{{url_for('views.advt_dashboard')}}"><span>AdFluencer</span></a></h1>                    
                 </div>
 
                 <nav id="navbar" class="navbar">
                     <ul>
-                        <li><a class="nav-link scrollto " href="{{url_for('infl_dashboard')}}">Home</a></li>
+                        <li><a class="nav-link scrollto " href="{{url_for('views.advt_dashboard')}}">Home</a></li>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav><!-- .navbar -->
@@ -63,7 +61,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <h2>Product Details </h2>
                         <ol>
-                            <li><a href="{{url_for('infl_dashboard')}}">Home</a></li>
+                            <li><a href="{{url_for('views.advt_dashboard')}}">Home</a></li>
                             <li>Product Details</li>
                         </ol>
                     </div>
@@ -82,17 +80,9 @@
                                 <div class="swiper-wrapper align-items-center">
 
                                     <div class="swiper-slide">
-                                        <img src="../static/img/portfolio/lotion1.jpg" alt="">
+                                        <img src="{{ url_for('static', filename = 'uploads/'+advt.name) }}" class="img-fluid" alt="{{ advt.name }}">
                                     </div>
-
-                                    <div class="swiper-slide">
-                                        <img src="../static/img/portfolio/lotion2.jpg" alt="">
-                                    </div>
-
-                                    <div class="swiper-slide">
-                                        <img src="../static/img/portfolio/lotion3.jpg" alt="">
-                                    </div>
-
+                                    
                                 </div>
                                 <div class="swiper-pagination"></div>
                             </div>
@@ -102,22 +92,21 @@
                             <div class="portfolio-info">
                                 <h3>Project information</h3>
                                 <ul>
-                                    <li><strong>Brand: </strong> Mamaearth</li>
-                                    <li><strong>Deadline: </strong> 1 week</li>
-                                    <li><strong>Product selling points: </strong> Anti-ageing, Collagen Boosting</li>
-                                    <li><strong>Age group targeted:</strong> All ages Men & Women</li>
+                                    <li><strong>Company: </strong> {{advt.comp_name}}</li>
+                                    <li><strong>Brand: </strong> {{advt.brand}}</li>
+                                    <li><strong>Deadline: </strong>{{ advt.deadline }}</li>
+                                    <li><strong>Product selling points: </strong>{{ advt.prdt_sp }}</li>
+                                    <li><strong>Age group targeted:</strong>{{ advt.age_grp }}</li>
                                 </ul>
                             </div>
                             <div class="portfolio-description">
                                 <h2>Product Description</h2>
                                 <p>
-                                    Mamaearth Vitamin C Body Lotion is the product you need! It's time to give your skin
-                                    the comfort and love it deserves with the goodness of vitamin C, honey, shea butter
-                                    and olive oil. Say hello to radiant skin with this vitamin C enriched body lotion
-                                    and bid adieu to dull and uneven skin tone.
+                                    {{ advt.desc }}
                                 </p>
                             </div>
-                            <button type="button" class="btn btn-primary btn-lg">Interested</button>
+                            <a href="{{url_for('views.advt_update', id = advt.id)}}" class="btn btn-primary btn-lg">Edit</a>
+                            <a href="{{url_for('views.advt_delete', id = advt.id)}}" class="btn btn-danger btn-lg">Delete</a>
                         </div>
 
                     </div>
@@ -157,6 +146,8 @@
                         </div>
 
                         <div class="col-lg-3 col-md-6 footer-links">
+                        </div>
+                        <div class="col-lg-3 col-md-6 footer-links">
                             <h4>Our Social Networks</h4>
 
                             <div class="social-links mt-3">
@@ -175,13 +166,6 @@
             <div class="container py-4">
                 <div class="copyright">
                     &copy; Copyright <strong><span>AdFluencer</span></strong>. All Rights Reserved
-                </div>
-                <div class="credits">
-                    <!-- All the links in the footer should remain intact. -->
-                    <!-- You can delete the links only if you purchased the pro version. -->
-                    <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/AdFluencer-responsive-bootstrap-website-template/ -->
-                    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
                 </div>
             </div>
         </footer><!-- End Footer -->

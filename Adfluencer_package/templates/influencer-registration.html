@@ -49,14 +49,14 @@
             <div class="container d-flex align-items-center justify-content-between">
 
                 <div class="logo">
-                    <h1 class="text-light"><a href="{{url_for('home')}}"><span>AdFluencer</span></a></h1>
+                    <h1 class="text-light"><a href="{{url_for('views.home')}}"><span>AdFluencer</span></a></h1>
                     <!-- Uncomment below if you prefer to use an image logo -->
                     <!-- <a href="index.html"><img src="../static/img/logo.png" alt="" class="img-fluid"></a>-->
                 </div>
 
                 <nav id="navbar" class="navbar">
                     <ul>
-                        <li><a class="nav-link scrollto " href="{{url_for('home')}}">Home</a></li>
+                        <li><a class="nav-link scrollto " href="{{url_for('views.home')}}">Home</a></li>
                         <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
@@ -239,7 +239,7 @@
                     <button type="submit">Register</button>
                 </div>
 
-                <label for="">Already have an account?</label><a href="{{url_for('login')}}" id="name">Login</a>
+                <label for="">Already have an account?</label><a href="{{url_for('views.login')}}" id="name">Login</a>
 
             </form>
         </div>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>AdFluencer - Index</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="../static/img/Logo_1.png" rel="icon">
+    <link href="../static/img/Logo_1.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="../static/vendor/aos/aos.css" rel="stylesheet">
+    <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="../static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="../static/css/style.css" rel="stylesheet">
+
+    <!-- Including jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js">
+    </script>
+
+    <!-- Including Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
+    </script>
+
+    <!-- Including validation -->
+    <script type="text/javascript" src="{{url_for('static', filename='js/advt_advertisement.js' )}}"></script>
+</head>
+
+<body>
+    <div class="wrap">
+
+        <!-- ======= Header ======= -->
+        <header id="header" class="d-flex align-items-center">
+            <div class="container d-flex align-items-center justify-content-between">
+
+                <div class="logo">
+                    <h1 class="text-light"><a href="{{url_for('views.advt_dashboard')}}"><span>AdFluencer</span></a>
+                    </h1>                    
+                </div>
+
+                <nav id="navbar" class="navbar">
+                    <ul>
+                        <li><a class="nav-link scrollto " href="{{url_for('views.advt_dashboard')}}">Home</a></li>
+                        <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+                    </ul>
+                    <i class="bi bi-list mobile-nav-toggle"></i>
+                </nav><!-- .navbar -->
+
+            </div>
+        </header><!-- End Header -->
+    </div>
+
+    <br><br><br>
+    {% for msg in get_flashed_messages() %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{msg}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    
+    <body onload="firstfocus()"></body>
+    <form name='advertisements' enctype=multipart/form-data method="POST" onsubmit="return validate()" >
+        <br>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Company Name</label>
+            <input type="text" class="form-control" name="comp_name" id="exampleFormControlInput1"
+                placeholder="{{ comp_name }}" value="{{ comp_name }}" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Email address</label>
+            <input type="email" class="form-control" name="email" id="exampleFormControlInput1"
+                placeholder="{{ user_email }}" value="{{ user_email }}" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Product Description</label>
+            <textarea class="form-control" name="desc" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <div class="col-12">
+            <label for="inputAddress" class="form-label">Brand</label>
+            <input type="text" class="form-control" name="brand" id="inputAddress" placeholder="">
+        </div>
+        <div class="col-12">
+            <label for="inputAddress" class="form-label">Deadline</label>
+            <input type="text" class="form-control" name="deadline" id="inputAddress" placeholder="">
+        </div>
+        <div class="col-12">
+            <label for="exampleFormControlTextarea1" class="form-label">Product selling points</label>
+            <textarea class="form-control" name="prdt_sp" id="exampleFormControlTextarea1" rows="3"></textarea>            
+        </div>
+        <div class="col-12">
+            <label for="inputAddress" class="form-label">Age group targeted</label>
+            <input type="text" class="form-control" name="age_grp" id="inputAddress" placeholder="">
+        </div>
+        <div class="mb-3">
+            <label for="formFileMultiple" class="form-label">Upload product images</label>
+            <input class="form-control" type="file" name="prdt_imgs" id="formFileMultiple" multiple>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Save and Upload</button>
+        </div>
+    </form>
+    <br>
+    <style>
+        form {
+            padding-left: 50px;
+            padding-right: 50px;
+        }
+    </style>
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h3>AdFluencer</h3>
+                        <p>
+                            1st Floor, Lok Centre Premises Co-op Society Ltd Above ICICI Bank, Marol Maroshi Rd, Marol,
+                            Andheri East, Mumbai <br><br>
+                            <strong>Phone:</strong> +91 858846718<br>
+                            <strong>Email:</strong> contact@adfluencer.com<br>
+                        </p>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Our Social Networks</h4>
+
+                        <div class="social-links mt-3">
+                            <a href="#" class="github"><i class="bx bxl-github"></i></a>
+                            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container py-4">
+            <div class="copyright">
+                &copy; Copyright <strong><span>AdFluencer</span></strong>. All Rights Reserved
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+
+    </div>
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="{{url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/aos/aos.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/glightbox/js/glightbox.min.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/php-email-form/validate.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/swiper/swiper-bundle.min.js')}}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{{url_for('static', filename='js/main.js')}}"></script>
+
+</body>
+
+</html>
