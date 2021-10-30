@@ -67,7 +67,7 @@ function validate(){
     }
     
     else if (comp_website == "" || comp_website == null) {
-        alert("Please enter your comp's website URL");
+        alert("Please enter your comp's website URL, If your company doesn't have a website just type https://sample.com");
         comp_websitef.focus();
         return false;
     }
