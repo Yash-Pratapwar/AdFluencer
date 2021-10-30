@@ -15,11 +15,11 @@ def create_app():
     
     db.init_app(app)
     from Adfluencer_package.views import views
-    from Adfluencer_package.auth import auth
+    
 
     
     app.register_blueprint(views, url_prefix='/')
-    app.register_blueprint(auth, url_prefix='/')
+    
 
     from .models import user_advt, user_infl
     login_manager = LoginManager()
