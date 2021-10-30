@@ -30,7 +30,7 @@ def create_app():
 
     @login_manager.user_loader
     def load_user(id):
-        return user_infl.query.get(int(id)) or user_advt.query.get(int(id))
+        return user_advt.query.get(int(id)) or user_advt.query.get(int(id))
 
     return app
 
