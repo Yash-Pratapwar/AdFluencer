@@ -10,32 +10,24 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="../static/img/Logo_1.png" rel="icon">
-    <link href="../static/img/Logo_1.png" rel="apple-touch-icon">
+	<link href="{{url_for('static', filename='img/Logo_1.png')}}" rel="icon">
+	<link href="{{url_for('static', filename='img/Logo_1.png')}}" rel="apple-touch-icon">
 
-    <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+	<!-- Google Fonts -->
+	<link
+		href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+		rel="stylesheet">
 
-    <!-- Vendor CSS Files -->
-    <link href="../static/vendor/aos/aos.css" rel="stylesheet">
-    <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="../static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="../static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="../static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+	<!-- Vendor CSS Files -->
+	<link href="{{url_for('static', filename='vendor/aos/aos.css')}}" rel="stylesheet">
+	<link href="{{url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+	<link href="{{url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+	<link href="{{url_for('static', filename='vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+	<link href="{{url_for('static', filename='vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
+	<link href="{{url_for('static', filename='vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
 
-    <!-- Template Main CSS File -->
-    <link href="../static/css/style.css" rel="stylesheet">
-
-    <!-- Including jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js">
-    </script>
-
-    <!-- Including Bootstrap JS -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
-    </script>
+	<!-- Template Main CSS File -->
+	<link href="{{url_for('static',filename='css/style.css')}}" rel="stylesheet">
 
     <!-- Including validation -->
     <script type="text/javascript" src="{{url_for('static', filename='js/advt_advertisement.js' )}}"></script>
@@ -59,7 +51,7 @@
                         <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
-                </nav><!-- .navbar -->
+                </nav><!-- navbar -->
 
             </div>
         </header><!-- End Header -->
@@ -79,7 +71,7 @@
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Company Name</label>
             <input type="text" class="form-control" name="comp_name" id="exampleFormControlInput1"
-                placeholder="{{ comp_name }}" value="{{ comp_name }}" disabled>
+                placeholder="{{ advts.comp_name }}" value="{{ advts.comp_name }}" disabled>
         </div>
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Email address</label>
@@ -88,30 +80,30 @@
         </div>
         <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">Product Description</label>
-            <textarea class="form-control" name="desc" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea class="form-control" name="desc" id="exampleFormControlTextarea1" rows="3" placeholder="{{ advts.desc }}"></textarea>
         </div>
         <div class="col-12">
             <label for="inputAddress" class="form-label">Brand</label>
-            <input type="text" class="form-control" name="brand" id="inputAddress" placeholder="">
+            <input type="text" class="form-control" name="brand" id="inputAddress" placeholder="{{ advts.brand }}">
         </div>
         <div class="col-12">
             <label for="inputAddress" class="form-label">Deadline</label>
-            <input type="text" class="form-control" name="deadline" id="inputAddress" placeholder="">
+            <input type="text" class="form-control" name="deadline" id="inputAddress" placeholder="{{ advts.deadline }}">
         </div>
         <div class="col-12">
             <label for="exampleFormControlTextarea1" class="form-label">Product selling points</label>
-            <textarea class="form-control" name="prdt_sp" id="exampleFormControlTextarea1" rows="3"></textarea>            
+            <textarea class="form-control" name="prdt_sp" id="exampleFormControlTextarea1" rows="3" placeholder="{{ advts.prdt_sp }}" ></textarea>
         </div>
         <div class="col-12">
             <label for="inputAddress" class="form-label">Age group targeted</label>
-            <input type="text" class="form-control" name="age_grp" id="inputAddress" placeholder="">
+            <input type="text" class="form-control" name="age_grp" id="inputAddress" placeholder="{{ advts.age_grp }}">
         </div>
         <div class="mb-3">
             <label for="formFileMultiple" class="form-label">Upload product images</label>
-            <input class="form-control" type="file" name="prdt_imgs" id="formFileMultiple" multiple>
+            <input class="form-control" type="file" name="prdt_imgs" id="formFileMultiple" multiple placeholder="{{ advts.filename }}">
         </div>
         <div class="col-12">
-            <button type="submit" class="btn btn-primary">Save and Upload</button>
+            <button type="submit" class="btn btn-primary">Save and Update</button>
         </div>
     </form>
     <br>

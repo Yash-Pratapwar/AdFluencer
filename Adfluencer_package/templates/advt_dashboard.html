@@ -59,9 +59,8 @@
                     Welcome <br />
                     <span>{{name}}</span>
                 </h1>
-
-                <!-- <h2>We are a team of college students </h2> -->
-                <a href="#clients" class="btn-get-started scrollto">Get Started</a>
+                
+                <a href="#portfolio" class="btn-get-started scrollto">Get Started</a>
             </div>
         </section>
         <!-- End Hero -->
@@ -72,22 +71,16 @@
                 <div class="logo">
                     <h1 class="text-light">
                         <a href="{{url_for('views.home')}}"><span>AdFluencer</span></a>
-                    </h1>
-                    <!-- Uncomment below if you prefer to use an image logo -->
-                    <!-- <a href="index.html"><img src="../static/img/logo.png" alt="" class="img-fluid"></a>-->
+                    </h1>                    
                 </div>
 
                 <nav id="navbar" class="navbar">
                     <ul>
                         <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                        <li><a class="nav-link scrollto" href="#features">About</a></li>
-                        <!-- <li><a class="nav-link scrollto" href="#services">Services</a></li> -->
-                        <!-- <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li> -->
-                        <!-- <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li> -->
-                        <li>
-                            <a class="nav-link scrollto" href="{{url_for('views.advt_advertise')}}">Advertise</a>
-                        </li>
+                        <li><a class="nav-link scrollto" href="#portfolio">Your Advertisements</a></li>                        
+                        <li><a class="nav-link scrollto" href="#cta">Advertise</a></li>
                         <li><a class="nav-link scrollto" href="#team">Influencers</a></li>
+                        <li><a class="nav-link scrollto" href="#faq">FAQ</a></li>
                         <li><a href="{{url_for('views.logout')}}">Logout</a></li>
                         <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                     </ul>
@@ -99,107 +92,52 @@
         <!-- End Header -->
 
         <main id="main">
-            <!-- ======= Clients Section ======= -->
-            <!-- <section id="clients" class="clients">
+
+
+            <!-- ======= Your Advertisements Section ======= -->
+            <section id="portfolio" class="portfolio section-bg">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-lg-2 col-md-4 col-6">
-                            <img src="../static/img/clients/client-1.png" class="img-fluid" alt="" data-aos="zoom-in" />
-                        </div>
 
-                        <div class="col-lg-2 col-md-4 col-6">
-                            <img src="../static/img/clients/client-2.png" class="img-fluid" alt="" data-aos="zoom-in"
-                                data-aos-delay="100" />
-                        </div>
-
-                        <div class="col-lg-2 col-md-4 col-6">
-                            <img src="../static/img/clients/client-3.png" class="img-fluid" alt="" data-aos="zoom-in"
-                                data-aos-delay="200" />
-                        </div>
-
-                        <div class="col-lg-2 col-md-4 col-6">
-                            <img src="../static/img/clients/client-4.png" class="img-fluid" alt="" data-aos="zoom-in"
-                                data-aos-delay="300" />
-                        </div>
-
-                        <div class="col-lg-2 col-md-4 col-6">
-                            <img src="../static/img/clients/client-5.png" class="img-fluid" alt="" data-aos="zoom-in"
-                                data-aos-delay="400" />
-                        </div>
-
-                        <div class="col-lg-2 col-md-4 col-6">
-                            <img src="../static/img/clients/client-6.png" class="img-fluid" alt="" data-aos="zoom-in"
-                                data-aos-delay="500" />
-                        </div>
+                    <div class="section-title" data-aos="fade-down">
+                        <span>Your Advertisements</span>
+                        <h2>Your Advertisements</h2>
+                        {% if advts_owner|length==0 %}
+                        <p>No advertisements posted</p>
+                        {% else %}                            
+                        <p>This is how your posted advertisements will be visible to Influencers</p>
+                        {% endif %}
                     </div>
-                </div>
-            </section> -->
-            <!-- End Clients Section -->
-
-            <!-- ======= Features Section ======= -->
-            <section id="features" class="features">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-                            <div class="card" data-aos="fade-up">
-                                <img src="../static/img/features-1.jpg" class="card-img-top" alt="..." />
-                                <div class="card-body">
-                                    <i class="bx bx-tachometer"></i>
-                                    <h5 class="card-title"><a href="">Our Mission</a></h5>
-                                    <p class="card-text">
-                                        To Empower every economic level of society with the power of internet, By providing them source of revenue with the help of there own creative Inovations.
-                                    </p>
+                    
+                    {% for advt in advts %}
+                    <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="300">
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-product">
+                            <div class="portfolio-wrap">                                
+                                <img src="{{ url_for('static', filename = 'uploads/'+advt.name) }}" class="img-fluid" alt="{{ advt.name}}">
+                                <div class="portfolio-info">
+                                    <h4>{{ advt.brand }}</h4>
+                                    <p>{{ advt.comp_name }}</p>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="
-                  col-lg-4 col-md-6
-                  mt-5 mt-md-0
-                  d-flex
-                  align-items-stretch
-                ">
-                            <div class="card" data-aos="fade-up" data-aos-delay="150">
-                                <img src="../static/img/features-2.jpg" class="card-img-top" alt="..." />
-                                <div class="card-body">
-                                    <i class="bx bx-file"></i>
-                                    <h5 class="card-title"><a href="">Our Plan</a></h5>
-                                    <p class="card-text">
-                                        Give Opportunities to Every type of social media Influencer to Earn Money with the help of Brand Endorsement.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="
-                  col-lg-4 col-md-6
-                  mt-5 mt-lg-0
-                  d-flex
-                  align-items-stretch
-                ">
-                            <div class="card" data-aos="fade-up" data-aos-delay="300">
-                                <img src="../static/img/features-3.jpg" class="card-img-top" alt="..." />
-                                <div class="card-body">
-                                    <i class="bx bx-show"></i>
-                                    <h5 class="card-title"><a href="">Our Vision</a></h5>
-                                    <p class="card-text">
-                                        Make Maximum Possible Links Between Every level of Influencers and from local to High Profit Companies.
-                                    </p>
+                                <div class="portfolio-links">
+                                    <a href="{{ url_for('static', filename = 'uploads/'+advt.name) }}" data-gallery="portfolioGallery"
+                                        class="portfolio-lightbox" title="{{ advt.name}}"><i class="bx bx-plus"></i></a>
+                                    <a href="{{url_for('views.advt_details', advt_id= advt.id)}}" title="More Details"><i
+                                            class="bx bx-link"></i></a>                                    
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-            <!-- End Features Section -->
+                    {% endfor %}
+            </section><!-- End Portfolio Section -->
 
             <!-- ======= Cta Section ======= -->
             <section id="cta" class="cta">
                 <div class="container">
                     <div class="text-center" data-aos="zoom-in">
-                        <h3>Call for Enquiry</h3>
+                        <h3>Advertise</h3>
                         <p>
-                            Adfluencers are Intimated with social Media Guidlines to be followed for content creation.
+                            Advertise your products...
                         </p>
-                        <a class="cta-btn" href="#">Call To Action</a>
+                        <a class="cta-btn" href="{{url_for('views.advt_advertise')}}">Advertise</a>
                     </div>
                 </div>
             </section>

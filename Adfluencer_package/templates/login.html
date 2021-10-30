@@ -29,6 +29,9 @@
     <!-- Template Main CSS File -->
     <link href="../static/css/style.css" rel="stylesheet">
 
+    <script type="text/javascript" src="{{url_for('static', filename='js/login.js' )}}"></script>
+
+
 </head>
 
 <body>
@@ -39,9 +42,7 @@
             <div class="container d-flex align-items-center justify-content-between">
 
                 <div class="logo">
-                    <h1 class="text-light"><a href="{{url_for('views.home')}}"><span>AdFluencer</span></a></h1>
-                    <!-- Uncomment below if you prefer to use an image logo -->
-                    <!-- <a href="index.html"><img src="../static/img/logo.png" alt="" class="img-fluid"></a>-->
+                    <h1 class="text-light"><a href="{{url_for('views.home')}}"><span>AdFluencer</span></a></h1>                    
                 </div>
 
                 <nav id="navbar" class="navbar">
@@ -62,7 +63,32 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     {% endfor %}
-    
+    <body onload="firstfocus();"></body>
+    <br>
+    <div class="main">
+        <div class="login">
+            <h2>Login</h2>
+            <form id="login" method="POST" name="login">
+                <label>E-mail: </label>
+                <br>
+                <input type="text" name="email" id="name" placeholder="Enter your email">
+                <br><br>
+                <label>Password: </label>
+                <br>
+                <input type="password" name="pswd" id="name" placeholder="Enter Password">
+                <br><br>
+                <div class="btn">
+                    <div class="inner"></div>
+                    <button type="submit">Login</button>
+                </div>
+                <label for="">Don't have an account?</label><a href="{{url_for('views.register')}}" id="name">Sign up</a>
+            </form>
+        </div>
+        <!--end login -->
+        <br><br><br><br><br>
+    </div>
+    <!--end main-->
+
     <style>
         body {
             background-image: linear-gradient(to right, rgb(230, 230, 230), gray);
@@ -84,8 +110,7 @@
             width: 100%;
             font-size: 18px;
             border-radius: 10px;
-            border: 1px solid rgba(27, 26, 26, 0.3);
-            /* box-shadow: 20px 20px rgba(0, 0, 0, 0, 0.3); */
+            border: 1px solid rgba(27, 26, 26, 0.3);            
             box-shadow: 0px 0px 8px 5px rgba(0, 0, 0, .4);
             color: rgb(15, 15, 15);
         }
@@ -156,28 +181,5 @@
             text-shadow: 1px 1px 5px rgba(0, 0, 0, 0, 0.3);
         }
     </style>
-
-    <br>
-    <div class="main">
-        <div class="login">
-            <h2>Login</h2>
-            <form id="login" method="POST">
-                <label>E-mail: </label>
-                <br>
-                <input type="text" name="email" id="name" placeholder="Enter your email">
-                <br><br>
-                <label>Password: </label>
-                <br>
-                <input type="password" name="pswd" id="name" placeholder="Enter Password">
-                <br><br>
-                <div class="btn">
-                    <div class="inner"></div>
-                    <button type="submit">Login</button>
-                </div>
-                <label for="">Don't have an account?</label><a href="{{url_for('views.register')}}" id="name">Sign up</a>
-            </form>
-        </div>
-        <!--end login -->
-        <br><br><br><br><br>
-    </div>
-    <!--end main-->
+</body>
+</html>
