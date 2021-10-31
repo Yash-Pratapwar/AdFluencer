@@ -20,7 +20,7 @@ def create_app():
     
     app.register_blueprint(views, url_prefix='/')
 
-    from .models import user_advt, user_infl, advertisements
+    from .models import users, advertisements
     
     create_database(app)
 
@@ -30,7 +30,7 @@ def create_app():
 
     @login_manager.user_loader
     def load_user(id):
-        return user_advt.query.get(int(id)) or user_advt.query.get(int(id))
+        return users.query.get(int(id))
 
     return app
 

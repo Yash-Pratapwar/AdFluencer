@@ -3,7 +3,7 @@ from flask import Blueprint, Response, Flask, session
 from flask import request, render_template, url_for, redirect, flash
 from flask_login import login_user, login_required, logout_user, current_user
 from flask import render_template, request
-from Adfluencer_package.models import user_advt, user_infl
+from Adfluencer_package.models import users
 from werkzeug.security import generate_password_hash, check_password_hash
 from Adfluencer_package import db, create_app, app
 from werkzeug.utils import secure_filename
@@ -28,8 +28,8 @@ def login():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('pswd')
-        user_a = user_advt.query.filter_by(comp_email=email).first()
-        user_i = user_infl.query.filter_by(inf_email=email).first()
+        user_a = users.query.filter_by(comp_email=email).first()
+        user_i = users.query.filter_by(inf_email=email).first()
         if user_a:
             if check_password_hash(user_a.password, password):
                 flash('Logged in successfully!', category='success')
@@ -107,7 +107,7 @@ def advt_advertise():
     
     user_email=current_user.comp_email
     comp_name = current_user.comp_name
-    return render_template('advt_advertisements.html',user_email=user_email, comp_name=comp_name  )
+    return render_template('advt_advertisements.html', user_email=user_email, comp_name=comp_name)
 
 @views.route('/advt/update_advertise/<int:id>', methods = ['GET', 'POST'])
 @login_required
@@ -201,14 +201,14 @@ def adv_regis():
         acc_handler_gender = request.form["gender"]
         acc_type = 'advt'
         
-        user = user_advt.query.filter_by(comp_email=comp_email).first()
+        user = users.query.filter_by(comp_email=comp_email).first()
         if user:
             flash('Email already exists.', category='error')
             return render_template('advertiser-registration.html')
         else:
             hashed_password = generate_password_hash(
                 pswd1, method='sha256')
-            adv_regis_user = user_advt(comp_name=comp_name, acc_handler_name=acc_handler_name,
+            adv_regis_user = users(comp_name=comp_name, acc_handler_name=acc_handler_name,
             acc_handler_desig=acc_handler_desig, comp_website=comp_website, ph_no=ph_no, comp_email=comp_email,
             ah_email=ah_email, password=hashed_password, acc_handler_gender=acc_handler_gender, acc_type=acc_type)
             db.session.add(adv_regis_user)
@@ -231,14 +231,14 @@ def inf_regis():
         gender = request.form["gender"]
         acc_type = 'infl'
 
-        user = user_infl.query.filter_by(inf_email=inf_email).first()
+        user = users.query.filter_by(inf_email=inf_email).first()
         if user:
             flash('Email already exists.', category='error')
             return render_template('influencer-registration.html')
         else:
             hashed_password = generate_password_hash(
                 pswd1, method='sha256')
-            inf_regis_user = user_infl(fname=fname, lname=lname, smh=smh,ph_no=ph_no, 
+            inf_regis_user = users(fname=fname, lname=lname, smh=smh,ph_no=ph_no, 
             inf_email=inf_email, password=hashed_password, age=age, gender=gender, acc_type=acc_type)
             db.session.add(inf_regis_user)
             db.session.commit()

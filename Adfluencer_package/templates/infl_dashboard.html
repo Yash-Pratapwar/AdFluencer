@@ -57,7 +57,7 @@
                 }, 3000);
             </script>
             <div class="hero-container" data-aos="fade-up">
-                <h1>Welcome <br><span>{{name}}</span></h1>                
+                <h1>Welcome <br><span>{{name}}</span></h1>
                 <a href="#clients" class="btn-get-started scrollto">Get Started</a>
             </div>
         </section><!-- End Hero -->
@@ -67,17 +67,18 @@
             <div class="container d-flex align-items-center justify-content-between">
 
                 <div class="logo">
-                    <h1 class="text-light"><a href="{{url_for('views.infl_dashboard')}}"><span>AdFluencer</span></a></h1>                    
+                    <h1 class="text-light"><a href="{{url_for('views.infl_dashboard')}}"><span>AdFluencer</span></a>
+                    </h1>
                 </div>
 
                 <nav id="navbar" class="navbar">
                     <ul>
-                        <li><a class="nav-link scrollto active" href="#hero">Home</a></li>                        
-                        <li><a class="nav-link scrollto" href="{{url_for('views.my_profile')}}">My Profile</a></li>                        
-                        <li><a class="nav-link scrollto " href="#portfolio">Advertisements</a></li>                        
-                        <li><a class="nav-link scrollto " href="#faq">FAQ</a></li>                        
-                        <li><a href="{{url_for('views.logout')}}">Logout</a></li>            
+                        <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+                        <li><a class="nav-link scrollto" href="{{url_for('views.my_profile')}}">My Profile</a></li>
+                        <li><a class="nav-link scrollto " href="#portfolio">Advertisements</a></li>
+                        <li><a class="nav-link scrollto " href="#faq">FAQ</a></li>
                         <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+                        <li><a href="{{url_for('views.logout')}}">Logout</a></li>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav><!-- .navbar -->
@@ -135,33 +136,35 @@
                         <span>Advertisements</span>
                         <h2>Advertisements</h2>
                         {% if advts|length ==0 %}
-                            <p>No advertisements to display</p>
+                        <p>No advertisements to display</p>
                         {% else %}
-                            <p>Apply to promote the product after checking the product Description !!</p>
+                        <p>Apply to promote the product after checking the product description !!</p>
                         {% endif %}
                     </div>
-                    
+
                     {% for adv in advts|batch(3)  %}
                     <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="300">
                         {% for advt in adv %}
-                        <div class="col-lg-4 col-md-6 portfolio-item ">                            
+                        <div class="col-lg-4 col-md-6 portfolio-item ">
                             <div class="portfolio-wrap">
-                                <img src="{{ url_for('static', filename = 'uploads/'+advt.name) }}" class="img-fluid" alt="{{ advt.name }}">
+                                <img src="{{ url_for('static', filename = 'uploads/'+advt.name) }}" class="img-fluid"
+                                    alt="{{ advt.name }}">
                                 <div class="portfolio-info">
                                     <h4>{{ advt.brand }}</h4>
                                     <p>{{ advt.comp_name }}</p>
                                 </div>
                                 <div class="portfolio-links">
-                                    <a href="{{ url_for('static', filename = 'uploads/'+advt.name) }}" data-gallery="portfolioGallery"
-                                        class="portfolio-lightbox" title="{{advt.brand}}"><i class="bx bx-plus"></i></a>
-                                    <a href="{{url_for('views.portfolio_details', advt_id= advt.id)}}" title="More Details"><i
-                                            class="bx bx-link"></i></a>
+                                    <a href="{{ url_for('static', filename = 'uploads/'+advt.name) }}"
+                                        data-gallery="portfolioGallery" class="portfolio-lightbox"
+                                        title="{{advt.brand}}"><i class="bx bx-plus"></i></a>
+                                    <a href="{{url_for('views.portfolio_details', advt_id= advt.id)}}"
+                                        title="More Details"><i class="bx bx-link"></i></a>
                                 </div>
-                            </div>                            
+                            </div>
                         </div>
                         {% endfor %}
                     </div>
-                    {% endfor %}                    
+                    {% endfor %}
             </section><!-- End Portfolio Section -->
 
             <!-- ======= Testimonials Section ======= -->
@@ -257,7 +260,8 @@
                         <ul>
                             <li data-aos="fade-up">
                                 <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse"
-                                    class="collapse" data-bs-target="#faq-list-1">How will i know Advertiser has accepted my interest?<i class="bx bx-chevron-down icon-show"></i><i
+                                    class="collapse" data-bs-target="#faq-list-1">How will i know Advertiser has
+                                    accepted my interest?<i class="bx bx-chevron-down icon-show"></i><i
                                         class="bx bx-chevron-up icon-close"></i></a>
                                 <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
                                     <p>
@@ -268,189 +272,131 @@
 
                             <li data-aos="fade-up" data-aos-delay="100">
                                 <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse"
-                                    data-bs-target="#faq-list-2" class="collapsed">when will i get Advertisements oppurtunities?<i class="bx bx-chevron-down icon-show"></i><i
+                                    data-bs-target="#faq-list-2" class="collapsed">when will i get Advertisements
+                                    oppurtunities?<i class="bx bx-chevron-down icon-show"></i><i
                                         class="bx bx-chevron-up icon-close"></i></a>
                                 <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
                                     <p>
-                                    Advertisements will Be updated to you on weekly basis.
+                                        Advertisements will Be updated to you on weekly basis.
                                     </p>
                                 </div>
                             </li>
 
-                            <!-- <li data-aos="fade-up" data-aos-delay="200">
-                                <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse"
-                                    data-bs-target="#faq-list-3" class="collapsed">Dolor sit amet consectetur adipiscing
-                                    elit? <i class="bx bx-chevron-down icon-show"></i><i
-                                        class="bx bx-chevron-up icon-close"></i></a>
-                                <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
-                                    <p>
-                                        Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci.
-                                        Faucibus pulvinar
-                                        elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum
-                                        tellus pellentesque
-                                        eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at
-                                        elementum eu facilisis
-                                        sed odio morbi quis
-                                    </p>
-                                </div>
-                            </li>
 
-                            <li data-aos="fade-up" data-aos-delay="300">
-                                <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse"
-                                    data-bs-target="#faq-list-4" class="collapsed">Tempus quam pellentesque nec nam
-                                    aliquam sem et tortor consequat? <i class="bx bx-chevron-down icon-show"></i><i
-                                        class="bx bx-chevron-up icon-close"></i></a>
-                                <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
-                                    <p>
-                                        Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim
-                                        suspendisse in est ante in.
-                                        Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit
-                                        adipiscing bibendum est.
-                                        Purus gravida quis blandit turpis cursus in.
-                                    </p>
-                                </div>
-                            </li>
-
-                            <li data-aos="fade-up" data-aos-delay="400">
-                                <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse"
-                                    data-bs-target="#faq-list-5" class="collapsed">Tortor vitae purus faucibus ornare.
-                                    Varius vel pharetra vel turpis nunc eget lorem
-                                    dolor? <i class="bx bx-chevron-down icon-show"></i><i
-                                        class="bx bx-chevron-up icon-close"></i></a>
-                                <div id="faq-list-5" class="collapse" data-bs-parent=".faq-list">
-                                    <p>
-                                        Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies
-                                        leo integer malesuada
-                                        nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem
-                                        dolor sed. Ut
-                                        venenatis tellus in metus vulputate eu scelerisque.
-                                    </p>
-                                </div>
-                            </li> -->
 
                         </ul>
                     </div>
 
                 </div>
-            </section>End F.A.Q Section -->
+            </section><!-- End F.A.Q Section -->
 
             <!-- ======= Contact Us Section ======= -->
             <section id="contact" class="contact">
                 <div class="container">
-        
-                  <div class="section-title" data-aos="fade-down">
-                    <span>Contact Us</span>
-                    <h2>Contact Us</h2>
-                  </div>
-        
-                  <div class="row justify-content-center">
-                    <div class="col-lg-4 col-md-12" data-aos="fade-up" data-aos-delay="100">
-                      <div class="info-box">
-                        <i class="bx bx-map"></i>
-                        <h3>Our Address</h3>
-                        <p>FCRIT Vashi</p>
-                      </div>
+
+                    <div class="section-title" data-aos="fade-down">
+                        <span>Contact Us</span>
+                        <h2>Contact Us</h2>
                     </div>
-                    <div class="col-lg-4 col-md-6 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="200">
-                      <div class="info-box">
-                        <i class="bx bx-envelope"></i>
-                        <h3>Email Us</h3>
-                        <p>AdfluencerAd.com<br>FluentlyAd.com</p>
-                      </div>
+
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4 col-md-12" data-aos="fade-up" data-aos-delay="100">
+                            <div class="info-box">
+                                <i class="bx bx-map"></i>
+                                <h3>Our Address</h3>
+                                <p>FCRIT Vashi</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="200">
+                            <div class="info-box">
+                                <i class="bx bx-envelope"></i>
+                                <h3>Email Us</h3>
+                                <p>AdfluencerAd.com<br>FluentlyAd.com</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="300">
+                            <div class="info-box">
+                                <i class="bx bx-phone-call"></i>
+                                <h3>Call Us</h3>
+                                <p>+91 986521493<br>+91 865296415</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="300">
-                      <div class="info-box">
-                        <i class="bx bx-phone-call"></i>
-                        <h3>Call Us</h3>
-                        <p>+91 986521493<br>+91 865296415</p>
-                      </div>
-                    </div>
-                  </div>
-        
+
                 </div>
-              </section><!-- End Contact Us Section -->
+            </section><!-- End Contact Us Section -->
 
         </main><!-- End #main -->
 
         <!-- ======= Footer ======= -->
         <footer id="footer">
 
-            <!-- <div class="footer-newsletter">
-              <div class="container">
-                <div class="row justify-content-center">
-                  <div class="col-lg-6">
-                    <h4>Join Our Instagram</h4>
-                    <p>For Weekly updates follow Adfluencer page on instagram </p>
-                    <form action="" method="post">
-                      <input type="email" name="email"><input type="submit" value="Subscribe">
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-      
             <div class="footer-top">
-              <div class="container">
-                <div class="row">
-      
-                  <div class="col-lg-3 col-md-6 footer-contact">
-                    <h3>AdFluencer</h3>
-                    <p>
-                      1st Floor, Lok Centre Premises Co-op Society Ltd Above ICICI Bank, Marol Maroshi Rd, Marol, Andheri East, Mumbai <br><br>
-                      <strong>Phone:</strong> +91 858846718<br>
-                      <strong>Email:</strong> contact@adfluencer.com<br>
-                    </p>
-                  </div>
-      
-                  <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Useful Links</h4>
-                    <ul>
-                      <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                      <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                      <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                      <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                      <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-                    </ul>
-                  </div>
-      
-      
-                  <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Our Social Networks</h4>
-                    
-                    <div class="social-links mt-3">
-                      <!-- <a href="#" class="github"><i class="bx bxl-github"></i></a> -->
-                      <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                      <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                      <!-- <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a> -->
-                      <!-- <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a> -->
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-3 col-md-6 footer-contact">
+                            <h3>AdFluencer</h3>
+                            <p>
+                                1st Floor, Lok Centre Premises Co-op Society Ltd Above ICICI Bank, Marol Maroshi Rd,
+                                Marol, Andheri East, Mumbai <br><br>
+                                <strong>Phone:</strong> +91 858846718<br>
+                                <strong>Email:</strong> contact@adfluencer.com<br>
+                            </p>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 footer-links">
+                            <h4>Useful Links</h4>
+                            <ul>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 col-md-6 footer-links">
+                            
+                        </div>
+
+
+                        <div class="col-lg-3 col-md-6 footer-links">
+                            <h4>Our Social Networks</h4>
+
+                            <div class="social-links mt-3">
+                                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+
+                            </div>
+                        </div>
+
                     </div>
-                  </div>
-      
                 </div>
-              </div>
             </div>
-      
+
             <div class="container py-4">
-              <div class="copyright">
-                &copy; Copyright <strong><span>AdFluencer</span></strong>. All Rights Reserved
-              </div>
+                <div class="copyright">
+                    &copy; Copyright <strong><span>AdFluencer</span></strong>. All Rights Reserved
+                </div>
             </div>
-          </footer><!-- End Footer -->
-      
-        </div>
-      
-        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-      
-        <!-- Vendor JS Files -->
-        <script src="{{url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-        <script src="{{url_for('static', filename='vendor/aos/aos.js')}}"></script>
-        <script src="{{url_for('static', filename='vendor/glightbox/js/glightbox.min.js')}}"></script>
-        <script src="{{url_for('static', filename='vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
-        <script src="{{url_for('static', filename='vendor/php-email-form/validate.js')}}"></script>
-        <script src="{{url_for('static', filename='vendor/swiper/swiper-bundle.min.js')}}"></script>
-      
-        <!-- Template Main JS File -->
-        <script src="{{url_for('static', filename='js/main.js')}}"></script>
+        </footer><!-- End Footer -->
+
+    </div>
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="{{url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/aos/aos.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/glightbox/js/glightbox.min.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/php-email-form/validate.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/swiper/swiper-bundle.min.js')}}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{{url_for('static', filename='js/main.js')}}"></script>
 
 </body>
+
 </html>

@@ -41,7 +41,7 @@
         <!-- ======= Hero Section ======= -->
         <section id="hero">
             {% for msg in get_flashed_messages() %}
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{msg}}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -59,7 +59,7 @@
                     Welcome <br />
                     <span>{{name}}</span>
                 </h1>
-                
+
                 <a href="#portfolio" class="btn-get-started scrollto">Get Started</a>
             </div>
         </section>
@@ -71,18 +71,18 @@
                 <div class="logo">
                     <h1 class="text-light">
                         <a href="{{url_for('views.home')}}"><span>AdFluencer</span></a>
-                    </h1>                    
+                    </h1>
                 </div>
 
                 <nav id="navbar" class="navbar">
                     <ul>
                         <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                        <li><a class="nav-link scrollto" href="#portfolio">Your Advertisements</a></li>                        
+                        <li><a class="nav-link scrollto" href="#portfolio">Your Advertisements</a></li>
                         <li><a class="nav-link scrollto" href="#cta">Advertise</a></li>
                         <li><a class="nav-link scrollto" href="#team">Influencers</a></li>
                         <li><a class="nav-link scrollto" href="#faq">FAQ</a></li>
-                        <li><a href="{{url_for('views.logout')}}">Logout</a></li>
                         <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+                        <li><a href="{{url_for('views.logout')}}">Logout</a></li>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav>
@@ -103,28 +103,31 @@
                         <h2>Your Advertisements</h2>
                         {% if advts_owner|length==0 %}
                         <p>No advertisements posted</p>
-                        {% else %}                            
+                        {% else %}
                         <p>This is how your posted advertisements will be visible to Influencers</p>
                         {% endif %}
                     </div>
-                    
-                    {% for advt in advts %}
+                    {% for adv in advts|batch(3) %}
                     <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="300">
+                        {% for advt in adv %}
                         <div class="col-lg-4 col-md-6 portfolio-item filter-product">
-                            <div class="portfolio-wrap">                                
-                                <img src="{{ url_for('static', filename = 'uploads/'+advt.name) }}" class="img-fluid" alt="{{ advt.name}}">
+                            <div class="portfolio-wrap">
+                                <img src="{{ url_for('static', filename = 'uploads/'+advt.name) }}" class="img-fluid"
+                                    alt="{{ advt.name}}">
                                 <div class="portfolio-info">
                                     <h4>{{ advt.brand }}</h4>
                                     <p>{{ advt.comp_name }}</p>
                                 </div>
                                 <div class="portfolio-links">
-                                    <a href="{{ url_for('static', filename = 'uploads/'+advt.name) }}" data-gallery="portfolioGallery"
-                                        class="portfolio-lightbox" title="{{ advt.name}}"><i class="bx bx-plus"></i></a>
-                                    <a href="{{url_for('views.advt_details', advt_id= advt.id)}}" title="More Details"><i
-                                            class="bx bx-link"></i></a>                                    
+                                    <a href="{{ url_for('static', filename = 'uploads/'+advt.name) }}"
+                                        data-gallery="portfolioGallery" class="portfolio-lightbox"
+                                        title="{{ advt.brand}}"><i class="bx bx-plus"></i></a>
+                                    <a href="{{url_for('views.advt_details', advt_id= advt.id)}}"
+                                        title="More Details"><i class="bx bx-link"></i></a>
                                 </div>
                             </div>
                         </div>
+                        {% endfor %}
                     </div>
                     {% endfor %}
             </section><!-- End Portfolio Section -->
@@ -149,7 +152,7 @@
                     <div class="section-title" data-aos="fade-down">
                         <span>Influencers</span>
                         <h2>Influencers</h2>
-                        
+
                     </div>
 
                     <div class="row">
@@ -164,10 +167,10 @@
 
                                     </div>
                                     <div class="social">
-                                        <!-- <a href=""><i class="bi bi-github"></i></a> -->
-                                        <!-- <a href=""><i class="bi bi-facebook"></i></a> -->
-                                        <a href="https://www.instagram.com/just_neel_things/"><i class="bi bi-instagram"></i></a>
-                                        <!-- <a href=""><i class="bi bi-linkedin"></i></a> -->
+
+                                        <a href="https://www.instagram.com/just_neel_things/"><i
+                                                class="bi bi-instagram"></i></a>
+
                                     </div>
                                 </div>
                             </div>
@@ -186,9 +189,10 @@
 
                                     </div>
                                     <div class="social">
-                                       
+
                                         <!-- <a href=""><i class="bi bi-facebook"></i></a> -->
-                                        <a href="https://www.instagram.com/mostlysane/"><i class="bi bi-instagram"></i></a>
+                                        <a href="https://www.instagram.com/mostlysane/"><i
+                                                class="bi bi-instagram"></i></a>
                                         <a href="https://www.youtube.com/c/MostlySane"><i class="bi bi-youtube"></i></a>
                                     </div>
                                 </div>
@@ -206,9 +210,10 @@
 
                                     </div>
                                     <div class="social">
-                                        
-                                        <a href="https://www.instagram.com/bhagyashreelimaye/"><i class="bi bi-instagram"></i></a>
-                                       
+
+                                        <a href="https://www.instagram.com/bhagyashreelimaye/"><i
+                                                class="bi bi-instagram"></i></a>
+
                                     </div>
                                 </div>
                             </div>
@@ -225,14 +230,15 @@
 
                                     </div>
                                     <div class="social">
-                                        
+
                                         <a href=""><i class="bi bi-instagram"></i></a>
-                                        <a href="https://www.youtube.com/channel/UCNSdjX4ry9fICqeObdZPAZQ"><i class="bi bi-youtube"></i></a>
+                                        <a href="https://www.youtube.com/channel/UCNSdjX4ry9fICqeObdZPAZQ"><i
+                                                class="bi bi-youtube"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <div class="col-xl-3 col-lg-4 col-md-6">
                                 <div class="member" data-aos="fade-up" data-aos-delay="100">
@@ -245,14 +251,16 @@
 
                                         </div>
                                         <div class="social">
-                                            
-                                            <a href="https://www.instagram.com/niharicka.singh/"><i class="bi bi-instagram"></i></a>
-                                            <a href="https://www.youtube.com/c/CaptainNick"><i class="bi bi-youtube"></i></a>
+
+                                            <a href="https://www.instagram.com/niharicka.singh/"><i
+                                                    class="bi bi-instagram"></i></a>
+                                            <a href="https://www.youtube.com/c/CaptainNick"><i
+                                                    class="bi bi-youtube"></i></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="col-xl-3 col-lg-4 col-md-6 mt-4 mt-md-0">
                                 <div class="member" data-aos="fade-up" data-aos-delay="200">
                                     <img src="../static/img/team/team-8.png" class="img-fluid" alt="" />
@@ -264,14 +272,15 @@
 
                                         </div>
                                         <div class="social">
-                                            
-                                            <a href="https://www.instagram.com/abhinowg/"><i class="bi bi-instagram"></i></a>
+
+                                            <a href="https://www.instagram.com/abhinowg/"><i
+                                                    class="bi bi-instagram"></i></a>
                                             <a href=""><i class="bi bi-youtube"></i></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="col-xl-3 col-lg-4 col-md-6 mt-4 mt-lg-0" data-wow-delay="0.2s">
                                 <div class="member" data-aos="fade-up" data-aos-delay="300">
                                     <img src="../static/img/team/team-9.png" class="img-fluid" alt="" />
@@ -279,18 +288,20 @@
                                         <div class="member-info-content">
                                             <h4>Mikhael</h4>
                                             <span>instagram-30K Followers</span>
-                                        <span>Author</span>
+                                            <span>Author</span>
 
                                         </div>
                                         <div class="social">
-                                            
-                                            <a href="https://www.instagram.com/ashishchanchlani/"><i class="bi bi-instagram"></i></a>
-                                            <a href="https://www.youtube.com/c/ashishchanchlanivines"><i class="bi bi-youtube"></i></a>
+
+                                            <a href="https://www.instagram.com/ashishchanchlani/"><i
+                                                    class="bi bi-instagram"></i></a>
+                                            <a href="https://www.youtube.com/c/ashishchanchlanivines"><i
+                                                    class="bi bi-youtube"></i></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="col-xl-3 col-lg-4 col-md-6 mt-4 mt-lg-0" data-wow-delay="0.3s">
                                 <div class="member" data-aos="fade-up" data-aos-delay="400">
                                     <img src="../static/img/team/yp.png" class="img-fluid" alt="" />
@@ -298,125 +309,26 @@
                                         <div class="member-info-content">
                                             <h4>Yash P</h4>
                                             <span>Instagram-10K Followers</span>
-                                        <span>Photographer</span>
+                                            <span>Photographer</span>
 
                                         </div>
                                         <div class="social">
-                                            
-                                            <a href="https://www.instagram.com/soul.cravings_/"><i class="bi bi-instagram"></i></a>
-                                            
+
+                                            <a href="https://www.instagram.com/soul.cravings_/"><i
+                                                    class="bi bi-instagram"></i></a>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     </div>
-                </div>
-                <br /><br /><br />
+                    <br /><br /><br />
             </section>
             <!-- End Team Section -->
 
-            <!-- ======= Testimonials Section ======= -->
-            <!-- <section id="testimonials" class="testimonials">
-                <div class="container position-relative">
-                    <div class="testimonials-slider swiper-container" data-aos="fade-up" data-aos-delay="100">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="testimonial-item">
-                                    <img src="../static/img/testimonials/testimonials-1.jpg" class="testimonial-img"
-                                        alt="" />
-                                    <h3>Saul Goodman</h3>
-                                    <h4>Ceo &amp; Founder</h4>
-                                    <p>
-                                        <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                        Proin iaculis purus consequat sem cure digni ssim donec
-                                        porttitora entum suscipit rhoncus. Accusantium quam,
-                                        ultricies eget id, aliquam eget nibh et. Maecen aliquam,
-                                        risus at semper.
-                                        <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                                    </p>
-                                </div>
-                            </div> -->
-                            <!-- End testimonial item -->
-
-                            <!-- <div class="swiper-slide">
-                                <div class="testimonial-item">
-                                    <img src="../static/img/testimonials/testimonials-2.jpg" class="testimonial-img"
-                                        alt="" />
-                                    <h3>Sara Wilsson</h3>
-                                    <h4>Designer</h4>
-                                    <p>
-                                        <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                        Export tempor illum tamen malis malis eram quae irure esse
-                                        labore quem cillum quid cillum eram malis quorum velit
-                                        fore eram velit sunt aliqua noster fugiat irure amet legam
-                                        anim culpa.
-                                        <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- End testimonial item -->
-
-                            <!-- <div class="swiper-slide">
-                                <div class="testimonial-item">
-                                    <img src="../static/img/testimonials/testimonials-3.jpg" class="testimonial-img"
-                                        alt="" />
-                                    <h3>Jena Karlis</h3>
-                                    <h4>Store Owner</h4>
-                                    <p>
-                                        <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                        Enim nisi quem export duis labore cillum quae magna enim
-                                        sint quorum nulla quem veniam duis minim tempor labore
-                                        quem eram duis noster aute amet eram fore quis sint minim.
-                                        <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                                    </p>
-                                </div>
-                            </div> -->
-                            <!-- End testimonial item -->
-
-                            <!-- <div class="swiper-slide">
-                                <div class="testimonial-item">
-                                    <img src="../static/img/testimonials/testimonials-4.jpg" class="testimonial-img"
-                                        alt="" />
-                                    <h3>Matt Brandon</h3>
-                                    <h4>Freelancer</h4>
-                                    <p>
-                                        <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                        Fugiat enim eram quae cillum dolore dolor amet nulla culpa
-                                        multos export minim fugiat minim velit minim dolor enim
-                                        duis veniam ipsum anim magna sunt elit fore quem dolore
-                                        labore illum veniam.
-                                        <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                                    </p>
-                                </div>
-                            </div> -->
-                            <!-- End testimonial item -->
-
-                            <!-- <div class="swiper-slide">
-                                <div class="testimonial-item">
-                                    <img src="../static/img/testimonials/testimonials-5.jpg" class="testimonial-img"
-                                        alt="" />
-                                    <h3>John Larson</h3>
-                                    <h4>Entrepreneur</h4>
-                                    <p>
-                                        <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                        Quis quorum aliqua sint quem legam fore sunt eram irure
-                                        aliqua veniam tempor noster veniam enim culpa labore duis
-                                        sunt culpa nulla illum cillum fugiat legam esse veniam
-                                        culpa fore nisi cillum quid.
-                                        <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                                    </p>
-                                </div>
-                            </div> -->
-                            <!-- End testimonial item -->
-                        <!-- </div>
-                        <div class="swiper-pagination"></div>
-                    </div>
-                </div>
-            </section> -->
-            <!-- End Testimonials Section -->
-
             <!-- ======= F.A.Q Section ======= -->
-             <section id="faq" class="faq">
+            <section id="faq" class="faq">
                 <div class="container">
                     <div class="section-title" data-aos="fade-down">
                         <span>F.A.Q</span>
@@ -428,122 +340,72 @@
                         <ul>
                             <li data-aos="fade-up">
                                 <i class="bx bx-help-circle icon-help"></i>
-                                <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">Non
+                                <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">
                                     How to Advertise Multiple Advertisements?
                                     <i class="bx bx-chevron-down icon-show"></i><i
                                         class="bx bx-chevron-up icon-close"></i></a>
                                 <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
                                     <p>
-                                        Advertisers Can Post there advertisements on Advertise Tab in Navigation Bar.                                    </p>
+                                        Advertisers can post there advertisements through Advertise tab in navigation
+                                        bar. </p>
                                 </div>
                             </li>
 
                             <li data-aos="fade-up" data-aos-delay="100">
                                 <i class="bx bx-help-circle icon-help"></i>
-                                <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">Where to Mention details of the Product?                                    <i class="bx bx-chevron-down icon-show"></i><i
+                                <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">Where to
+                                    mention details of the product? <i class="bx bx-chevron-down icon-show"></i><i
                                         class="bx bx-chevron-up icon-close"></i></a>
                                 <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
                                     <p>
-                                       While Entering the Product under Advertise Tab You can Enter the product details,price ,Duration to Create Advertisement.
+                                        While entering the product under Advertise tab you can Enter the product
+                                        details, duration to create advertisement.
                                     </p>
                                 </div>
                             </li>
-
-                            <!-- <li data-aos="fade-up" data-aos-delay="200">
-                                <i class="bx bx-help-circle icon-help"></i>
-                                <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">Dolor sit
-                                    amet consectetur adipiscing elit?
-                                    <i class="bx bx-chevron-down icon-show"></i><i
-                                        class="bx bx-chevron-up icon-close"></i></a>
-                                <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
-                                    <p>
-                                        Eleifend mi in nulla posuere sollicitudin aliquam ultrices
-                                        sagittis orci. Faucibus pulvinar elementum integer enim.
-                                        Sem nulla pharetra diam sit amet nisl suscipit. Rutrum
-                                        tellus pellentesque eu tincidunt. Lectus urna duis
-                                        convallis convallis tellus. Urna molestie at elementum eu
-                                        facilisis sed odio morbi quis
-                                    </p>
-                                </div>
-                            </li>
-
-                            <li data-aos="fade-up" data-aos-delay="300">
-                                <i class="bx bx-help-circle icon-help"></i>
-                                <a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="collapsed">Tempus quam
-                                    pellentesque nec nam aliquam sem et tortor
-                                    consequat? <i class="bx bx-chevron-down icon-show"></i><i
-                                        class="bx bx-chevron-up icon-close"></i></a>
-                                <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
-                                    <p>
-                                        Molestie a iaculis at erat pellentesque adipiscing
-                                        commodo. Dignissim suspendisse in est ante in. Nunc vel
-                                        risus commodo viverra maecenas accumsan. Sit amet nisl
-                                        suscipit adipiscing bibendum est. Purus gravida quis
-                                        blandit turpis cursus in.
-                                    </p>
-                                </div>
-                            </li>
-
-                            <li data-aos="fade-up" data-aos-delay="400">
-                                <i class="bx bx-help-circle icon-help"></i>
-                                <a data-bs-toggle="collapse" data-bs-target="#faq-list-5" class="collapsed">Tortor vitae
-                                    purus faucibus ornare. Varius vel pharetra vel
-                                    turpis nunc eget lorem dolor?
-                                    <i class="bx bx-chevron-down icon-show"></i><i
-                                        class="bx bx-chevron-up icon-close"></i></a>
-                                <div id="faq-list-5" class="collapse" data-bs-parent=".faq-list">
-                                    <p>
-                                        Laoreet sit amet cursus sit amet dictum sit amet justo.
-                                        Mauris vitae ultricies leo integer malesuada nunc vel.
-                                        Tincidunt eget nullam non nisi est sit amet. Turpis nunc
-                                        eget lorem dolor sed. Ut venenatis tellus in metus
-                                        vulputate eu scelerisque.
-                                    </p>
-                                </div>
-                            </li>--> 
                         </ul>
                     </div>
                 </div>
-            </section> --> -->
+            </section>
             <!-- End F.A.Q Section -->
 
             <!-- ======= Contact Us Section ======= -->
-            
 
-              <section id="contact" class="contact">
+
+            <section id="contact" class="contact">
                 <div class="container">
-        
-                  <div class="section-title" data-aos="fade-down">
-                    <span>Contact Us</span>
-                    <h2>Contact Us</h2>
-                  </div>
-        
-                  <div class="row justify-content-center">
-                    <div class="col-lg-4 col-md-12" data-aos="fade-up" data-aos-delay="100">
-                      <div class="info-box">
-                        <i class="bx bx-map"></i>
-                        <h3>Our Address</h3>
-                        <p>FCRIT Vashi</p>
-                      </div>
+
+                    <div class="section-title" data-aos="fade-down">
+                        <span>Contact Us</span>
+                        <h2>Contact Us</h2>
                     </div>
-                    <div class="col-lg-4 col-md-6 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="200">
-                      <div class="info-box">
-                        <i class="bx bx-envelope"></i>
-                        <h3>Email Us</h3>
-                        <p>AdfluencerAd.com<br>FluentlyAd.com</p>
-                      </div>
+
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4 col-md-12" data-aos="fade-up" data-aos-delay="100">
+                            <div class="info-box">
+                                <i class="bx bx-map"></i>
+                                <h3>Our Address</h3>
+                                <p>FCRIT Vashi</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="200">
+                            <div class="info-box">
+                                <i class="bx bx-envelope"></i>
+                                <h3>Email Us</h3>
+                                <p>AdfluencerAd.com<br>FluentlyAd.com</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="300">
+                            <div class="info-box">
+                                <i class="bx bx-phone-call"></i>
+                                <h3>Call Us</h3>
+                                <p>+91 986521493<br>+91 865296415</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="300">
-                      <div class="info-box">
-                        <i class="bx bx-phone-call"></i>
-                        <h3>Call Us</h3>
-                        <p>+91 986521493<br>+91 865296415</p>
-                      </div>
-                    </div>
-                  </div>
-        
+
                 </div>
-              </section>
+            </section>
             <!-- End Contact Us Section -->
         </main>
         <!-- End #main -->
@@ -551,82 +413,70 @@
         <!-- ======= Footer ======= -->
         <footer id="footer">
 
-            <!-- <div class="footer-newsletter">
-              <div class="container">
-                <div class="row justify-content-center">
-                  <div class="col-lg-6">
-                    <h4>Join Our Instagram</h4>
-                    <p>For Weekly updates follow Adfluencer page on instagram </p>
-                    <form action="" method="post">
-                      <input type="email" name="email"><input type="submit" value="Subscribe">
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-      
             <div class="footer-top">
-              <div class="container">
-                <div class="row">
-      
-                  <div class="col-lg-3 col-md-6 footer-contact">
-                    <h3>AdFluencer</h3>
-                    <p>
-                      1st Floor, Lok Centre Premises Co-op Society Ltd Above ICICI Bank, Marol Maroshi Rd, Marol, Andheri East, Mumbai <br><br>
-                      <strong>Phone:</strong> +91 858846718<br>
-                      <strong>Email:</strong> contact@adfluencer.com<br>
-                    </p>
-                  </div>
-      
-                  <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Useful Links</h4>
-                    <ul>
-                      <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                      <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                      <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                      <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                      <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-                    </ul>
-                  </div>
-      
-      
-                  <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Our Social Networks</h4>
-                    
-                    <div class="social-links mt-3">
-                      <!-- <a href="#" class="github"><i class="bx bxl-github"></i></a> -->
-                      <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                      <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                      <!-- <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a> -->
-                      <!-- <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a> -->
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-3 col-md-6 footer-contact">
+                            <h3>AdFluencer</h3>
+                            <p>
+                                1st Floor, Lok Centre Premises Co-op Society Ltd Above ICICI Bank, Marol Maroshi Rd,
+                                Marol, Andheri East, Mumbai <br><br>
+                                <strong>Phone:</strong> +91 858846718<br>
+                                <strong>Email:</strong> contact@adfluencer.com<br>
+                            </p>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 footer-links">
+                            <h4>Useful Links</h4>
+                            <ul>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 col-md-6 footer-links">
+
+                        </div>
+
+
+                        <div class="col-lg-3 col-md-6 footer-links">
+                            <h4>Our Social Networks</h4>
+
+                            <div class="social-links mt-3">
+
+                                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+
+                            </div>
+                        </div>
+
                     </div>
-                  </div>
-      
                 </div>
-              </div>
             </div>
-      
+
             <div class="container py-4">
-              <div class="copyright">
-                &copy; Copyright <strong><span>AdFluencer</span></strong>. All Rights Reserved
-              </div>
+                <div class="copyright">
+                    &copy; Copyright <strong><span>AdFluencer</span></strong>. All Rights Reserved
+                </div>
             </div>
-          </footer><!-- End Footer -->
-      
-        </div>
-      
-        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-      
-        <!-- Vendor JS Files -->
-        <script src="{{url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-        <script src="{{url_for('static', filename='vendor/aos/aos.js')}}"></script>
-        <script src="{{url_for('static', filename='vendor/glightbox/js/glightbox.min.js')}}"></script>
-        <script src="{{url_for('static', filename='vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
-        <script src="{{url_for('static', filename='vendor/php-email-form/validate.js')}}"></script>
-        <script src="{{url_for('static', filename='vendor/swiper/swiper-bundle.min.js')}}"></script>
-      
-        <!-- Template Main JS File -->
-        <script src="{{url_for('static', filename='js/main.js')}}"></script>
+        </footer><!-- End Footer -->
+
+    </div>
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="{{url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/aos/aos.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/glightbox/js/glightbox.min.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/php-email-form/validate.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/swiper/swiper-bundle.min.js')}}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{{url_for('static', filename='js/main.js')}}"></script>
 </body>
 
 </html>
