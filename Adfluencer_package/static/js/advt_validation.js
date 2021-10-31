@@ -4,7 +4,8 @@ function firstfocus() {
     return true;
 }
 function validate(){
-    var letters = /^[a-zA-Z]{20}?[ ]?[a-zA-Z]{20}+$/;
+    var letters = /^\w+( \w+)*$/;
+    // var letterc = /^[a-zA-Z]+$/;
     var res = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
     var phoneno = /^\d{10}$/;
     var mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -32,12 +33,12 @@ function validate(){
 
 
     if (comp_name == "" || comp_name == null) {
-        alert("comp name should not be empty");
+        alert("Company name should not be empty");
         comp_namef.focus();
         return false;
     }
     else if (!comp_name.match(letters)) {
-        alert("comp name should contain only letters");
+        alert("Company name should contain only letters");
         comp_namef.focus();
         return false;
     }
@@ -67,7 +68,7 @@ function validate(){
     }
     
     else if (comp_website == "" || comp_website == null) {
-        alert("Please enter your comp's website URL");
+        alert("Please enter your comp's website URL, If your company doesn't have a website just type https://sample.com");
         comp_websitef.focus();
         return false;
     }
