@@ -61,11 +61,15 @@ def logout():
 @views.route('/advt/dashboard', methods = ['GET', 'POST'])
 @login_required
 def advt_dashboard():
-    name = current_user.comp_name
-    owner_id = current_user.id
-    advts_owner= advertisements.query.all()
-    advts = advertisements.query.filter_by(owner_id=owner_id)
-    return render_template('advt_dashboard.html',advts=advts, name=name, advts_owner=advts_owner)
+    if current_user.comp_name == None:
+        flash('Please login')
+        return redirect(url_for('views.login'))
+    else:
+        name = current_user.comp_name
+        owner_id = current_user.id
+        advts_owner= advertisements.query.all()
+        advts = advertisements.query.filter_by(owner_id=owner_id)
+        return render_template('advt_dashboard.html',advts=advts, name=name, advts_owner=advts_owner)
 
 
 def allowed_file(filename):
@@ -75,39 +79,43 @@ def allowed_file(filename):
 @views.route('/advt/advertise', methods = ['GET', 'POST'])
 @login_required
 def advt_advertise():
-    if request.method == 'POST':
-        files = request.files.getlist('prdt_imgs')
-        for file in files:
-            if file and allowed_file(file.filename):
-                comp_name = current_user.comp_name
-                email = current_user.comp_email
-                desc = request.form.get('desc')
-                brand = request.form.get('brand')
-                deadline = request.form.get('deadline')
-                prdt_sp = request.form.get('prdt_sp')
-                age_grp = request.form.get('age_grp')
-                prdt_imgs = request.files['prdt_imgs']
-                owner_id = current_user.id
-                
-                filename = secure_filename(prdt_imgs.filename)
-                mimetype = prdt_imgs.mimetype
-                
-                file.save(os.path.join(basedir, app.config['UPLOAD_FOLDER'], filename))
-                advt = advertisements(owner_id=owner_id, comp_name=comp_name, email=email, desc=desc, brand=brand, deadline=deadline, prdt_sp=prdt_sp,
-                age_grp=age_grp, name = filename, mimetype=mimetype)
-                db.session.add(advt)
-                db.session.commit()
-                flash('Advertisement added!', category='success')
-                return redirect(url_for('views.advt_dashboard'))
-            else:
-                flash('Please upload a valid image file (JPEG/JPG/PNG/GIF).')
-                user_email=current_user.comp_email
-                comp_name = current_user.comp_name
-                return render_template('advt_advertisements.html',user_email=user_email, comp_name=comp_name)
-    
-    user_email=current_user.comp_email
-    comp_name = current_user.comp_name
-    return render_template('advt_advertisements.html', user_email=user_email, comp_name=comp_name)
+    if current_user.comp_name == None:
+        flash('Please login')
+        return redirect(url_for('views.login'))
+    else:
+        if request.method == 'POST':
+            files = request.files.getlist('prdt_imgs')
+            for file in files:
+                if file and allowed_file(file.filename):
+                    comp_name = current_user.comp_name
+                    email = current_user.comp_email
+                    desc = request.form.get('desc')
+                    brand = request.form.get('brand')
+                    deadline = request.form.get('deadline')
+                    prdt_sp = request.form.get('prdt_sp')
+                    age_grp = request.form.get('age_grp')
+                    prdt_imgs = request.files['prdt_imgs']
+                    owner_id = current_user.id
+                    
+                    filename = secure_filename(prdt_imgs.filename)
+                    mimetype = prdt_imgs.mimetype
+                    
+                    file.save(os.path.join(basedir, app.config['UPLOAD_FOLDER'], filename))
+                    advt = advertisements(owner_id=owner_id, comp_name=comp_name, email=email, desc=desc, brand=brand, deadline=deadline, prdt_sp=prdt_sp,
+                    age_grp=age_grp, name = filename, mimetype=mimetype)
+                    db.session.add(advt)
+                    db.session.commit()
+                    flash('Advertisement added!', category='success')
+                    return redirect(url_for('views.advt_dashboard'))
+                else:
+                    flash('Please upload a valid image file (JPEG/JPG/PNG/GIF).')
+                    user_email=current_user.comp_email
+                    comp_name = current_user.comp_name
+                    return render_template('advt_advertisements.html',user_email=user_email, comp_name=comp_name)
+        
+        user_email=current_user.comp_email
+        comp_name = current_user.comp_name
+        return render_template('advt_advertisements.html', user_email=user_email, comp_name=comp_name)
 
 @views.route('/advt/update_advertise/<int:id>', methods = ['GET', 'POST'])
 @login_required
@@ -164,9 +172,13 @@ def advt_details(advt_id):
 @views.route('/infl/dashboard')
 @login_required
 def infl_dashboard():
-    name = current_user.fname
-    advts= advertisements.query.all()
-    return render_template('infl_dashboard.html', name=name, advts=advts)
+    if current_user.fname == None:
+        flash('Please login')
+        return redirect(url_for('views.login'))
+    else:
+        name = current_user.fname
+        advts= advertisements.query.all()
+        return render_template('infl_dashboard.html', name=name, advts=advts)
 
 
 @views.route('/infl/portfolio_details<int:advt_id>', methods = ['POST', 'GET'])
