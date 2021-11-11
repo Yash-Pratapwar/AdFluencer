@@ -39,7 +39,8 @@
             <div class="container d-flex align-items-center justify-content-between">
 
                 <div class="logo">
-                    <h1 class="text-light"><a href="{{url_for('views.advt_dashboard')}}"><span>AdFluencer</span></a></h1>                    
+                    <h1 class="text-light"><a href="{{url_for('views.advt_dashboard')}}"><span>AdFluencer</span></a>
+                    </h1>
                 </div>
 
                 <nav id="navbar" class="navbar">
@@ -62,6 +63,8 @@
                         <h2>Product Details </h2>
                         <ol>
                             <li><a href="{{url_for('views.advt_dashboard')}}">Home</a></li>
+                            <li><a href="{{url_for('views.advt_details', advt_id=advt.id)}}">Advertisement</a></li>
+                            <li><a href="{{url_for('views.advt_apply', id=advt.id)}}">Applications</a></li>
                             <li>Product Details</li>
                         </ol>
                     </div>
@@ -80,9 +83,10 @@
                                 <div class="swiper-wrapper align-items-center">
 
                                     <div class="swiper-slide">
-                                        <img src="{{ url_for('static', filename = 'uploads/'+advt.name) }}" class="img-fluid" alt="{{ advt.name }}">
+                                        <img src="{{ url_for('static', filename = 'uploads/'+advt.name) }}"
+                                            class="img-fluid" alt="{{ advt.name }}">
                                     </div>
-                                    
+
                                 </div>
                                 <div class="swiper-pagination"></div>
                             </div>
@@ -96,7 +100,7 @@
                                     <li><strong>Brand: </strong> {{advt.brand}}</li>
                                     <li><strong>Deadline: </strong>{{ advt.deadline }}</li>
                                     <li><strong>Product selling points: </strong>{{ advt.prdt_sp }}</li>
-                                    <li><strong>Age group targeted:</strong>{{ advt.age_grp }}</li>
+                                    <li><strong>Age group targeted:</strong> {{ advt.age_grp }}</li>
                                 </ul>
                             </div>
                             <div class="portfolio-description">
@@ -105,11 +109,51 @@
                                     {{ advt.desc }}
                                 </p>
                             </div>
-                            <a href="{{url_for('views.advt_update', id = advt.id)}}" class="btn btn-primary btn-lg">Edit</a>
-                            <a href="{{url_for('views.advt_delete', id = advt.id)}}" class="btn btn-danger btn-lg">Delete</a>
-                            <a href="{{url_for('views.advt_apply', id = advt.id)}}" class="btn btn-success btn-lg">Applications</a>
+                            <a href="{{url_for('views.advt_app_applicants', id= advt.id)}}" class="btn btn-primary btn-lg">Approved Applicants</a>
+                            
                         </div>
+                        <h2>Applicants for your advertisement</h2>
+                        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                            <table class="table table-hover">
+                                <tbody>
+                                    {% if ap|length==0 %}
+                                        <div class="alert alert-dark" role="alert">
+                                        No applications yet
+                                        </div>                                    
+                                    {% else %}                                                                                                        
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">First Name</th>
+                                                <th scope="col">Last Name</th>
+                                                <th scope="col">Social Media Handle</th>
+                                                <th scope="col">Email</th>
+                                            </tr>
+                                        </thead>
+                                            {% for item in apl %}
+                                            <tr>
+                                                <th scope="row">{{loop.index}}</th>
+                                                <td>{{item.infl_fname}}</td>
+                                                <td>{{item.infl_lname}}</td>
+                                                <td>{{item.infl_smh}}</td>
+                                                <td>{{item.infl_email}}</td>
+                                                <td>
+                                                    <a href="{{url_for('views.advt_approve', id=item.infl_id)}}" type="button"
+                                                        class="btn btn-outline-success btn-sn mx-1">Approve</button>
+                                                </td>
+                                                <td>
+                                                    <a href="{{url_for('views.advt_reject', id=item.id)}}" type="button"
+                                                    class="btn btn-outline-danger btn-sn mx-1">Reject</button>
+                                                    
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        
 
+                                        {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
                 </div>
@@ -147,6 +191,7 @@
                         </div>
 
                         <div class="col-lg-3 col-md-6 footer-links">
+
                         </div>
                         <div class="col-lg-3 col-md-6 footer-links">
                             <h4>Our Social Networks</h4>
@@ -187,6 +232,6 @@
     <!-- Template Main JS File -->
     <script src="{{url_for('static', filename='js/main.js')}}"></script>
 
-
 </body>
+
 </html>

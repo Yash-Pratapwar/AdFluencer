@@ -8,6 +8,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from Adfluencer_package import db, create_app, app
 from werkzeug.utils import secure_filename
 from Adfluencer_package.models import advertisements
+from Adfluencer_package.models import advt_approval
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired, Email
 
 
 app = Flask(__name__)
@@ -69,7 +73,13 @@ def advt_dashboard():
         owner_id = current_user.id
         advts_owner= advertisements.query.all()
         advts = advertisements.query.filter_by(owner_id=owner_id)
-        return render_template('advt_dashboard.html',advts=advts, name=name, advts_owner=advts_owner)
+        advts_oid = advertisements.query.filter_by(owner_id=owner_id).first()
+        try:
+            adv_oid = advts_oid.owner_id
+            return render_template('advt_dashboard.html',advts=advts, name=name, advts_owner=advts_owner, adv_oid=adv_oid, owner_id=owner_id)
+        except:
+            pass
+        return render_template('advt_dashboard.html',advts=advts, name=name, advts_owner=advts_owner, owner_id=owner_id)
 
 
 def allowed_file(filename):
@@ -146,7 +156,7 @@ def advt_update(id):
     advt_id = id
     user_email = current_user.comp_email
     advts = advertisements.query.filter_by(id=advt_id).first()
-    return render_template('advt_update_advertisements.html', advts=advts, user_email=user_email )
+    return render_template('advt_update_advertisements.html', advts=advts, user_email=user_email, id=advt_id )
 
 @views.route('/advt/delete_advertise/<int:id>')
 @login_required
@@ -157,9 +167,85 @@ def advt_delete(id):
         db.session.commit()
         flash('Advertisement deleted successfully!')
         return redirect(url_for('views.advt_dashboard'))
+    except:
+        flash('some error occured')
+        return redirect(url_for('views.advt_dashboard'))
+#         try:
+    #             infl_id = apply.infl_id
+    #         except:
+    #             infl_id = None
+    # # adv_id = applys.advt_id
+    # # owner_id = applys.owner_id
+@views.route('/advt/applications/<int:id>', methods = ['GET', 'POST'])
+@login_required
+def advt_apply(id):
+    advt_id = id
+    # user_email = current_user.comp_email
+    ap=advt_approval.query.all()
+    apl = advt_approval.query.filter_by(advt_id=advt_id, approved=0).all()    
+    # applys = advt_approval.query.filter_by(approved=0).all()
+    # for item in applys:
+    #     infl_id = item.infl_id
+    # infl_int = users.query.filter_by(id=infl_id)
+    advts = advertisements.query.filter_by(id=advt_id).first()
+    return render_template('advt_applications.html', advt=advts,apl=apl,ap=ap )
+
+        # flash('some error occured')
+    # advts = advertisements.query.filter_by(id=advt_id).first()
+    # return render_template('advt_applications.html', advt=advts, applys=applys,apl=apl )
+
+
+@views.route('/advt/approved_applications/<int:id>', methods = ['GET', 'POST'])
+@login_required
+def advt_app_applicants(id):
+    advt_id = id
+    # user_email = current_user.comp_email
+    apl = advt_approval.query.filter_by(advt_id=advt_id).first()
+    applys = advt_approval.query.all()
+    for apply in applys:
+        if apply.approved==1:
+            try:
+                infl_id = apply.infl_id
+            except:
+                flash('some error occured')
+                # infl_id = None
+    # adv_id = applys.advt_id
+    # owner_id = applys.owner_id
+    try:
+        infl_int = users.query.filter_by(id=infl_id)
+        advts = advertisements.query.filter_by(id=advt_id).first()
+        return render_template('advt_approved_applicants.html', advt=advts, applys=applys, infl_int=infl_int,apl=apl )
+    except:
+        flash('some error occured')
+    advts = advertisements.query.filter_by(id=advt_id).first()
+    return render_template('advt_approved_applicants.html', advt=advts, applys=applys,apl=apl )
+
+
+@views.route('/advt/applications/approve/<int:id>', methods = ['GET', 'POST'])
+@login_required
+def advt_approve(id):
+    infl_id = id
+    advt_apr = advt_approval.query.filter_by(infl_id=infl_id).first()
+    advt_apr.approved=1
+    advt_apr.filter='approved'
+    
+    db.session.commit()
+    flash('Influencer application approved! Hope you have a great collaboartion!')
+    return redirect(url_for('views.advt_dashboard'))
+
+
+@views.route('/advt/applications/reject/<int:id>')
+@login_required
+def advt_reject(id):
+    apply_to_delete = advt_approval.query.get_or_404(id)
+    try:
+        db.session.delete(apply_to_delete)
+        db.session.commit()
+        flash('Application rejected, hope you find a better candidate!')
+        return redirect(url_for('views.advt_dashboard'))
 
     except:
-        flash('some error occured ;(')
+        flash('some error occured ')
         return redirect(url_for('views.advt_dashboard'))
 
 @views.route('/advt/advt_details/<int:advt_id>', methods = ['POST', 'GET'])
@@ -169,16 +255,33 @@ def advt_details(advt_id):
     return render_template('advt_details.html', advt=advt)
 
 
-@views.route('/infl/dashboard')
+@views.route('/infl/dashboard', methods = ['POST', 'GET'])
 @login_required
 def infl_dashboard():
-    if current_user.fname == None:
-        flash('Please login')
-        return redirect(url_for('views.login'))
-    else:
+    if request.method == 'POST':
+        advt_id = request.form.get("advt_id")
+        owner_id = request.form.get("owner_id")
+        owner_name = request.form.get("owner_name")
+        infl_id = request.form.get("infl_id")
+        infl_fname = request.form.get("infl_fname")
+        infl_lname = request.form.get("infl_lname")
+        infl_smh = request.form.get("infl_smh")
+        infl_email = request.form.get("infl_email")
+        filter='applied'
+        apply = advt_approval(advt_id = advt_id, owner_id = owner_id, owner_name=owner_name, infl_id = infl_id, infl_fname=infl_fname, infl_lname=infl_lname, infl_smh=infl_smh, infl_email=infl_email,filter=filter)
+        db.session.add(apply)
+        db.session.commit()
         name = current_user.fname
         advts= advertisements.query.all()
         return render_template('infl_dashboard.html', name=name, advts=advts)
+    else:
+        if current_user.fname == None:
+            flash('Please login')
+            return redirect(url_for('views.login'))
+        else:
+            name = current_user.fname
+            advts= advertisements.query.all()
+            return render_template('infl_dashboard.html', name=name, advts=advts)
 
 
 @views.route('/infl/portfolio_details<int:advt_id>', methods = ['POST', 'GET'])
@@ -187,12 +290,29 @@ def portfolio_details(advt_id):
     advt = advertisements.query.filter_by(id=advt_id).first()
     return render_template('infl_portfolio.html', advt=advt)
 
+@views.route('/infl/my_profile/portfolio_details<int:advt_id>', methods = ['POST', 'GET'])
+@login_required
+def my_portfolio_details(advt_id):
+    advt = advertisements.query.filter_by(id=advt_id).first()
+    return render_template('my_infl_portfolio.html', advt=advt)
+
 
 @views.route('/infl/my_profile')
 @login_required
 def my_profile():
-    return render_template('infl_profile.html')
-
+    
+    apl = advt_approval.query.all()
+    infl_id=current_user.id
+    advt_apl = advt_approval.query.filter_by(infl_id=infl_id).first()
+    user= users.query.filter_by(id=infl_id).first()
+    try:
+        advt_id = advt_apl.advt_id    
+        advts_apl = advertisements.query.filter_by(id=advt_id)
+        advts_apl_inf = advt_approval.query.filter_by(id=advt_id).first()
+        inf_id=advts_apl_inf.infl_id
+        return render_template('infl_profile.html', advts = advts_apl, apl=apl, advt_id=advt_id, advt_apl=advt_apl, user=user,inf_id=inf_id, infl_id=infl_id)
+    except:
+        return render_template('infl_profile.html',  apl=apl, advt_apl=advt_apl, user=user, infl_id=infl_id)
 
 @views.route('/register')
 def register():
@@ -257,9 +377,3 @@ def inf_regis():
             flash('Account created! Please login', category='success')
             return redirect(url_for('views.login'))
     return render_template('influencer-registration.html')
-
-
-@views.route('/myprofile')
-@login_required
-def myprofile():
-    return render_template('infl_profile')

@@ -43,3 +43,18 @@ class advertisements(db.Model, UserMixin):
     name = db.Column(db.Text, nullable = False)
     mimetype = db.Column(db.Text, nullable = False)
     date_uploaded = db.Column(db.DateTime, default = datetime.utcnow)
+
+class advt_approval(db.Model, UserMixin):
+    __tablename__ = 'advt_approval'
+    id = db.Column(db.Integer, primary_key = True)
+    advt_id = db.Column(db.Integer, nullable = True)
+    owner_id = db.Column(db.Integer, nullable = True)
+    owner_name = db.Column(db.Text, nullable = True)
+    infl_id = db.Column(db.Integer, nullable = True)
+    infl_fname = db.Column(db.Text, nullable = True)
+    infl_lname = db.Column(db.Text, nullable = True)
+    infl_smh = db.Column(db.Text, nullable = True)
+    infl_email = db.Column(db.Text, nullable = True)
+    approved = db.Column(db.Integer, nullable = True, default=0)
+    filter = db.Column(db.Text, nullable = True) 
+    
