@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>AdFluencer - Index</title>
+    <title>AdFluencer</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -96,7 +96,7 @@
                                     <li><strong>Brand: </strong> {{advt.brand}}</li>
                                     <li><strong>Deadline: </strong>{{ advt.deadline }}</li>
                                     <li><strong>Product selling points: </strong>{{ advt.prdt_sp }}</li>
-                                    <li><strong>Age group targeted:</strong> {{ advt.age_grp }}</li>
+                                    <li><strong>Age group targeted:</strong>{{ advt.age_grp }}</li>
                                 </ul>
                             </div>
                             <div class="portfolio-description">
@@ -105,8 +105,18 @@
                                     {{ advt.desc }}
                                 </p>
                             </div>
-                            <!-- <button type="button" class="btn btn-primary btn-lg">Interested</button> -->
-                            <a href="{{url_for('views.infl_dashboard')}}" class="btn btn-primary btn-lg" onclick="return msg()">Interested</a>
+                            <form action="{{ url_for('views.infl_dashboard') }}" method="POST" onclick="return msg()">
+                                <input type="hidden" name="advt_id" value="{{ advt.id }}">
+                                <input type="hidden" name="owner_id" value="{{ advt.owner_id }}">
+                                <input type="hidden" name="infl_id" value="{{ current_user.id }}">
+                                <input type="hidden" name="infl_fname" value="{{ current_user.fname }}">
+                                <input type="hidden" name="infl_lname" value="{{ current_user.lname }}">
+                                <input type="hidden" name="infl_smh" value="{{ current_user.smh }}">
+                                <input type="hidden" name="infl_email" value="{{ current_user.inf_email }}">
+                                <input type="hidden" name="owner_name" value="{{ advt.comp_name }}">
+                                <button type="submit" class="btn btn-primary btn-lg">Interested</button>                                
+                            </form>
+                            <!-- <a href="{{url_for('views.infl_dashboard', advt_id= advt.id, owner_id = advt.owner_id, infl_id = current_user.id)}}" class="btn btn-primary btn-lg" onclick="return msg()">Interested</a> -->
                             <script>
                                 function msg()
                                 {
@@ -151,6 +161,8 @@
                             </ul>
                         </div>
 
+                        <div class="col-lg-3 col-md-6 footer-links">    
+                        </div>
                         <div class="col-lg-3 col-md-6 footer-links">
                             <h4>Our Social Networks</h4>
 
@@ -180,15 +192,15 @@
             class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
-    <script src="../static/vendor/aos/aos.js"></script>
-    <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../static/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="../static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="../static/vendor/php-email-form/validate.js"></script>
-    <script src="../static/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="{{url_for('static', filename='vendor/aos/aos.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/glightbox/js/glightbox.min.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/php-email-form/validate.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/swiper/swiper-bundle.min.js')}}"></script>
 
     <!-- Template Main JS File -->
-    <script src="../static/js/main.js"></script>
+    <script src="{{url_for('static', filename='js/main.js')}}"></script>
 
 </body>
 </html>

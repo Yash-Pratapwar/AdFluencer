@@ -1,43 +1,231 @@
-<div class="container rounded bg-white mt-5 mb-5">
-    <div class="row">
-        <link rel="stylesheet" href="static/css/infl_style.css" type="text/css"
-        <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">Edogaru</span><span class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
-        </div>
-        <div class="col-md-5 border-right">
-            <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Profile Settings</h4>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>AdFluencer</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="{{url_for('static', filename='img/Logo_1.png')}}" rel="icon">
+    <link href="{{url_for('static', filename='img/Logo_1.png')}}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{{url_for('static', filename='vendor/aos/aos.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{{url_for('static',filename='css/style.css')}}" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="wrap">
+
+        <!-- ======= Header ======= -->
+        <header id="header" class="d-flex align-items-center">
+            <div class="container d-flex align-items-center justify-content-between">
+
+                <div class="logo">
+                    <h1 class="text-light"><a href="{{url_for('views.infl_dashboard')}}"><span>AdFluencer</span></a>
+                    </h1>
                 </div>
-                <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" placeholder="first name" value=""></div>
-                    <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control" value="" placeholder="surname"></div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" value=""></div>
-                    <div class="col-md-12"><label class="labels">Address Line 1</label><input type="text" class="form-control" placeholder="enter address line 1" value=""></div>
-                    <div class="col-md-12"><label class="labels">Address Line 2</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
-                    <div class="col-md-12"><label class="labels">Postcode</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
-                    <div class="col-md-12"><label class="labels">State</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
-                    <div class="col-md-12"><label class="labels">Area</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
-                    <div class="col-md-12"><label class="labels">Email ID</label><input type="text" class="form-control" placeholder="enter email id" value=""></div>
-                    <div class="col-md-12"><label class="labels">Education</label><input type="text" class="form-control" placeholder="education" value=""></div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" placeholder="country" value=""></div>
-                    <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" value="" placeholder="state"></div>
-                </div>
-                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
+
+                <nav id="navbar" class="navbar">
+                    <ul>
+                        <li><a class="nav-link scrollto " href="{{url_for('views.infl_dashboard')}}">Home</a></li>
+                        <li><a class="nav-link scrollto " href="#portfolio">Your Applications</a></li>
+                        <li><a href="{{url_for('views.logout')}}">Logout</a></li>
+                    </ul>
+                    <i class="bi bi-list mobile-nav-toggle"></i>
+                </nav><!-- .navbar -->
+
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center experience"><span>Edit Experience</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Experience</span></div><br>
-                <div class="col-md-12"><label class="labels">Experience in Designing</label><input type="text" class="form-control" placeholder="experience" value=""></div> <br>
-                <div class="col-md-12"><label class="labels">Additional Details</label><input type="text" class="form-control" placeholder="additional details" value=""></div>
+        </header><!-- End Header -->
+        <style>
+            .content-section {
+                padding-top: 10px;
+                margin-left: 30px;
+                padding-bottom: 30px;
+            }
+            #breadcrumbs{
+                padding-top: 90px;
+            }
+        </style>
+        <main id="main">
+            <!-- ======= Breadcrumbs ======= -->
+            <section id="breadcrumbs" class="breadcrumbs" data-aos="fade-up">
+                <div class="container">
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h2>My Profile </h2>
+                        <ol>
+                            <li><a href="{{url_for('views.infl_dashboard')}}">Home</a></li>
+                            <li><a href="{{url_for('views.my_profile')}}">My Profile</a></li>
+                            <!-- <li>Product Details</li> -->
+                        </ol>
+                    </div>
+
+                </div>
+            </section><!-- End Breadcrumbs -->
+            <div class="content-section">
+                <div class="col-md-8">
+                    <legend class="border-bottom mb-4">Account Info</legend>
+                    <form name='advertisements' enctype=multipart/form-data method="POST" onsubmit="return validate()">                        
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Your first name</label>
+                            <input type="text" class="form-control" name="comp_name" id="exampleFormControlInput1"
+                                placeholder="{{user.fname }}" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Your last name</label>
+                            <input type="text" class="form-control" name="comp_name" id="exampleFormControlInput1"
+                                placeholder="{{ user.lname }}" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                            <input type="email" class="form-control" name="email" id="exampleFormControlInput1"
+                                placeholder="{{ user.inf_email }}"  disabled>
+                        </div>
+                        
+                        <div class="col-12">
+                            <!-- <button type="submit" class="btn btn-primary">Save and Update</button> -->
+
+                            <!-- <button type="button" class="btn btn-danger">Cancel</button> -->
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
+            <section id="portfolio" class="portfolio section-bg">
+                <div class="container">
+
+                    <div class="section-title" data-aos="fade-down">
+                        <span>Your Applications</span>
+                        <h2>Your Applications</h2>
+                        {% if inf_id != infl_id %}
+                        <p>Not applied for any advertisements yet!</p>
+                        {% else %}
+                        <p>Advertisements you applied for</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="row" data-aos="fade-up" data-aos-delay="150">
+                        <div class="col-lg-12 d-flex justify-content-center">
+                            <ul id="portfolio-flters">
+                                <li data-filter="*" class="filter-active">All</li>
+                                <li data-filter=".filter-approved">Approved</li>
+                                <li data-filter=".filter-applied">Applied for</li>                                
+                            </ul>
+                        </div>
+                    </div>
+
+                    {% for adv in advts|batch(3)  %}
+                    <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="300">
+                        {% for advt in adv %}
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-{{advt_apl.filter}}">
+                            <div class="portfolio-wrap">
+                                <img src="{{ url_for('static', filename = 'uploads/'+advt.name) }}" class="img-fluid"
+                                    alt="{{ advt.name }}">
+                                <div class="portfolio-info">
+                                    <h4>{{ advt.brand }}</h4>
+                                    <p>{{ advt.comp_name }}</p>
+                                </div>
+                                <div class="portfolio-links">
+                                    <a href="{{ url_for('static', filename = 'uploads/'+advt.name) }}"
+                                        data-gallery="portfolioGallery" class="portfolio-lightbox"
+                                        title="{{advt.brand}}"><i class="bx bx-plus"></i></a>
+                                    <a href="{{url_for('views.my_portfolio_details', advt_id= advt.id)}}"
+                                        title="More Details"><i class="bx bx-link"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+            </section>
+        </main><!-- End #main -->
+
+        <!-- ======= Footer ======= -->
+        <footer id="footer">
+
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-3 col-md-6 footer-contact">
+                            <h3>AdFluencer</h3>
+                            <p>
+                                1st Floor, Lok Centre Premises Co-op Society Ltd Above ICICI Bank, Marol Maroshi Rd,
+                                Marol, Andheri East, Mumbai <br><br>
+                                <strong>Phone:</strong> +91 858846718<br>
+                                <strong>Email:</strong> contact@adfluencer.com<br>
+                            </p>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 footer-links">
+                            <h4>Useful Links</h4>
+                            <ul>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 footer-links">
+                        </div>
+                        <div class="col-lg-3 col-md-6 footer-links">
+                            <h4>Our Social Networks</h4>
+
+                            <div class="social-links mt-3">
+                                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="container py-4">
+                <div class="copyright">
+                    &copy; Copyright <strong><span>AdFluencer</span></strong>. All Rights Reserved
+                </div>
+            </div>
+        </footer><!-- End Footer -->
+
     </div>
-</div>
-</div>
-</div>
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="{{url_for('static', filename='vendor/aos/aos.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/glightbox/js/glightbox.min.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/php-email-form/validate.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/swiper/swiper-bundle.min.js')}}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{{url_for('static', filename='js/main.js')}}"></script>
+
+</body>
+
+</html>

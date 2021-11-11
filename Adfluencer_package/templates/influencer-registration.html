@@ -10,24 +10,24 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="../static/img/Logo_1.png" rel="icon">
-    <link href="../static/img/Logo_1.png" rel="apple-touch-icon">
+	<link href="{{url_for('static', filename='img/Logo_1.png')}}" rel="icon">
+	<link href="{{url_for('static', filename='img/Logo_1.png')}}" rel="apple-touch-icon">
 
-    <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+	<!-- Google Fonts -->
+	<link
+		href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+		rel="stylesheet">
 
-    <!-- Vendor CSS Files -->
-    <link href="../static/vendor/aos/aos.css" rel="stylesheet">
-    <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="../static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="../static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="../static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+	<!-- Vendor CSS Files -->
+	<link href="{{url_for('static', filename='vendor/aos/aos.css')}}" rel="stylesheet">
+	<link href="{{url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+	<link href="{{url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+	<link href="{{url_for('static', filename='vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+	<link href="{{url_for('static', filename='vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
+	<link href="{{url_for('static', filename='vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
 
-    <!-- Template Main CSS File -->
-    <link href="../static/css/style.css" rel="stylesheet">
+	<!-- Template Main CSS File -->
+	<link href="{{url_for('static',filename='css/style.css')}}" rel="stylesheet">
 
     <!-- Including jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js">
@@ -57,7 +57,7 @@
                 <nav id="navbar" class="navbar">
                     <ul>
                         <li><a class="nav-link scrollto " href="{{url_for('views.home')}}">Home</a></li>
-                        <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+                        <!-- <li><a class="nav-link scrollto" href="#contact">Contact</a></li> -->
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav><!-- .navbar -->
@@ -80,6 +80,134 @@
         }, 3000);
     </script>
 
+    
+
+    <body onload="firstfocus();"></body>
+    <br>
+    <div class="main">
+        <div class="register">
+            <h2>Register Here</h2>
+            <form name="registration" id="register" method="POST" onsubmit="return validate()">
+                <label>First Name: </label>
+                <br>
+                <input type="text" name="fname" id="name" placeholder="Enter Your First Name*">
+                <br><br>
+
+                <label>Last Name: </label>
+                <br>
+                <input type="text" name="lname" id="name" placeholder="Enter Your Last Name*">
+                <br><br>
+
+                <label>Social media handle: </label>
+                <br>
+                <input type="url" name="smh" id="name" placeholder="URL format: https://sample.com*">
+                <br><br>
+
+                <label>Phone number: </label>
+                <br>
+                <input type="tel" name="ph_no" id="name" placeholder="Enter Your 10 digit Phone no.*">
+                <br><br>
+
+                <label>Email: </label>
+                <br>
+                <input type="email" name="inf_email" id="name" placeholder="Enter your E-mail ID*">
+                <br><br>
+
+                <label>Password: </label>
+                <br>
+                <input type="password" name="pswd1" id="name" placeholder="Enter Password*">
+                <br><br>
+
+                <label>Re-enter password: </label>
+                <br>
+                <input type="password" name="pswd2" id="name" placeholder="Enter Password again*">
+                <br><br>
+
+                <label>Your Age: </label>
+                <br>
+                <input type="number" name="age" id="name" placeholder="How old are you?">
+                <br><br>
+
+                <label>Gender: </label>
+                <br>
+                <!-- &nbsp;&nbsp; -->
+                <input type="radio" name="gender" id="gender" value="male" required>
+                <!-- &nbsp; -->
+                <span id="male">Male</span>
+                <!-- &nbsp; -->
+                <input type="radio" name="gender" id="gender" value="female" required>
+                <!-- &nbsp; -->
+                <span id="female">Female</span>
+                <!-- &nbsp; -->
+                <input type="radio" name="gender" id="gender" value="others" required>
+                <!-- &nbsp; -->
+                <span id="others">others</span>
+                <br>
+                <div class="btn">
+                    <div class="inner"></div>
+                    <button type="submit">Register</button>
+                </div>
+
+                <label for="">Already have an account?</label><a href="{{url_for('views.login')}}" id="name">Login</a>
+
+            </form>
+        </div>
+        <!--end register -->
+        <br><br><br><br><br>
+    </div>
+    <!--end main-->
+    <footer id="footer" id='contact'>
+
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h3>AdFluencer</h3>
+                        <p>
+                            1st Floor, Lok Centre Premises Co-op Society Ltd Above ICICI Bank, Marol Maroshi Rd,
+                            Marol, Andheri East, Mumbai <br><br>
+                            <strong>Phone:</strong> +91 858846718<br>
+                            <strong>Email:</strong> contact@adfluencer.com<br>
+                        </p>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                    </div>
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Our Social Networks</h4>
+
+                        <div class="social-links mt-3">
+                            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container py-4">
+            <div class="copyright">
+                &copy; Copyright <strong><span>AdFluencer</span></strong>. All Rights Reserved
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    
     <style>
         body {
             background-image: linear-gradient(to right, gray, rgb(230, 230, 230));
@@ -172,78 +300,3 @@
             text-shadow: 1px 1px 5px rgba(0, 0, 0, 0, 0.3);
         }
     </style>
-
-    <body onload="firstfocus();"></body>
-    <br>
-    <div class="main">
-        <div class="register">
-            <h2>Register Here</h2>
-            <form name="registration" id="register" method="POST" onsubmit="return validate()">
-                <label>First Name: </label>
-                <br>
-                <input type="text" name="fname" id="name" placeholder="Enter Your First Name*">
-                <br><br>
-
-                <label>Last Name: </label>
-                <br>
-                <input type="text" name="lname" id="name" placeholder="Enter Your Last Name*">
-                <br><br>
-
-                <label>Social media handle: </label>
-                <br>
-                <input type="url" name="smh" id="name" placeholder="URL format: https://sample.com*">
-                <br><br>
-
-                <label>Phone number: </label>
-                <br>
-                <input type="tel" name="ph_no" id="name" placeholder="Enter Your 10 digit Phone no.*">
-                <br><br>
-
-                <label>Email: </label>
-                <br>
-                <input type="email" name="inf_email" id="name" placeholder="Enter your E-mail ID*">
-                <br><br>
-
-                <label>Password: </label>
-                <br>
-                <input type="password" name="pswd1" id="name" placeholder="Enter Password*">
-                <br><br>
-
-                <label>Re-enter password: </label>
-                <br>
-                <input type="password" name="pswd2" id="name" placeholder="Enter Password again*">
-                <br><br>
-
-                <label>Your Age: </label>
-                <br>
-                <input type="number" name="age" id="name" placeholder="How old are you?">
-                <br><br>
-
-                <label>Gender: </label>
-                <br>
-                <!-- &nbsp;&nbsp; -->
-                <input type="radio" name="gender" id="gender" value="male" required>
-                <!-- &nbsp; -->
-                <span id="male">Male</span>
-                <!-- &nbsp; -->
-                <input type="radio" name="gender" id="gender" value="female" required>
-                <!-- &nbsp; -->
-                <span id="female">Female</span>
-                <!-- &nbsp; -->
-                <input type="radio" name="gender" id="gender" value="others" required>
-                <!-- &nbsp; -->
-                <span id="others">others</span>
-                <br>
-                <div class="btn">
-                    <div class="inner"></div>
-                    <button type="submit">Register</button>
-                </div>
-
-                <label for="">Already have an account?</label><a href="{{url_for('views.login')}}" id="name">Login</a>
-
-            </form>
-        </div>
-        <!--end register -->
-        <br><br><br><br><br>
-    </div>
-    <!--end main-->

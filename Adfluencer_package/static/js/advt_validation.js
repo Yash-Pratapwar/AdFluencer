@@ -5,7 +5,7 @@ function firstfocus() {
 }
 function validate(){
     var letters = /^\w+( \w+)*$/;
-    // var letterc = /^[a-zA-Z]+$/;
+    var letterc = /^[a-zA-Z\s]*$/;
     var res = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
     var phoneno = /^\d{10}$/;
     var mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -37,7 +37,7 @@ function validate(){
         comp_namef.focus();
         return false;
     }
-    else if (!comp_name.match(letters)) {
+    else if (!comp_name.match(letterc)) {
         alert("Company name should contain only letters");
         comp_namef.focus();
         return false;
@@ -49,7 +49,7 @@ function validate(){
         return false;
     }
     
-    else if (!acc_handler_name.match(letters)) {
+    else if (!acc_handler_name.match(letterc)) {
         alert("Account handler's name should contain only letters");
         acc_handler_namef.focus();
         return false;
@@ -61,7 +61,7 @@ function validate(){
         return false;
     }
     
-    else if (!acc_handler_desig.match(letters)) {
+    else if (!acc_handler_desig.match(letterc)) {
         alert("Account handler's designation should contain only letters");
         acc_handler_desigf.focus();
         return false;
