@@ -8,3 +8,4 @@ __pycache__/
 Adfluencer_package/__pycache__/__init__.cpython-39.pyc
 Adfluencer_package/__pycache__/models.cpython-39.pyc
 .gitignore
+AdFluencer-workspace.code-workspace
