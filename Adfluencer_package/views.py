@@ -9,9 +9,6 @@ from Adfluencer_package import db, create_app, app
 from werkzeug.utils import secure_filename
 from Adfluencer_package.models import advertisements
 from Adfluencer_package.models import advt_approval
-from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired, Email
 
 
 app = Flask(__name__)
@@ -170,36 +167,21 @@ def advt_delete(id):
     except:
         flash('some error occured')
         return redirect(url_for('views.advt_dashboard'))
-#         try:
-    #             infl_id = apply.infl_id
-    #         except:
-    #             infl_id = None
-    # # adv_id = applys.advt_id
-    # # owner_id = applys.owner_id
+
+
 @views.route('/advt/applications/<int:id>', methods = ['GET', 'POST'])
 @login_required
 def advt_apply(id):
-    advt_id = id
-    # user_email = current_user.comp_email
-    ap=advt_approval.query.all()
-    apl = advt_approval.query.filter_by(advt_id=advt_id, approved=0).all()    
-    # applys = advt_approval.query.filter_by(approved=0).all()
-    # for item in applys:
-    #     infl_id = item.infl_id
-    # infl_int = users.query.filter_by(id=infl_id)
+    advt_id = id    
+    apl = advt_approval.query.filter_by(advt_id=advt_id, approved=0).all()        
     advts = advertisements.query.filter_by(id=advt_id).first()
-    return render_template('advt_applications.html', advt=advts,apl=apl,ap=ap )
-
-        # flash('some error occured')
-    # advts = advertisements.query.filter_by(id=advt_id).first()
-    # return render_template('advt_applications.html', advt=advts, applys=applys,apl=apl )
+    return render_template('advt_applications.html', advt=advts,apl=apl)
 
 
 @views.route('/advt/approved_applications/<int:id>', methods = ['GET', 'POST'])
 @login_required
 def advt_app_applicants(id):
     advt_id = id
-    # user_email = current_user.comp_email
     apl = advt_approval.query.filter_by(advt_id=advt_id).first()
     applys = advt_approval.query.all()
     for apply in applys:
@@ -207,10 +189,7 @@ def advt_app_applicants(id):
             try:
                 infl_id = apply.infl_id
             except:
-                flash('some error occured')
-                # infl_id = None
-    # adv_id = applys.advt_id
-    # owner_id = applys.owner_id
+                flash('some error occured')                
     try:
         infl_int = users.query.filter_by(id=infl_id)
         advts = advertisements.query.filter_by(id=advt_id).first()
@@ -231,7 +210,7 @@ def advt_approve(id):
     
     db.session.commit()
     flash('Influencer application approved! Hope you have a great collaboartion!')
-    return redirect(url_for('views.advt_dashboard'))
+    return redirect(url_for('views.advt_apply'))
 
 
 @views.route('/advt/applications/reject/<int:id>')
@@ -242,7 +221,7 @@ def advt_reject(id):
         db.session.delete(apply_to_delete)
         db.session.commit()
         flash('Application rejected, hope you find a better candidate!')
-        return redirect(url_for('views.advt_dashboard'))
+        return redirect(url_for('views.advt_apply'))
 
     except:
         flash('some error occured ')

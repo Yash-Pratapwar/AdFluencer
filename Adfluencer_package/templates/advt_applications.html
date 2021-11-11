@@ -53,6 +53,20 @@
             </div>
         </header><!-- End Header -->
 
+        {% for msg in get_flashed_messages() %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{msg}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        <script type="text/javascript">
+            setTimeout(function () {
+    
+                // Closing the alert
+                $('.alert').alert('close');
+            }, 3000);
+        </script>
+        
         <main id="main">
 
             <!-- ======= Breadcrumbs ======= -->
@@ -116,7 +130,7 @@
                         <div class="table-wrapper-scroll-y my-custom-scrollbar">
                             <table class="table table-hover">
                                 <tbody>
-                                    {% if ap|length==0 %}
+                                    {% if apl|length==0 %}
                                         <div class="alert alert-dark" role="alert">
                                         No applications yet
                                         </div>                                    
