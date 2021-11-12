@@ -35,7 +35,6 @@
 
 <body>
     <div class="wrap">
-
         <!-- ======= Header ======= -->
         <header id="header" class="d-flex align-items-center">
             <div class="container d-flex align-items-center justify-content-between">
@@ -48,7 +47,7 @@
                 <nav id="navbar" class="navbar">
                     <ul>
                         <li><a class="nav-link scrollto " href="{{url_for('views.advt_dashboard')}}">Home</a></li>
-                        <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+                        <li><a href="{{url_for('views.logout')}}">Logout</a></li>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav><!-- navbar -->
@@ -56,8 +55,26 @@
             </div>
         </header><!-- End Header -->
     </div>
+    <style>
+        .breadcrumbs{
+            padding-top: 100px;
+        }
+    </style>
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs" data-aos="fade-up">
+        <div class="container">
 
-    <br><br><br>
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Advertisement Details </h2>
+                <ol>
+                    <li><a href="{{url_for('views.advt_dashboard')}}">Home</a></li>
+                    <li><a href="{{url_for('views.advt_details', advt_id=advt.id)}}">Advertisement</a></li>
+                    <li>Update Advertisement</li>
+                </ol>
+            </div>
+
+        </div>
+    </section><!-- End Breadcrumbs -->
     {% for msg in get_flashed_messages() %}
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
         {{msg}}
@@ -141,6 +158,9 @@
                             <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
                         </ul>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 footer-links">                        
                     </div>
 
                     <div class="col-lg-3 col-md-6 footer-links">

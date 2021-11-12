@@ -45,6 +45,7 @@
                 <nav id="navbar" class="navbar">
                     <ul>
                         <li><a class="nav-link scrollto " href="{{url_for('views.advt_dashboard')}}">Home</a></li>
+                        <li><a href="{{url_for('views.logout')}}">Logout</a></li>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav><!-- .navbar -->
@@ -59,11 +60,11 @@
                 <div class="container">
 
                     <div class="d-flex justify-content-between align-items-center">
-                        <h2>Product Details </h2>
+                        <h2>Advertisement Details </h2>
                         <ol>
                             <li><a href="{{url_for('views.advt_dashboard')}}">Home</a></li>
                             <li><a href="{{url_for('views.advt_details', advt_id=advt.id)}}">Advertisement</a></li>
-                            <li>Product Details</li>
+                            <li>Advertisement Details</li>
                         </ol>
                     </div>
 
@@ -106,7 +107,7 @@
                                     {{ advt.desc }}
                                 </p>
                             </div>
-                            <a href="{{url_for('views.advt_update', id = advt.id)}}" class="btn btn-primary btn-lg">Edit</a>
+                            <a href="{{url_for('views.advt_update', id = advt.id)}}" class="btn btn-primary btn-lg">Update</a>
                             <a href="{{url_for('views.advt_delete', id = advt.id)}}" class="btn btn-danger btn-lg">Delete</a>
                             <a href="{{url_for('views.advt_apply', id = advt.id)}}" class="btn btn-success btn-lg">Applications</a>
                         </div>

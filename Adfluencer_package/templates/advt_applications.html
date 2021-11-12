@@ -46,6 +46,7 @@
                 <nav id="navbar" class="navbar">
                     <ul>
                         <li><a class="nav-link scrollto " href="{{url_for('views.advt_dashboard')}}">Home</a></li>
+                        <li><a href="{{url_for('views.logout')}}">Logout</a></li>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav><!-- .navbar -->
@@ -53,19 +54,6 @@
             </div>
         </header><!-- End Header -->
 
-        <!-- {% for msg in get_flashed_messages() %}
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            {{msg}}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        {% endfor %}
-        <script type="text/javascript">
-            setTimeout(function () {
-    
-                // Closing the alert
-                $('.alert').alert('close');
-            }, 3000);
-        </script> -->
         <style>
             .breadcrumbs{
                 padding-top: 100px;
@@ -78,12 +66,11 @@
                 <div class="container">
 
                     <div class="d-flex justify-content-between align-items-center">
-                        <h2>Product Details </h2>
+                        <h2>Advertisement Details </h2>
                         <ol>
                             <li><a href="{{url_for('views.advt_dashboard')}}">Home</a></li>
                             <li><a href="{{url_for('views.advt_details', advt_id=advt.id)}}">Advertisement</a></li>
-                            <li><a href="{{url_for('views.advt_apply', id=advt.id)}}">Applications</a></li>
-                            <li>Product Details</li>
+                            <li><a href="{{url_for('views.advt_apply', id=advt.id)}}">Applications</a></li>                            
                         </ol>
                     </div>
 

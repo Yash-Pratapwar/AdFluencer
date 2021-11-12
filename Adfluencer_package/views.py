@@ -128,9 +128,11 @@ def advt_advertise():
 @login_required
 def advt_update(id):
     name_to_update = advertisements.query.filter(advertisements.id==id).first()
+    advt = advertisements.query.filter_by(id=id).first()
+    advt_name_update = advt_approval.query.filter_by(advt_id=id).first()
     files = request.files.getlist('prdt_imgs')
     for file in files:
-        if file and allowed_file(file.filename):                
+        if file and allowed_file(file.filename):
             name_to_update.desc = request.form.get('desc')
             name_to_update.brand = request.form.get('brand')
             name_to_update.deadline = request.form.get('deadline')
@@ -139,6 +141,7 @@ def advt_update(id):
             name_to_update.prdt_imgs = request.files['prdt_imgs']
             filename = secure_filename(name_to_update.prdt_imgs.filename)  
             name_to_update.name = filename
+            advt_name_update.advt_name = filename
             try:
                 file.save(os.path.join(basedir, app.config['UPLOAD_FOLDER'], filename))
                 db.session.commit()                    
@@ -153,13 +156,15 @@ def advt_update(id):
     advt_id = id
     user_email = current_user.comp_email
     advts = advertisements.query.filter_by(id=advt_id).first()
-    return render_template('advt_update_advertisements.html', advts=advts, user_email=user_email, id=advt_id )
+    return render_template('advt_update_advertisements.html',advt=advt, advts=advts, user_email=user_email, id=advt_id )
 
 @views.route('/advt/delete_advertise/<int:id>')
 @login_required
 def advt_delete(id):
     advt_to_delete = advertisements.query.get_or_404(id)
+    advta_to_delete = advt_approval.query.filter_by(advt_id=id).first()
     try:
+        db.session.delete(advta_to_delete)
         db.session.delete(advt_to_delete)
         db.session.commit()
         flash('Advertisement deleted successfully!')
@@ -259,11 +264,11 @@ def portfolio_details(advt_id):
     advt = advertisements.query.filter_by(id=advt_id).first()
     return render_template('infl_portfolio.html', advt=advt)
 
-@views.route('/infl/my_profile/portfolio_details<int:advt_id>', methods = ['POST', 'GET'])
+@views.route('/infl/my_profile/portfolio_details/<int:advt_id>', methods = ['POST', 'GET'])
 @login_required
 def my_portfolio_details(advt_id):
-    advt = advertisements.query.filter_by(id=advt_id).first()
-    return render_template('my_infl_portfolio.html', advt=advt)
+    advtm = advertisements.query.filter(advertisements.id==advt_id).first()
+    return render_template('my_infl_portfolio.html', advt=advtm)
 
 
 @views.route('/infl/my_profile')
@@ -274,16 +279,8 @@ def my_profile():
     advt_apl = advt_approval.query.filter_by(infl_id=infl_id)
     advta_apl = advt_approval.query.filter_by(infl_id=infl_id).all()
     user= users.query.filter_by(id=infl_id).first()
-    # try:
-
-        # advt_id = advt_apl.advt_id    
-        # advts_apl = advertisements.query.filter_by(id=advt_id)
-        # advts_apl_inf = advt_approval.query.filter_by(id=advt_id).first()
-        # inf_id=advts_apl_inf.infl_id
     return render_template('infl_profile.html',advta_apl=advta_apl, apl=apl, advts=advt_apl, user=user, infl_id=infl_id)
-    # except:
-    #     flash('error occured')
-    #     return render_template('infl_profile.html',  apl=apl, advt_apl=advt_apl, user=user, infl_id=infl_id)
+
 
 @views.route('/register')
 def register():
