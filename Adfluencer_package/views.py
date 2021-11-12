@@ -9,9 +9,6 @@ from Adfluencer_package import db, create_app, app
 from werkzeug.utils import secure_filename
 from Adfluencer_package.models import advertisements
 from Adfluencer_package.models import advt_approval
-from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired, Email
 
 
 app = Flask(__name__)
