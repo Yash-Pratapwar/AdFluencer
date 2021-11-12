@@ -181,6 +181,10 @@ def advt_apply(id):
 @views.route('/advt/approved_applications/<int:id>', methods = ['GET', 'POST'])
 @login_required
 def advt_app_applicants(id):
+    advt_id = id    
+    apl = advt_approval.query.filter_by(advt_id=advt_id, approved=1).all()        
+    advts = advertisements.query.filter_by(id=advt_id).first()
+    return render_template('advt_approved_applicants.html', advt=advts,apl=apl)
     advt_id = id
     apl = advt_approval.query.filter_by(advt_id=advt_id).first()
     applys = advt_approval.query.all()
@@ -203,6 +207,8 @@ def advt_app_applicants(id):
 @views.route('/advt/applications/approve/<int:id>', methods = ['GET', 'POST'])
 @login_required
 def advt_approve(id):
+    advta=advt_approval.query.filter_by(infl_id=id)
+    advta_id=advta[0].advt_id
     infl_id = id
     advt_apr = advt_approval.query.filter_by(infl_id=infl_id).first()
     advt_apr.approved=1
@@ -210,7 +216,7 @@ def advt_approve(id):
     
     db.session.commit()
     flash('Influencer application approved! Hope you have a great collaboartion!')
-    return redirect(url_for('views.advt_apply'))
+    return redirect(url_for('views.advt_apply', id=advta_id))
 
 
 @views.route('/advt/applications/reject/<int:id>')

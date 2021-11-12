@@ -81,40 +81,37 @@
                         <h2>Approved applicants for your advertisement</h2>
                         <div class="table-wrapper-scroll-y my-custom-scrollbar">
                             <table class="table table-hover">
-                                <tbody>                                
-                                {% if apl.approved != 1 %}
-                                <div class="alert alert-dark" role="alert">
-                                    Not approved anyone yet, hope you find a suitable candidate at the earliest
-                                </div>
-                                {% elif apl.approved == 1 %}                                    
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">First Name</th>
-                                        <th scope="col">Last Name</th>
-                                        <th scope="col">Social Media Handle</th>
-                                        <th scope="col">Email</th>
-                                    </tr>
-                                </thead>
-                                {% for infl in infl_int %}                                                                       
-                                    <tr>
-                                        <th scope="row">{{loop.index}}</th>
-                                        <td>{{infl.fname}}</td>
-                                        <td>{{infl.lname}}</td>
-                                        <td>{{infl.smh}}</td>
-                                        <td>{{infl.inf_email}}</td>                                        
-                                    </tr>
-                                {% endfor %}
-                                {% endif %}                                        
+                                <tbody>
+                                    {% if apl|length==0 %}
+                                        <div class="alert alert-dark" role="alert">
+                                        No applications yet
+                                        </div>                                    
+                                    {% else %}                                                                                                        
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">First Name</th>
+                                                <th scope="col">Last Name</th>
+                                                <th scope="col">Social Media Handle</th>
+                                                <th scope="col">Email</th>
+                                            </tr>
+                                        </thead>
+                                            {% for item in apl %}
+                                            <tr>
+                                                <th scope="row">{{loop.index}}</th>
+                                                <td>{{item.infl_fname}}</td>
+                                                <td>{{item.infl_lname}}</td>
+                                                <td>{{item.infl_smh}}</td>
+                                                <td>{{item.infl_email}}</td>                                                
+                                            </tr>
+                                        {% endfor %}                                
+                                        {% endif %}
                                 </tbody>
                             </table>
                         </div>
                     </div>
-
                 </div>
-
             </section><!-- End Portfolio Details Section -->
-
         </main><!-- End #main -->
 
         <!-- ======= Footer ======= -->
