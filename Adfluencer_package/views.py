@@ -12,7 +12,7 @@ from Adfluencer_package.models import advt_approval
 
 
 app = Flask(__name__)
-UPLOAD_FOLDER = 'D:/COLLEGE DOCS/MINI PROJECT SEM-V/AdFluencer/AdFluencer/Adfluencer_package/static/uploads'
+UPLOAD_FOLDER = 'static/uploads'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 basedir = os.path.abspath(os.path.dirname(__file__))
