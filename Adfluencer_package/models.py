@@ -48,6 +48,8 @@ class advt_approval(db.Model, UserMixin):
     __tablename__ = 'advt_approval'
     id = db.Column(db.Integer, primary_key = True)
     advt_id = db.Column(db.Integer, nullable = True)
+    advt_name = db.Column(db.Text, nullable = True)
+    advt_brand = db.Column(db.Text, nullable = True)
     owner_id = db.Column(db.Integer, nullable = True)
     owner_name = db.Column(db.Text, nullable = True)
     infl_id = db.Column(db.Integer, nullable = True)
@@ -57,4 +59,3 @@ class advt_approval(db.Model, UserMixin):
     infl_email = db.Column(db.Text, nullable = True)
     approved = db.Column(db.Integer, nullable = True, default=0)
     filter = db.Column(db.Text, nullable = True) 
-    

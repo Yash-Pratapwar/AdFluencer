@@ -114,6 +114,9 @@
                                 <input type="hidden" name="infl_smh" value="{{ current_user.smh }}">
                                 <input type="hidden" name="infl_email" value="{{ current_user.inf_email }}">
                                 <input type="hidden" name="owner_name" value="{{ advt.comp_name }}">
+                                <input type="hidden" name="advt_name" value="{{ advt.name }}">
+                                <input type="hidden" name="advt_brand" value="{{ advt.brand }}">
+                                <input type="hidden" name="advt_comp_name" value="{{ advt.comp_name }}">
                                 <button type="submit" class="btn btn-primary btn-lg">Interested</button>                                
                             </form>
                             <!-- <a href="{{url_for('views.infl_dashboard', advt_id= advt.id, owner_id = advt.owner_id, infl_id = current_user.id)}}" class="btn btn-primary btn-lg" onclick="return msg()">Interested</a> -->

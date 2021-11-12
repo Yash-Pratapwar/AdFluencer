@@ -53,7 +53,7 @@
             </div>
         </header><!-- End Header -->
 
-        {% for msg in get_flashed_messages() %}
+        <!-- {% for msg in get_flashed_messages() %}
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
             {{msg}}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -65,10 +65,14 @@
                 // Closing the alert
                 $('.alert').alert('close');
             }, 3000);
-        </script>
-        
+        </script> -->
+        <style>
+            .breadcrumbs{
+                padding-top: 100px;
+            }
+        </style>
         <main id="main">
-
+            
             <!-- ======= Breadcrumbs ======= -->
             <section id="breadcrumbs" class="breadcrumbs" data-aos="fade-up">
                 <div class="container">
@@ -85,7 +89,19 @@
 
                 </div>
             </section><!-- End Breadcrumbs -->
-
+            {% for msg in get_flashed_messages() %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{msg}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        <script type="text/javascript">
+            setTimeout(function () {
+    
+                // Closing the alert
+                $('.alert').alert('close');
+            }, 3000);
+        </script>
             <!-- ======= Portfolio Details Section ======= -->
             <section id="portfolio-details" class="portfolio-details">
                 <div class="container">

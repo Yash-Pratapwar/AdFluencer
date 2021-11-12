@@ -216,12 +216,14 @@ def advt_approve(id):
 @views.route('/advt/applications/reject/<int:id>')
 @login_required
 def advt_reject(id):
+    advtr=advt_approval.query.filter_by(id=id)
+    advtr_id=advtr[0].advt_id
     apply_to_delete = advt_approval.query.get_or_404(id)
     try:
         db.session.delete(apply_to_delete)
         db.session.commit()
         flash('Application rejected, hope you find a better candidate!')
-        return redirect(url_for('views.advt_apply'))
+        return redirect(url_for('views.advt_apply', id=advtr_id))
 
     except:
         flash('some error occured ')
@@ -246,8 +248,10 @@ def infl_dashboard():
         infl_lname = request.form.get("infl_lname")
         infl_smh = request.form.get("infl_smh")
         infl_email = request.form.get("infl_email")
+        advt_name = request.form.get("advt_name")
+        advt_brand = request.form.get("advt_brand")
         filter='applied'
-        apply = advt_approval(advt_id = advt_id, owner_id = owner_id, owner_name=owner_name, infl_id = infl_id, infl_fname=infl_fname, infl_lname=infl_lname, infl_smh=infl_smh, infl_email=infl_email,filter=filter)
+        apply = advt_approval(advt_id = advt_id, advt_name=advt_name, advt_brand=advt_brand, owner_id = owner_id, owner_name=owner_name, infl_id = infl_id, infl_fname=infl_fname, infl_lname=infl_lname, infl_smh=infl_smh, infl_email=infl_email,filter=filter)
         db.session.add(apply)
         db.session.commit()
         name = current_user.fname
@@ -279,19 +283,21 @@ def my_portfolio_details(advt_id):
 @views.route('/infl/my_profile')
 @login_required
 def my_profile():
-    
     apl = advt_approval.query.all()
     infl_id=current_user.id
-    advt_apl = advt_approval.query.filter_by(infl_id=infl_id).first()
+    advt_apl = advt_approval.query.filter_by(infl_id=infl_id)
+    advta_apl = advt_approval.query.filter_by(infl_id=infl_id).all()
     user= users.query.filter_by(id=infl_id).first()
-    try:
-        advt_id = advt_apl.advt_id    
-        advts_apl = advertisements.query.filter_by(id=advt_id)
-        advts_apl_inf = advt_approval.query.filter_by(id=advt_id).first()
-        inf_id=advts_apl_inf.infl_id
-        return render_template('infl_profile.html', advts = advts_apl, apl=apl, advt_id=advt_id, advt_apl=advt_apl, user=user,inf_id=inf_id, infl_id=infl_id)
-    except:
-        return render_template('infl_profile.html',  apl=apl, advt_apl=advt_apl, user=user, infl_id=infl_id)
+    # try:
+
+        # advt_id = advt_apl.advt_id    
+        # advts_apl = advertisements.query.filter_by(id=advt_id)
+        # advts_apl_inf = advt_approval.query.filter_by(id=advt_id).first()
+        # inf_id=advts_apl_inf.infl_id
+    return render_template('infl_profile.html',advta_apl=advta_apl, apl=apl, advts=advt_apl, user=user, infl_id=infl_id)
+    # except:
+    #     flash('error occured')
+    #     return render_template('infl_profile.html',  apl=apl, advt_apl=advt_apl, user=user, infl_id=infl_id)
 
 @views.route('/register')
 def register():
