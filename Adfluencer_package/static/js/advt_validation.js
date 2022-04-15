@@ -68,7 +68,7 @@ function validate(){
     }
     
     else if (comp_website == "" || comp_website == null) {
-        alert("Please enter your comp's website URL, If your company doesn't have a website just type https://sample.com");
+        alert("Please enter your company's website URL, If your company doesn't have a website just type https://sample.com");
         comp_websitef.focus();
         return false;
     }
@@ -80,7 +80,7 @@ function validate(){
     }
     
     else if (ph_no == "" || ph_no == null) {
-        alert("Please enter your comp's phone number");
+        alert("Please enter your company's phone number");
         ph_nof.focus();
         return false;
     }
