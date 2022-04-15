@@ -297,6 +297,7 @@ def adv_regis():
         ph_no = request.form.get("ph_no")
         comp_email = request.form.get("comp_email")
         ah_email = request.form.get("ah_email")
+        advt_categories = request.form.get("advt_categories")
         pswd1 = request.form.get("pswd1")
         acc_handler_gender = request.form["gender"]
         acc_type = 'advt'
@@ -310,7 +311,7 @@ def adv_regis():
                 pswd1, method='sha256')
             adv_regis_user = users(comp_name=comp_name, acc_handler_name=acc_handler_name,
             acc_handler_desig=acc_handler_desig, comp_website=comp_website, ph_no=ph_no, comp_email=comp_email,
-            ah_email=ah_email, password=hashed_password, acc_handler_gender=acc_handler_gender, acc_type=acc_type)
+            ah_email=ah_email, advt_categories=advt_categories,password=hashed_password, acc_handler_gender=acc_handler_gender, acc_type=acc_type)
             db.session.add(adv_regis_user)
             db.session.commit()
             flash('Account created! Please login', category='success')
@@ -326,6 +327,7 @@ def inf_regis():
         smh = request.form.get("smh")
         ph_no = request.form.get("ph_no")
         inf_email = request.form.get("inf_email")
+        inf_categories = request.form.get("inf_categories")
         age = request.form.get("age")
         pswd1 = request.form.get("pswd1")
         gender = request.form["gender"]
@@ -339,7 +341,7 @@ def inf_regis():
             hashed_password = generate_password_hash(
                 pswd1, method='sha256')
             inf_regis_user = users(fname=fname, lname=lname, smh=smh,ph_no=ph_no, 
-            inf_email=inf_email, password=hashed_password, age=age, gender=gender, acc_type=acc_type)
+            inf_email=inf_email, inf_categories=inf_categories,password=hashed_password, age=age, gender=gender, acc_type=acc_type)
             db.session.add(inf_regis_user)
             db.session.commit()
             flash('Account created! Please login', category='success')
