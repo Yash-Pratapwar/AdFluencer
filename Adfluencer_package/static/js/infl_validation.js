@@ -2,6 +2,8 @@
 // alert("validation.js loaded successfully!")
 function validate(){
     var letters = /^[a-zA-Z]+$/;
+    var lettersf =  /^(([a-zA-Z]*, )|([a-zA-Z]*))*$/;
+    // var lettersf = /^([a-zA-Z]+)(,([a-zA-Z]+))+$/;
     var res = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
     var phoneno = /^\d{10}$/;
     var mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -23,6 +25,8 @@ function validate(){
     var age = document.registration.age.value;
     var agef = document.registration.age;
     var getSelectedValue = document.querySelector('input[name="gender"]:checked');
+    var inf_categories = document.registration.inf_categories.value;
+    var inf_categoriesf = document.registration.inf_categories;
 
 
 
@@ -84,7 +88,19 @@ function validate(){
         inf_emailf.focus();
         return false;
     }
+
+    else if (inf_categories == "" || inf_categories == null) {
+        alert("Categories should not be empty");
+        inf_categoriesf.focus();
+        return false;
+    }
     
+    else if (!inf_categories.match(lettersf)) {
+        alert("Categories should contain only letters");
+        inf_categoriesf.focus();
+        return false;
+    }
+
     else if (pswd1 == "" || pswd1 == null) {
         alert("Please enter password");
         pswd1f.focus();

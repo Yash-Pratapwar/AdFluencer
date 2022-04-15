@@ -6,6 +6,7 @@ function firstfocus() {
 function validate(){
     var letters = /^\w+( \w+)*$/;
     var letterc = /^[a-zA-Z\s]*$/;
+    var lettersf =  /^(([a-zA-Z]*, )|([a-zA-Z]*))*$/;
     var res = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
     var phoneno = /^\d{10}$/;
     var mail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -24,6 +25,8 @@ function validate(){
     var comp_emailf = document.registration.comp_email;
     var ah_email = document.registration.ah_email.value;
     var ah_emailf = document.registration.ah_email;
+    var advt_categories = document.registration.advt_categories.value;
+    var advt_categoriesf = document.registration.advt_categories;
     var pswd1 = document.registration.pswd1.value;
     var pswd1f = document.registration.pswd1;
     var pswd2 = document.registration.pswd2.value;
@@ -112,6 +115,18 @@ function validate(){
     else if (!ah_email.match(mail)) {
         alert("Please enter a valid E-mail ID, format: xyz@gmail.com");
         ah_emailf.focus();
+        return false;
+    }
+    
+    else if (advt_categories == "" || advt_categories == null) {
+        alert("Interested categories should not be empty");
+        advt_categoriesf.focus();
+        return false;
+    }
+    
+    else if (!advt_categories.match(lettersf)) {
+        alert("Interested categories should contain only letters");
+        advt_categoriesf.focus();
         return false;
     }
     

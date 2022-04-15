@@ -23,6 +23,8 @@ class users(db.Model, UserMixin):
     lname = db.Column(db.String(150), nullable = True)
     smh = db.Column(db.String(150), nullable = True)    
     inf_email = db.Column(db.String(150), unique=True)
+    inf_categories = db.Column(db.String(200), unique=True)
+    advt_categories = db.Column(db.String(200), unique=True)
     age = db.Column(db.Integer, nullable = True)
     gender = db.Column(db.String(150))
     acc_type = db.Column(db.String(50))
