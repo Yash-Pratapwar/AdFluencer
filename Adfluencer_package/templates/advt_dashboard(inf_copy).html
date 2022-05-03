@@ -1,0 +1,176 @@
+{% for name_l in abc %}
+                    {% for inf in name_l %}
+                        <h1>{{inf.fname}}</h1>
+                        <h1>{{inf.lname}}</h1>
+                        <h1>{{inf.categories}}</h1>
+                        <h1>{{inf.smh}}</h1>
+                    {% endfor %}
+                    {% endfor %}
+                    {% for infl in recm_infl_lst|batch(3) %}
+                    <div class="row">
+                        {% for inf in infl %}
+                        <div class="col-xl-3 col-lg-4 col-md-6">
+                            <div class="member" data-aos="fade-up" data-aos-delay="100">
+                                <img src="../static/img/team/Team-1.png" class="img-fluid" alt="" />
+                                <div class="member-info">
+                                    <div class="member-info-content">
+                                        <h4>{{inf.fname}} </h4>
+                                        <!-- <span>Instagram-572k followers</span> -->
+                                        <span>{{inf.categories}}</span>
+
+                                    </div>
+                                    <div class="social">
+                                        <a href="https://www.instagram.com/just_neel_things/"><i
+                                                class="bi bi-instagram"></i></a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+                    
+
+                        <div class="col-xl-3 col-lg-4 col-md-6 mt-4 mt-md-0">
+                            <div class="member" data-aos="fade-up" data-aos-delay="200">
+                                <img src="../static/img/team/team-3.png" class="img-fluid" alt="" />
+                                <div class="member-info">
+                                    <div class="member-info-content">
+                                        <h4>Prajakta Koli</h4>
+                                        <span>youtube-2.5M Subscribers</span>
+                                        <span>Entertainment</span>
+
+
+
+                                    </div>
+                                    <div class="social">
+                                        <a href="https://www.instagram.com/mostlysane/"><i
+                                                class="bi bi-instagram"></i></a>
+                                        <a href="https://www.youtube.com/c/MostlySane"><i class="bi bi-youtube"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-6 mt-4 mt-lg-0" data-wow-delay="0.2s">
+                            <div class="member" data-aos="fade-up" data-aos-delay="300">
+                                <img src="../static/img/team/team-4.png" class="img-fluid" alt="" />
+                                <div class="member-info">
+                                    <div class="member-info-content">
+                                        <h4>Bhagyashree Limaye</h4>
+                                        <span>Instagram-268k followers</span>
+                                        <span>Social Cause</span>
+
+                                    </div>
+                                    <div class="social">
+
+                                        <a href="https://www.instagram.com/bhagyashreelimaye/"><i
+                                                class="bi bi-instagram"></i></a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-6 mt-4 mt-lg-0" data-wow-delay="0.3s">
+                            <div class="member" data-aos="fade-up" data-aos-delay="400">
+                                <img src="../static/img/team/team-5.png" class="img-fluid" alt="" />
+                                <div class="member-info">
+                                    <div class="member-info-content">
+                                        <h4>Gaurav Taneja</h4>
+                                        <span>Youtube-6.67M Subscribers</span>
+                                        <span>Vlogger & Bodybuilder</span>
+
+                                    </div>
+                                    <div class="social">
+
+                                        <a href=""><i class="bi bi-instagram"></i></a>
+                                        <a href="https://www.youtube.com/channel/UCNSdjX4ry9fICqeObdZPAZQ"><i
+                                                class="bi bi-youtube"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xl-3 col-lg-4 col-md-6">
+                                <div class="member" data-aos="fade-up" data-aos-delay="100">
+                                    <img src="../static/img/team/team-7.png" class="img-fluid" alt="" />
+                                    <div class="member-info">
+                                        <div class="member-info-content">
+                                            <h4>Niharika Singh</h4>
+                                            <span>Instagram-150k Followers</span>
+                                            <span>Fun/Comedy</span>
+
+                                        </div>
+                                        <div class="social">
+
+                                            <a href="https://www.instagram.com/niharicka.singh/"><i
+                                                    class="bi bi-instagram"></i></a>
+                                            <a href="https://www.youtube.com/c/CaptainNick"><i
+                                                    class="bi bi-youtube"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-3 col-lg-4 col-md-6 mt-4 mt-md-0">
+                                <div class="member" data-aos="fade-up" data-aos-delay="200">
+                                    <img src="../static/img/team/team-8.png" class="img-fluid" alt="" />
+                                    <div class="member-info">
+                                        <div class="member-info-content">
+                                            <h4>Abhinav G</h4>
+                                            <span>instagram-1k Followers</span>
+                                            <span>Social Cause & Fun</span>
+
+                                        </div>
+                                        <div class="social">
+
+                                            <a href="https://www.instagram.com/abhinowg/"><i
+                                                    class="bi bi-instagram"></i></a>
+                                            <a href=""><i class="bi bi-youtube"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-3 col-lg-4 col-md-6 mt-4 mt-lg-0" data-wow-delay="0.2s">
+                                <div class="member" data-aos="fade-up" data-aos-delay="300">
+                                    <img src="../static/img/team/team-9.png" class="img-fluid" alt="" />
+                                    <div class="member-info">
+                                        <div class="member-info-content">
+                                            <h4>Mikhael</h4>
+                                            <span>instagram-30K Followers</span>
+                                            <span>Author</span>
+
+                                        </div>
+                                        <div class="social">
+
+                                            <a href="https://www.instagram.com/soul.cravings_/"><i
+                                                class="bi bi-instagram"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-3 col-lg-4 col-md-6 mt-4 mt-lg-0" data-wow-delay="0.3s">
+                                <div class="member" data-aos="fade-up" data-aos-delay="400">
+                                    <img src="../static/img/team/yash.jpg" class="img-fluid" alt="" />
+                                    <div class="member-info">
+                                        <div class="member-info-content">
+                                            <h4>Yash</h4>
+                                            <span>Instagram-1K Followers</span>
+                                            <span>Photographer</span>
+
+                                        </div>
+                                        <div class="social">
+
+                                            <a href="https://www.instagram.com/y_ash22/"><i
+                                                    class="bi bi-instagram"></i></a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
