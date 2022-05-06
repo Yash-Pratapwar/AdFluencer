@@ -9,7 +9,7 @@ from Adfluencer_package import db, create_app, app
 from werkzeug.utils import secure_filename
 from Adfluencer_package.models import advertisements
 from Adfluencer_package.models import advt_approval
-
+import rec_sys as model
 
 app = Flask(__name__)
 UPLOAD_FOLDER = 'static/uploads'
@@ -67,16 +67,37 @@ def advt_dashboard():
         return redirect(url_for('views.login'))
     else:
         name = current_user.comp_name
+        recmd_infl = model.recm_sys(name)
         owner_id = current_user.id
         advts_owner= advertisements.query.all()
         advts = advertisements.query.filter_by(owner_id=owner_id)
         advts_oid = advertisements.query.filter_by(owner_id=owner_id).first()
+        recmd_infl.remove(owner_id)
+        main=[]
+        for inf_id in recmd_infl:
+            inf = users.query.filter_by(id=inf_id)
+            for infl in inf:
+                f = infl.fname
+                l = infl.lname
+                c = infl.categories
+                s = infl.smh
+                n = infl.infl_pic
+                abc=[]
+                abc.append(f)
+                abc.append(l)
+                abc.append(c)
+                abc.append(s)
+                abc.append(n)
+                main.append(abc)
+        print(main)
         try:
             adv_oid = advts_oid.owner_id
-            return render_template('advt_dashboard.html',advts=advts, name=name, advts_owner=advts_owner, adv_oid=adv_oid, owner_id=owner_id)
+            if adv_oid:
+                return render_template('advt_dashboard.html',advts=advts, name=name, advts_owner=advts_owner, adv_oid=adv_oid, owner_id=owner_id,main = main)
+            else:
+                return render_template('advt_dashboard.html',advts=advts, name=name, advts_owner=advts_owner, owner_id=owner_id, main = main)
         except:
-            pass
-        return render_template('advt_dashboard.html',advts=advts, name=name, advts_owner=advts_owner, owner_id=owner_id)
+            return render_template('advt_dashboard.html',advts=advts, name=name, advts_owner=advts_owner, owner_id=owner_id, main = main)
 
 
 def allowed_file(filename):
@@ -129,7 +150,7 @@ def advt_advertise():
 def advt_update(id):
     name_to_update = advertisements.query.filter(advertisements.id==id).first()
     advt = advertisements.query.filter_by(id=id).first()
-    advt_name_update = advt_approval.query.filter_by(advt_id=id).first()
+    advt_name_update = advertisements.query.filter_by(id=id).first()
     files = request.files.getlist('prdt_imgs')
     for file in files:
         if file and allowed_file(file.filename):
@@ -164,9 +185,12 @@ def advt_delete(id):
     advt_to_delete = advertisements.query.get_or_404(id)
     advta_to_delete = advt_approval.query.filter_by(advt_id=id).first()
     try:
-        db.session.delete(advta_to_delete)
-        db.session.delete(advt_to_delete)
-        db.session.commit()
+        if advt_to_delete:
+            db.session.delete(advt_to_delete)
+            db.session.commit()
+        elif advta_to_delete:
+            db.session.delete(advta_to_delete)
+            db.session.commit()
         flash('Advertisement deleted successfully!')
         return redirect(url_for('views.advt_dashboard'))
     except:
@@ -297,10 +321,12 @@ def adv_regis():
         ph_no = request.form.get("ph_no")
         comp_email = request.form.get("comp_email")
         ah_email = request.form.get("ah_email")
+        categories = request.form.get("advt_categories")
         pswd1 = request.form.get("pswd1")
         acc_handler_gender = request.form["gender"]
         acc_type = 'advt'
-        
+        max_id = db.session.query(users).order_by(users.id.desc()).first()
+        # print(max_id.id)
         user = users.query.filter_by(comp_email=comp_email).first()
         if user:
             flash('Email already exists.', category='error')
@@ -308,9 +334,9 @@ def adv_regis():
         else:
             hashed_password = generate_password_hash(
                 pswd1, method='sha256')
-            adv_regis_user = users(comp_name=comp_name, acc_handler_name=acc_handler_name,
+            adv_regis_user = users(id=max_id.id+1, comp_name=comp_name, acc_handler_name=acc_handler_name,
             acc_handler_desig=acc_handler_desig, comp_website=comp_website, ph_no=ph_no, comp_email=comp_email,
-            ah_email=ah_email, password=hashed_password, acc_handler_gender=acc_handler_gender, acc_type=acc_type)
+            ah_email=ah_email, categories=categories,password=hashed_password, acc_handler_gender=acc_handler_gender, acc_type=acc_type)
             db.session.add(adv_regis_user)
             db.session.commit()
             flash('Account created! Please login', category='success')
@@ -321,27 +347,38 @@ def adv_regis():
 @views.route('/inf_regis', methods=['GET', 'POST'])
 def inf_regis():
     if request.method == 'POST':
-        fname = request.form.get("fname")
-        lname = request.form.get("lname")
-        smh = request.form.get("smh")
-        ph_no = request.form.get("ph_no")
-        inf_email = request.form.get("inf_email")
-        age = request.form.get("age")
-        pswd1 = request.form.get("pswd1")
-        gender = request.form["gender"]
-        acc_type = 'infl'
+        file = request.files['infl_pic']
+        if file and allowed_file(file.filename):
+            fname = request.form.get("fname")
+            lname = request.form.get("lname")
+            smh = request.form.get("smh")
+            ph_no = request.form.get("ph_no")
+            inf_email = request.form.get("inf_email")
+            categories = request.form.get("inf_categories")
+            age = request.form.get("age")
+            pswd1 = request.form.get("pswd1")
+            infl_pic = request.files["infl_pic"]
+            gender = request.form["gender"]
+            acc_type = 'infl'
+            max_id = db.session.query(users).order_by(users.id.desc()).first()
+            filename = secure_filename(file.filename)
+            print(filename)
+            mimetype = infl_pic.mimetype
 
-        user = users.query.filter_by(inf_email=inf_email).first()
-        if user:
-            flash('Email already exists.', category='error')
-            return render_template('influencer-registration.html')
-        else:
-            hashed_password = generate_password_hash(
-                pswd1, method='sha256')
-            inf_regis_user = users(fname=fname, lname=lname, smh=smh,ph_no=ph_no, 
-            inf_email=inf_email, password=hashed_password, age=age, gender=gender, acc_type=acc_type)
-            db.session.add(inf_regis_user)
-            db.session.commit()
-            flash('Account created! Please login', category='success')
-            return redirect(url_for('views.login'))
+            file.save(os.path.join(basedir, app.config['UPLOAD_FOLDER'], filename))
+
+            user = users.query.filter_by(inf_email=inf_email).first()
+            if user:
+                flash('Email already exists.', category='error')
+                return render_template('influencer-registration.html')
+            else:
+                hashed_password = generate_password_hash(
+                    pswd1, method='sha256')
+                inf_regis_user = users(id=max_id.id+1, fname=fname, lname=lname, smh=smh,ph_no=ph_no, 
+                inf_email=inf_email, categories=categories,password=hashed_password, 
+                age=age, gender=gender, acc_type=acc_type, infl_pic = filename, mimetype=mimetype)
+                db.session.add(inf_regis_user)
+                db.session.commit()
+                flash('Account created! Please login', category='success')
+                return redirect(url_for('views.login'))
     return render_template('influencer-registration.html')

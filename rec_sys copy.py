@@ -1,0 +1,69 @@
+import pandas as pd
+import numpy as np
+# import matplotlib.pyplot as plt
+from sqlalchemy import create_engine
+import pandas as pd
+# import sql_copy as get_data 
+# db_engine = create_engine('postgresql://zxarian:1234@localhost:5432/adfluencer')
+# sql = "COPY users TO STDOUT WITH CSV HEADER DELIMITER ','"
+# with open("/home/yash/selenium_chrome/faker_updated_6.csv", "w") as file:
+#     conn = db_engine.raw_connection()
+#     cur = conn.cursor()
+#     cur.copy_expert(sql, file)
+# df = pd.read_sql_query('select * from "users"',con=engine)
+# print(df)
+# sql_query = '''SELECT * FROM users'''
+def recm_sys(tar_infl):
+    db_engine = create_engine('postgresql://zxarian:1234@localhost:5432/adfluencer')
+    sql = "COPY users TO STDOUT WITH CSV HEADER DELIMITER ','"
+    with open("/home/yash/selenium_chrome/faker_updated_6.csv", "w") as file:
+        conn = db_engine.raw_connection()
+        cur = conn.cursor()
+        cur.copy_expert(sql, file)
+    # infl_tags = pd.read_sql_query('select * from "users"',con=engine)
+    # infl_tags = get_data.read_sql_tmpfile(db_engine)
+    # print(infl_tags)
+    # read_file = pd.read_csv('/home/yash/selenium_chrome/faker_updated_5.txt')
+    # read_file.to_csv('/home/yash/selenium_chrome/faker_updated_6.csv')
+    infl_tags = pd.read_csv('/home/yash/selenium_chrome/faker_updated_6.csv')
+    infl_tags.fillna("", inplace=True)
+    # print(infl_tags)
+    # create binary indicators for each genre
+    infl_tags_stack = infl_tags[infl_tags['categories'] != '(no categories listed)'].set_index('id').categories.str.split(',', expand = True).stack()
+    infl_tags_explode = pd.get_dummies(infl_tags_stack, prefix = 'g').groupby(level = 0).sum().reset_index()
+    del infl_tags_stack
+
+    # genre vector (binary string)
+    infl_tags_explode['tag_vector'] = infl_tags_explode.iloc[:,1:].values.tolist()
+
+    # check out genre vector
+    # infl_tags_explode.head(3)
+    # append genre vector
+    infl_tags = infl_tags.merge(infl_tags_explode[['id','tag_vector']], on = 'id', how = 'left')
+    # check out genre dataframe with genre vector
+    # infl_tags.head()
+    # mv_tags_list['tag_list'] = mv_tags_list.tag.map(lambda x: x.split(','))
+    infl_tags_list = infl_tags.groupby(['id','comp_name'])['categories'].apply(lambda x: ','.join(x)).reset_index()
+    infl_tags_list['tag_list'] = infl_tags_list.categories.map(lambda x: x.split(','))
+    # infl_tags_list.head(1)
+    infl_tags_list.loc[infl_tags_list.comp_name == tar_infl, ['id','comp_name','tag_list']]
+
+    target_infl = tar_infl
+
+    target_tag_list = infl_tags_list[infl_tags_list.comp_name == target_infl].tag_list.values[0]
+    infl_tags_list_sim = infl_tags_list[['id','comp_name','tag_list','categories']].copy()
+    infl_tags_list_sim['jaccard_sim'] = infl_tags_list_sim.tag_list.map(lambda x: len(set(x).intersection(set(target_tag_list))) / len(set(x).union(set(target_tag_list))))
+    # print(f'Influencers most similar to {target_infl} based on tags:')
+    text = ','.join(infl_tags_list_sim.sort_values(by = 'jaccard_sim', ascending = False).head(25)['categories'].values)
+    # print(infl_tags_list_sim.sort_values(by = 'jaccard_sim', ascending = False).comp_name.head(10))
+    a = infl_tags_list_sim.sort_values(by = 'jaccard_sim', ascending = False).id.head(13)
+    # print([a])
+    b = []
+    for item in a:
+        b.append(item)
+    # print(b)
+
+    return b
+
+# op = recm_sys('xyz')
+# print(op)

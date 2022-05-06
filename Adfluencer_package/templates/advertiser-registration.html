@@ -30,7 +30,7 @@
 	<link href="{{url_for('static',filename='css/style.css')}}" rel="stylesheet">
 
     <!-- JS file -->
-    <script src="../static/js/form_validation.js"></script>
+    <!-- <script src="../static/js/form_validation.js"></script> -->
 
     <!-- Including validation -->
     <script type="text/javascript" src="{{url_for('static', filename='js/advt_validation.js' )}}"></script>
@@ -111,6 +111,11 @@
                 <label>Account handler's email: </label>
                 <br>
                 <input type="email" name="ah_email" id="name" placeholder="Enter acc handler's email ID*" >
+                <br><br>
+
+                <label>Categories: </label>
+                <br>                
+                <input type="text" name="advt_categories" minlength="3" id="name" placeholder="Enter categories you are interested in*">
                 <br><br>
 
                 <label>Password: </label>

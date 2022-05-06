@@ -150,44 +150,11 @@
             <section id="team" class="team">
                 <div class="container">
                     <div class="section-title" data-aos="fade-down">
-                        <span>Recommended Influencers</span>
-                        <h2>Recommended Influencers</h2>
+                        <span>Influencers</span>
+                        <h2>Influencers</h2>
+
                     </div>
 
-                    {% for inf in main|batch(4) %}
-                    <div class="row">
-                        {% for infl in inf %}
-                        <div class="col-xl-3 col-lg-4 col-md-6">
-                            <div class="member" data-aos="fade-up" data-aos-delay="100">
-                                {% if infl[4] %}
-                                <img src="{{ url_for('static', filename = 'uploads/'+infl[4]) }}" class="img-fluid"
-                                    alt="{{ infl[4]}}">
-                                {% else %}
-                                <img src="../static/img/team/Team-1.png" class="img-fluid" alt="" />
-                                {% endif %}
-                                <div class="member-info">
-                                    <div class="member-info-content">
-                                        <h4>{{ infl[0] }}{{" " }}{{ infl[1] }} </h4>
-                                        <!-- <span>Instagram-572k followers</span> -->
-                                        <span>{{ infl[2] }}</span>
-                                    </div>
-
-                                    <div class="social">
-                                        <a href="{{infl[3]}}"><i class="bi bi-instagram"></i></a>
-                                        <!-- <a href="https://www.instagram.com/just_neel_things/"><i
-                                                class="bi bi-instagram"></i></a> -->
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                        </div>
-                        <br>
-                        {% endfor %}
-                    </div>
-                    {% endfor %}
-                    <br /><br /><br />
-            </section>
-            <!-- 
                     <div class="row">
                         <div class="col-xl-3 col-lg-4 col-md-6">
                             <div class="member" data-aos="fade-up" data-aos-delay="100">
@@ -222,6 +189,8 @@
 
                                     </div>
                                     <div class="social">
+
+                                        <!-- <a href=""><i class="bi bi-facebook"></i></a> -->
                                         <a href="https://www.instagram.com/mostlysane/"><i
                                                 class="bi bi-instagram"></i></a>
                                         <a href="https://www.youtube.com/c/MostlySane"><i class="bi bi-youtube"></i></a>
@@ -351,8 +320,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div> -->
-
+                    </div>
+                    <br /><br /><br />
+            </section>
             <!-- End Team Section -->
 
             <!-- ======= F.A.Q Section ======= -->

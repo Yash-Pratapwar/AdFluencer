@@ -10,24 +10,24 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-	<link href="{{url_for('static', filename='img/Logo_1.png')}}" rel="icon">
-	<link href="{{url_for('static', filename='img/Logo_1.png')}}" rel="apple-touch-icon">
+    <link href="{{url_for('static', filename='img/Logo_1.png')}}" rel="icon">
+    <link href="{{url_for('static', filename='img/Logo_1.png')}}" rel="apple-touch-icon">
 
-	<!-- Google Fonts -->
-	<link
-		href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-		rel="stylesheet">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
 
-	<!-- Vendor CSS Files -->
-	<link href="{{url_for('static', filename='vendor/aos/aos.css')}}" rel="stylesheet">
-	<link href="{{url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-	<link href="{{url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
-	<link href="{{url_for('static', filename='vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
-	<link href="{{url_for('static', filename='vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
-	<link href="{{url_for('static', filename='vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="{{url_for('static', filename='vendor/aos/aos.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
 
-	<!-- Template Main CSS File -->
-	<link href="{{url_for('static',filename='css/style.css')}}" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="{{url_for('static',filename='css/style.css')}}" rel="stylesheet">
 
     <!-- Including jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js">
@@ -36,7 +36,7 @@
     <!-- Including Bootstrap JS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
     </script>
-
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <!-- Including validation -->
     <script type="text/javascript" src="{{url_for('static', filename='js/infl_validation.js' )}}"></script>
 </head>
@@ -80,14 +80,14 @@
         }, 3000);
     </script>
 
-    
+
 
     <body onload="firstfocus();"></body>
     <br>
     <div class="main">
         <div class="register">
             <h2>Register Here</h2>
-            <form name="registration" id="register" method="POST" onsubmit="return validate()">
+            <form name="registration" enctype=multipart/form-data id="register" method="POST" onsubmit="return validate()">
                 <label>First Name: </label>
                 <br>
                 <input type="text" name="fname" id="name" placeholder="Enter Your First Name*">
@@ -113,6 +113,11 @@
                 <input type="email" name="inf_email" id="name" placeholder="Enter your E-mail ID*">
                 <br><br>
 
+                <label>Categories: </label>
+                <br>                
+                <input type="text" name="inf_categories" minlength="3" id="name" placeholder="Enter your categories as CSVs* ">
+                <br><br>
+
                 <label>Password: </label>
                 <br>
                 <input type="password" name="pswd1" id="name" placeholder="Enter Password*">
@@ -128,6 +133,10 @@
                 <input type="number" name="age" id="name" placeholder="How old are you?">
                 <br><br>
 
+                <label>Upload your profile pic: </label>
+                <input type="file" id="name" name="infl_pic" required>
+                <!-- <button type="submit"> -->
+
                 <label>Gender: </label>
                 <br>
                 <!-- &nbsp;&nbsp; -->
@@ -141,7 +150,7 @@
                 <!-- &nbsp; -->
                 <input type="radio" name="gender" id="gender" value="others" required>
                 <!-- &nbsp; -->
-                <span id="others">others</span>
+                <span id="others">Others</span>
                 <br>
                 <div class="btn">
                     <div class="inner"></div>
@@ -207,7 +216,7 @@
             </div>
         </div>
     </footer><!-- End Footer -->
-    
+
     <style>
         body {
             background-image: linear-gradient(to right, gray, rgb(230, 230, 230));
