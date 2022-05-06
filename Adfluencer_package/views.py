@@ -9,7 +9,6 @@ from Adfluencer_package import db, create_app, app
 from werkzeug.utils import secure_filename
 from Adfluencer_package.models import advertisements
 from Adfluencer_package.models import advt_approval
-from Adfluencer_package.models import recm_infl
 import rec_sys as model
 
 app = Flask(__name__)
@@ -73,54 +72,32 @@ def advt_dashboard():
         advts_owner= advertisements.query.all()
         advts = advertisements.query.filter_by(owner_id=owner_id)
         advts_oid = advertisements.query.filter_by(owner_id=owner_id).first()
-        # recm_infl_lst = []
-        # print(advts)
+        recmd_infl.remove(owner_id)
         main=[]
-        for inf_id in recmd_infl[1:]:
+        for inf_id in recmd_infl:
             inf = users.query.filter_by(id=inf_id)
             for infl in inf:
                 f = infl.fname
                 l = infl.lname
                 c = infl.categories
                 s = infl.smh
+                n = infl.infl_pic
                 abc=[]
                 abc.append(f)
                 abc.append(l)
                 abc.append(c)
                 abc.append(s)
+                abc.append(n)
                 main.append(abc)
-            # print(inf)
-        #     for infl in inf:
-        #         advt_id = current_user.id
-        #         inf_id = infl.id
-        #         inf_fname = infl.fname
-        #         inf_lname = infl.lname
-        #         inf_email = infl.inf_email
-        #         inf_smh = infl.smh
-        #         categories = infl.categories
-        #         # print(advt_id, inf_id, inf_fname)
-        #         # filename = secure_filename(prdt_imgs.filename)
-        #         # mimetype = prdt_imgs.mimetype
-        #         # file.save(os.path.join(basedir, app.config['UPLOAD_FOLDER'], filename))
-        #         recm_inf = recm_infl(advt_id=advt_id, inf_id=inf_id,inf_fname=inf_fname, 
-        #         inf_lname=inf_lname, inf_email=inf_email, inf_smh=inf_smh, categories=categories)
-        #         db.session.add(recm_inf)
-        #         db.session.commit()
-        # reccommended_infl = recm_infl.query.filter_by(advt_id=owner_id).limit(10).all()
-        # for infl in reccommended_infl:
-        #     abc_n = infl.inf_fname
-        #     abc.append(abc_n)
-        #     print(abc)
-        # lst = []
-        # for inf in abc:
-        #     for infl in inf:
-        #         a = infl.fname
+        print(main)
         try:
             adv_oid = advts_oid.owner_id
-            return render_template('advt_dashboard.html',advts=advts, name=name, advts_owner=advts_owner, adv_oid=adv_oid, owner_id=owner_id,main=main)
+            if adv_oid:
+                return render_template('advt_dashboard.html',advts=advts, name=name, advts_owner=advts_owner, adv_oid=adv_oid, owner_id=owner_id,main = main)
+            else:
+                return render_template('advt_dashboard.html',advts=advts, name=name, advts_owner=advts_owner, owner_id=owner_id, main = main)
         except:
-            pass
-        return render_template('advt_dashboard.html',advts=advts, name=name, advts_owner=advts_owner, owner_id=owner_id,main=main)
+            return render_template('advt_dashboard.html',advts=advts, name=name, advts_owner=advts_owner, owner_id=owner_id, main = main)
 
 
 def allowed_file(filename):
@@ -173,7 +150,7 @@ def advt_advertise():
 def advt_update(id):
     name_to_update = advertisements.query.filter(advertisements.id==id).first()
     advt = advertisements.query.filter_by(id=id).first()
-    advt_name_update = advt_approval.query.filter_by(advt_id=id).first()
+    advt_name_update = advertisements.query.filter_by(id=id).first()
     files = request.files.getlist('prdt_imgs')
     for file in files:
         if file and allowed_file(file.filename):
@@ -208,9 +185,12 @@ def advt_delete(id):
     advt_to_delete = advertisements.query.get_or_404(id)
     advta_to_delete = advt_approval.query.filter_by(advt_id=id).first()
     try:
-        db.session.delete(advta_to_delete)
-        db.session.delete(advt_to_delete)
-        db.session.commit()
+        if advt_to_delete:
+            db.session.delete(advt_to_delete)
+            db.session.commit()
+        elif advta_to_delete:
+            db.session.delete(advta_to_delete)
+            db.session.commit()
         flash('Advertisement deleted successfully!')
         return redirect(url_for('views.advt_dashboard'))
     except:
