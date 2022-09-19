@@ -2,7 +2,7 @@
 
 ## About
 
-It is an online Influencer Marketing Platform (service-based business model), created by us. It helps to connect small-scale and medium scale business owners with influencers, so that the influencers can advertise their products.
+It is an online Influencer Marketing Platform (service-based business model). It helps to connect small-scale and medium scale business owners with influencers, so that the influencers can advertise their products.
 
 ## Minimum Requirements
 
