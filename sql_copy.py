@@ -17,12 +17,12 @@ dbname=POSTGRES_DBNAME))
 cnx = create_engine(postgres_str)
 def read_sql_tmpfile(db_engine):
     sql = "COPY users TO STDOUT WITH CSV HEADER DELIMITER ','"
-    with open("/home/yash/selenium_chrome/faker_updated_6.csv", "w") as file:
+    with open("/home/yash/selenium_chrome/faker_updated_8.csv", "w") as file:
         conn = db_engine.raw_connection()
         cur = conn.cursor()
         cur.copy_expert(sql, file)
         # tmpfile.seek(0)
-        df = pd.read_csv('/home/yash/selenium_chrome/faker_updated_6.csv')
+        df = pd.read_csv('/home/yash/selenium_chrome/faker_updated_8.csv')
         # df.fillna("", inplace=True)
         return df
 # sql = "COPY (SELECT * FROM a_table WHERE month=6) TO STDOUT WITH CSV DELIMITER ';'"
@@ -32,5 +32,5 @@ def read_sql_tmpfile(db_engine):
 # COPY employees TO '/home/yash/selenium_chrome/faker_updated_5.csv'  WITH DELIMITER ',' CSV HEADER;
 # sql_query = '''SELECT * FROM users'''
 
-# a = read_sql_tmpfile(cnx)
-# print(a)
+a = read_sql_tmpfile(cnx)
+print(a)

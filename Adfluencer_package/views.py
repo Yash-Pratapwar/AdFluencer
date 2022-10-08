@@ -73,10 +73,21 @@ def advt_dashboard():
         advts = advertisements.query.filter_by(owner_id=owner_id)
         advts_oid = advertisements.query.filter_by(owner_id=owner_id).first()
         recmd_infl.remove(owner_id)
+        # print(recmd_infl)
+        for tar_id in recmd_infl:
+            tar_inf = users.query.filter_by(id=tar_id).first()
+            tar_id = tar_inf.id
+            if tar_inf.acc_type == 'advt':
+                recmd_infl.remove(tar_id)
+            else:
+                continue
+        print(recmd_infl)
+        
         main=[]
-        for inf_id in recmd_infl:
+        for inf_id in recmd_infl[:12]:
             inf = users.query.filter_by(id=inf_id)
             for infl in inf:
+                i = infl.id
                 f = infl.fname
                 l = infl.lname
                 c = infl.categories
@@ -88,6 +99,7 @@ def advt_dashboard():
                 abc.append(c)
                 abc.append(s)
                 abc.append(n)
+                abc.append(i)
                 main.append(abc)
         print(main)
         try:

@@ -11,6 +11,7 @@ def recm_sys(tar_infl):
         cur = conn.cursor()
         cur.copy_expert(sql, file)
     infl_tags = pd.read_csv('/home/yash/selenium_chrome/faker_updated_6.csv')
+    print(infl_tags)
     infl_tags.fillna("", inplace=True)    
     infl_tags_stack = infl_tags[infl_tags['categories'] != '(no categories listed)'].set_index('id').categories.str.split(',', expand = True).stack()
     infl_tags_explode = pd.get_dummies(infl_tags_stack, prefix = 'g').groupby(level = 0).sum().reset_index()
@@ -31,7 +32,8 @@ def recm_sys(tar_infl):
 
     text = ','.join(infl_tags_list_sim.sort_values(by = 'jaccard_sim', ascending = False).head(25)['categories'].values)
 
-    a = infl_tags_list_sim.sort_values(by = 'jaccard_sim', ascending = False).id.head(13)
+    a = infl_tags_list_sim.sort_values(by = 'jaccard_sim', ascending = False).id.head(15)
+    print([a])
 
     b = []
     for item in a:
@@ -39,5 +41,5 @@ def recm_sys(tar_infl):
     
     return b
 
-# op = recm_sys('xyz')
-# print(op)
+op = recm_sys('Faasos')
+print(op)
