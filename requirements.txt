@@ -11,3 +11,4 @@ MarkupSafe==2.0.1
 psycopg2-binary==2.9.3
 SQLAlchemy==1.4.26
 Werkzeug==2.0.2
+python==3.9.16
