@@ -11,7 +11,7 @@ UPLOAD_FOLDER = 'static/uploads/'
 
 def create_app():
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://yash:1234@localhost/adfluencer' #Keep the database name as 'adfluencer' only to make our life easy, edit this according to your username and password
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://postgres:1234@localhost/adfluencer' #Keep the database name as 'adfluencer' only to make our life easy, edit this according to your username and password
     # app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://yash:1234@localhost/adfluencer' #use this line to edit and comment out the above line
     #please refer this website: https://towardsdatascience.com/sending-data-from-a-flask-app-to-postgresql-database-889304964bf2
     '''
@@ -32,7 +32,8 @@ def create_app():
     from .models import users, advertisements
     
     # create_database(app) #uncomment this line to create schema
-
+    with app.app_context():
+        db.create_all()
     login_manager = LoginManager()
     login_manager.init_app(app)
     login_manager.login_view = 'views.login'
@@ -42,6 +43,7 @@ def create_app():
         return users.query.get(int(id))
     return app
 
+    
 def create_database(app):
     # if not path.exists('Adfluencer_package/' + DB_NAME):
     db.create_all(app=app)

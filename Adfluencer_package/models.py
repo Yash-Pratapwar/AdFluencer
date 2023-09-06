@@ -9,7 +9,7 @@ class users(db.Model, UserMixin):
     fname = db.Column(db.String(150), nullable = True)
     lname = db.Column(db.String(150), nullable = True)
     smh = db.Column(db.String(150), nullable = True)
-    ph_no = db.Column(db.Integer)
+    ph_no = db.Column(db.Numeric)
     inf_email = db.Column(db.String(150), unique=True)
     acc_handler_gender = db.Column(db.String(150), nullable = True)
     password = db.Column(db.String(150))
@@ -25,7 +25,7 @@ class users(db.Model, UserMixin):
     acc_type = db.Column(db.String(50))
     infl_pic = db.Column(db.Text, nullable = True)
     mimetype = db.Column(db.Text, nullable = True)
-    # date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
     advts = db.relationship('advertisements', backref='owner') 
 
 class advertisements(db.Model, UserMixin):

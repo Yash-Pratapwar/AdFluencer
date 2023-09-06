@@ -346,13 +346,22 @@ def adv_regis():
         else:
             hashed_password = generate_password_hash(
                 pswd1, method='sha256')
-            adv_regis_user = users(id=max_id.id+1, comp_name=comp_name, acc_handler_name=acc_handler_name,
-            acc_handler_desig=acc_handler_desig, comp_website=comp_website, ph_no=ph_no, comp_email=comp_email,
-            ah_email=ah_email, categories=categories,password=hashed_password, acc_handler_gender=acc_handler_gender, acc_type=acc_type)
-            db.session.add(adv_regis_user)
-            db.session.commit()
-            flash('Account created! Please login', category='success')
-            return redirect(url_for('views.login'))
+            if max_id:
+                adv_regis_user = users(id=max_id.id+1, comp_name=comp_name, acc_handler_name=acc_handler_name,
+                acc_handler_desig=acc_handler_desig, comp_website=comp_website, ph_no=ph_no, comp_email=comp_email,
+                ah_email=ah_email, categories=categories,password=hashed_password, acc_handler_gender=acc_handler_gender, acc_type=acc_type)
+                db.session.add(adv_regis_user)
+                db.session.commit()
+                flash('Account created! Please login', category='success')
+                return redirect(url_for('views.login'))
+            else:
+                adv_regis_user = users(id=1, comp_name=comp_name, acc_handler_name=acc_handler_name,
+                acc_handler_desig=acc_handler_desig, comp_website=comp_website, ph_no=ph_no, comp_email=comp_email,
+                ah_email=ah_email, categories=categories,password=hashed_password, acc_handler_gender=acc_handler_gender, acc_type=acc_type)
+                db.session.add(adv_regis_user)
+                db.session.commit()
+                flash('Account created! Please login', category='success')
+                return redirect(url_for('views.login'))
     return render_template('advertiser-registration.html')
 
 

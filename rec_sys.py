@@ -41,5 +41,5 @@ def recm_sys(tar_infl):
     
     return b
 
-op = recm_sys('Faasos')
-print(op)
+# op = recm_sys('Faasos')
+# print(op)
